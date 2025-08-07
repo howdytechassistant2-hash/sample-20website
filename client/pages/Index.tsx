@@ -1,56 +1,74 @@
-import { Sparkles, Send, DollarSign, CreditCard, HeadphonesIcon, Zap, Shield, Gift, Star } from "lucide-react";
+import {
+  Sparkles,
+  Send,
+  DollarSign,
+  CreditCard,
+  HeadphonesIcon,
+  Zap,
+  Shield,
+  Gift,
+  Star,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 const gameProviders = [
   {
     name: "VBLink",
-    image: "https://cdn.builder.io/api/v1/image/assets%2Fffae681dbcd7461980d77d5e3a05910d%2Ff122436734a44c019543e59662ae84e4",
+    image:
+      "https://cdn.builder.io/api/v1/image/assets%2Fffae681dbcd7461980d77d5e3a05910d%2Ff122436734a44c019543e59662ae84e4",
     bgColor: "from-purple-600 to-purple-800",
-    url: "https://www.vblink777.club/"
+    url: "https://www.vblink777.club/",
   },
   {
     name: "Ultra Panda",
-    image: "https://cdn.builder.io/api/v1/image/assets%2Fffae681dbcd7461980d77d5e3a05910d%2F982576dc41b547c8bdffdbd3014d1750",
+    image:
+      "https://cdn.builder.io/api/v1/image/assets%2Fffae681dbcd7461980d77d5e3a05910d%2F982576dc41b547c8bdffdbd3014d1750",
     bgColor: "from-red-600 to-red-800",
-    url: "https://www.ultrapanda.mobi/"
+    url: "https://www.ultrapanda.mobi/",
   },
   {
     name: "Juwa",
-    image: "https://play-lh.googleusercontent.com/iVYgmsm9piJ1vxRoaY_fEFYB_cG2DuaKA7NQq54-_u1f5M4dDCFU6YHJ6hTY28ZKtRg=w240-h480-rw",
+    image:
+      "https://play-lh.googleusercontent.com/iVYgmsm9piJ1vxRoaY_fEFYB_cG2DuaKA7NQq54-_u1f5M4dDCFU6YHJ6hTY28ZKtRg=w240-h480-rw",
     bgColor: "from-yellow-600 to-orange-600",
-    url: "https://dl.juwa777.com/"
+    url: "https://dl.juwa777.com/",
   },
   {
     name: "Fire Kirin",
-    image: "https://lh3.googleusercontent.com/8jDkXoDAnLFL2TUNAw8k3yZ0n8IMH9iVe4N0bTpi1e307T1bD4aOne3njqlfSIx2vHc",
+    image:
+      "https://lh3.googleusercontent.com/8jDkXoDAnLFL2TUNAw8k3yZ0n8IMH9iVe4N0bTpi1e307T1bD4aOne3njqlfSIx2vHc",
     bgColor: "from-orange-500 to-yellow-500",
-    url: "http://start.firekirin.xyz:8580/"
+    url: "http://start.firekirin.xyz:8580/",
   },
   {
     name: "Orion Stars",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUa6WX9nQjt3VUZAKnENvhr3EHpw_8KkFv8w&s",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUa6WX9nQjt3VUZAKnENvhr3EHpw_8KkFv8w&s",
     bgColor: "from-purple-500 to-pink-500",
-    url: "http://start.orionstars.vip:8580/index.html"
+    url: "http://start.orionstars.vip:8580/index.html",
   },
   {
     name: "Milky Ways",
-    image: "https://casinohipster.com/wp-content/uploads/2022/05/slots-milky-ways-nolimit-city-play-logo.jpg",
+    image:
+      "https://casinohipster.com/wp-content/uploads/2022/05/slots-milky-ways-nolimit-city-play-logo.jpg",
     bgColor: "from-blue-500 to-purple-500",
-    url: "https://milkywayapp.xyz/"
+    url: "https://milkywayapp.xyz/",
   },
   {
     name: "Panda Master",
-    image: "https://ballislife.com/betting/wp-content/uploads/sites/20/2023/08/Panda-Master-768x432.png.webp",
+    image:
+      "https://ballislife.com/betting/wp-content/uploads/sites/20/2023/08/Panda-Master-768x432.png.webp",
     bgColor: "from-red-700 to-red-900",
-    url: "http://mobile.pandamaster.vip/web_game/pandamaster/"
+    url: "http://mobile.pandamaster.vip/web_game/pandamaster/",
   },
   {
     name: "GAME VAULT",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEVZCP_zefwDunNZOHtgVvE3JduxqFt7c7Zw&s",
+    image:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEVZCP_zefwDunNZOHtgVvE3JduxqFt7c7Zw&s",
     bgColor: "from-blue-600 to-blue-800",
-    url: "https://product.gamevault7777.com/web/"
-  }
+    url: "https://product.gamevault7777.com/web/",
+  },
 ];
 
 const features = [
@@ -58,20 +76,20 @@ const features = [
     icon: <CreditCard className="w-12 h-12" />,
     title: "VERSATILE PAYMENT SYSTEM",
     description: "We accept payment from various cards/apps",
-    bgColor: "from-pink-400 to-pink-600"
+    bgColor: "from-pink-400 to-pink-600",
   },
   {
     icon: <HeadphonesIcon className="w-12 h-12" />,
     title: "24/7 SERVICE",
     description: "We provide 24/7 customer service",
-    bgColor: "from-pink-400 to-pink-600"
+    bgColor: "from-pink-400 to-pink-600",
   },
   {
     icon: <Gift className="w-12 h-12" />,
     title: "DAILY REWARDS",
     description: "Log in daily and claim exclusive bonuses",
-    bgColor: "from-green-400 to-green-600"
-  }
+    bgColor: "from-green-400 to-green-600",
+  },
 ];
 
 export default function Index() {
@@ -84,7 +102,9 @@ export default function Index() {
             <Sparkles className="w-6 h-6 text-casino-dark" />
           </div>
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-white">MYUNIVERSE</h1>
+            <h1 className="text-2xl md:text-3xl font-bold text-white">
+              MYUNIVERSE
+            </h1>
             <h2 className="text-xl md:text-2xl font-bold text-white">CASINO</h2>
           </div>
         </div>
@@ -103,7 +123,7 @@ export default function Index() {
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-70"
             style={{
-              backgroundImage: `url('https://cdn.builder.io/api/v1/image/assets%2Fffae681dbcd7461980d77d5e3a05910d%2Fbadb060c20524a63ac8a53152c708683?format=webp&width=800')`
+              backgroundImage: `url('https://cdn.builder.io/api/v1/image/assets%2Fffae681dbcd7461980d77d5e3a05910d%2Fbadb060c20524a63ac8a53152c708683?format=webp&width=800')`,
             }}
           ></div>
 
@@ -120,7 +140,13 @@ export default function Index() {
             {/* Glowing 100% with enhanced visibility */}
             <div className="relative mb-4">
               <h3 className="text-6xl md:text-8xl font-bold text-white mb-4 relative">
-                <span className="bg-gradient-to-r from-casino-gold via-yellow-300 to-casino-gold bg-clip-text text-transparent animate-pulse drop-shadow-2xl" style={{textShadow: '0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.6)'}}>
+                <span
+                  className="bg-gradient-to-r from-casino-gold via-yellow-300 to-casino-gold bg-clip-text text-transparent animate-pulse drop-shadow-2xl"
+                  style={{
+                    textShadow:
+                      "0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.6)",
+                  }}
+                >
                   100%
                 </span>
                 <div className="absolute inset-0 blur-xl bg-gradient-to-r from-casino-gold/70 to-yellow-300/70 animate-pulse -z-10"></div>
@@ -128,7 +154,13 @@ export default function Index() {
             </div>
 
             <h4 className="text-2xl md:text-3xl font-bold mb-8 relative">
-              <span className="bg-gradient-to-r from-white via-cyan-100 to-white bg-clip-text text-transparent drop-shadow-2xl" style={{textShadow: '0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6)'}}>
+              <span
+                className="bg-gradient-to-r from-white via-cyan-100 to-white bg-clip-text text-transparent drop-shadow-2xl"
+                style={{
+                  textShadow:
+                    "0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6)",
+                }}
+              >
                 SIGNUP BONUS
               </span>
             </h4>
@@ -140,9 +172,15 @@ export default function Index() {
               </div>
               <div className="bg-gradient-to-r from-purple-600 to-blue-600 p-4 rounded-xl shadow-xl hover:scale-105 transition-transform duration-300 border border-casino-green/30">
                 <div className="flex space-x-2">
-                  <div className="w-12 h-12 bg-gradient-to-br from-red-400 to-red-600 rounded flex items-center justify-center text-white font-bold animate-bounce shadow-lg">🍒</div>
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded flex items-center justify-center text-white font-bold animate-bounce delay-150 shadow-lg">BAR</div>
-                  <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded flex items-center justify-center text-white font-bold animate-bounce delay-300 shadow-lg">🍒</div>
+                  <div className="w-12 h-12 bg-gradient-to-br from-red-400 to-red-600 rounded flex items-center justify-center text-white font-bold animate-bounce shadow-lg">
+                    🍒
+                  </div>
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded flex items-center justify-center text-white font-bold animate-bounce delay-150 shadow-lg">
+                    BAR
+                  </div>
+                  <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded flex items-center justify-center text-white font-bold animate-bounce delay-300 shadow-lg">
+                    🍒
+                  </div>
                 </div>
               </div>
               <div className="w-16 h-16 bg-gradient-to-br from-casino-gold to-yellow-500 rounded-full flex items-center justify-center animate-pulse shadow-lg shadow-casino-gold/50">
@@ -175,13 +213,26 @@ export default function Index() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {gameProviders.map((provider, index) => (
-            <Card key={index} className={`bg-gradient-to-br ${provider.bgColor} border-none relative overflow-hidden group hover:scale-105 transition-transform duration-300`}>
+            <Card
+              key={index}
+              className={`bg-gradient-to-br ${provider.bgColor} border-none relative overflow-hidden group hover:scale-105 transition-transform duration-300`}
+            >
               <CardContent className="p-6 text-center">
                 <div className="mb-4">
-                  <img src={provider.image} alt={provider.name} className="w-20 h-20 mx-auto rounded-xl object-cover" />
+                  <img
+                    src={provider.image}
+                    alt={provider.name}
+                    className="w-20 h-20 mx-auto rounded-xl object-cover"
+                  />
                 </div>
-                <h3 className="text-xl font-bold text-white mb-4 uppercase tracking-wide">{provider.name}</h3>
-                <a href={provider.url} target="_blank" rel="noopener noreferrer">
+                <h3 className="text-xl font-bold text-white mb-4 uppercase tracking-wide">
+                  {provider.name}
+                </h3>
+                <a
+                  href={provider.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <Button className="bg-casino-green hover:bg-casino-green/90 text-casino-dark font-bold px-8 py-2 rounded-full uppercase tracking-wide w-full">
                     Play
                   </Button>
@@ -220,7 +271,8 @@ export default function Index() {
         <Card className="bg-casino-card/50 border-casino-green/20 max-w-4xl mx-auto relative">
           <CardContent className="p-8 md:p-12">
             <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-              MyUniverse Casino is your trusted platform for fast, secure, and automated casino slots recharge and redemption services.
+              MyUniverse Casino is your trusted platform for fast, secure, and
+              automated casino slots recharge and redemption services.
             </p>
             <ul className="space-y-4 text-gray-300">
               <li className="flex items-start space-x-3">
@@ -229,7 +281,10 @@ export default function Index() {
               </li>
               <li className="flex items-start space-x-3">
                 <Shield className="w-5 h-5 text-casino-green mt-1 flex-shrink-0" />
-                <span>Exclusive payment system solely dedicated to our website and patrons</span>
+                <span>
+                  Exclusive payment system solely dedicated to our website and
+                  patrons
+                </span>
               </li>
               <li className="flex items-start space-x-3">
                 <Zap className="w-5 h-5 text-casino-green mt-1 flex-shrink-0" />
@@ -251,13 +306,22 @@ export default function Index() {
       <section className="px-4 md:px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {features.map((feature, index) => (
-            <Card key={index} className="bg-casino-card/50 border-casino-green/20 text-center">
+            <Card
+              key={index}
+              className="bg-casino-card/50 border-casino-green/20 text-center"
+            >
               <CardContent className="p-8">
-                <div className={`w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br ${feature.bgColor} flex items-center justify-center text-white`}>
+                <div
+                  className={`w-20 h-20 mx-auto mb-6 rounded-2xl bg-gradient-to-br ${feature.bgColor} flex items-center justify-center text-white`}
+                >
                   {feature.icon}
                 </div>
-                <h3 className="text-lg font-bold text-casino-gold mb-4 uppercase tracking-wide">{feature.title}</h3>
-                <p className="text-gray-300 leading-relaxed">{feature.description}</p>
+                <h3 className="text-lg font-bold text-casino-gold mb-4 uppercase tracking-wide">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-300 leading-relaxed">
+                  {feature.description}
+                </p>
               </CardContent>
             </Card>
           ))}
@@ -268,10 +332,15 @@ export default function Index() {
       <section className="px-4 md:px-6 py-12">
         <Card className="bg-gradient-to-br from-purple-900 to-indigo-900 border-casino-green/20 max-w-4xl mx-auto">
           <CardContent className="p-8 md:p-12 text-center">
-            <h2 className="text-4xl md:text-6xl font-bold text-casino-gold mb-2">75%</h2>
-            <h3 className="text-2xl md:text-3xl font-bold text-casino-purple mb-6 uppercase tracking-wide">Referral Bonus</h3>
+            <h2 className="text-4xl md:text-6xl font-bold text-casino-gold mb-2">
+              75%
+            </h2>
+            <h3 className="text-2xl md:text-3xl font-bold text-casino-purple mb-6 uppercase tracking-wide">
+              Referral Bonus
+            </h3>
             <p className="text-xl text-white mb-8 leading-relaxed">
-              Refer our platform to your friends and receive 75% of what they deposit as your REFERRAL BONUS
+              Refer our platform to your friends and receive 75% of what they
+              deposit as your REFERRAL BONUS
             </p>
             <div className="w-32 h-32 mx-auto bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-8">
               <Gift className="w-16 h-16 text-white" />
@@ -297,20 +366,28 @@ export default function Index() {
               <h3 className="text-2xl md:text-3xl font-bold text-casino-gold mb-4 uppercase">
                 Play Like Never Before
               </h3>
-              <p className="text-casino-green font-bold text-lg mb-4">GAME ON!</p>
+              <p className="text-casino-green font-bold text-lg mb-4">
+                GAME ON!
+              </p>
             </div>
-            
+
             <div className="space-y-4">
               <div>
-                <h4 className="text-white font-bold mb-2 uppercase tracking-wide">Telegram</h4>
+                <h4 className="text-white font-bold mb-2 uppercase tracking-wide">
+                  Telegram
+                </h4>
                 <p className="text-casino-green">@thesolarclub</p>
               </div>
               <div>
-                <h4 className="text-white font-bold mb-2 uppercase tracking-wide">Email</h4>
+                <h4 className="text-white font-bold mb-2 uppercase tracking-wide">
+                  Email
+                </h4>
                 <p className="text-casino-green">Automatic@thesolar.solar</p>
               </div>
               <div>
-                <h4 className="text-white font-bold mb-2 uppercase tracking-wide">Social</h4>
+                <h4 className="text-white font-bold mb-2 uppercase tracking-wide">
+                  Social
+                </h4>
                 <div className="flex space-x-4">
                   <Send className="w-6 h-6 text-casino-green" />
                   <div className="w-6 h-6 bg-casino-green rounded-full"></div>
@@ -321,7 +398,7 @@ export default function Index() {
               </Button>
             </div>
           </div>
-          
+
           <div className="text-center text-gray-400 pt-8 border-t border-casino-green/10">
             <p>© 2024 MyUniverse Casino. All rights reserved.</p>
           </div>
