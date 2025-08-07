@@ -7,49 +7,49 @@ const gameProviders = [
     name: "VBLink",
     image: "https://cdn.builder.io/api/v1/image/assets%2Fffae681dbcd7461980d77d5e3a05910d%2Ff122436734a44c019543e59662ae84e4",
     bgColor: "from-purple-600 to-purple-800",
-    url: "https://vblink777.com"
+    url: "https://www.vblink777.club/"
   },
   {
     name: "Ultra Panda",
     image: "https://cdn.builder.io/api/v1/image/assets%2Fffae681dbcd7461980d77d5e3a05910d%2F982576dc41b547c8bdffdbd3014d1750",
     bgColor: "from-red-600 to-red-800",
-    url: "https://ultrapanda.mobi"
+    url: "https://www.ultrapanda.mobi/"
   },
   {
     name: "Juwa",
     image: "https://play-lh.googleusercontent.com/iVYgmsm9piJ1vxRoaY_fEFYB_cG2DuaKA7NQq54-_u1f5M4dDCFU6YHJ6hTY28ZKtRg=w240-h480-rw",
     bgColor: "from-yellow-600 to-orange-600",
-    url: "https://juwa777.org"
+    url: "https://dl.juwa777.com/"
   },
   {
     name: "Fire Kirin",
     image: "https://lh3.googleusercontent.com/8jDkXoDAnLFL2TUNAw8k3yZ0n8IMH9iVe4N0bTpi1e307T1bD4aOne3njqlfSIx2vHc",
     bgColor: "from-orange-500 to-yellow-500",
-    url: "https://firekirin.xyz"
+    url: "http://start.firekirin.xyz:8580/"
   },
   {
     name: "Orion Stars",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUa6WX9nQjt3VUZAKnENvhr3EHpw_8KkFv8w&s",
     bgColor: "from-purple-500 to-pink-500",
-    url: "https://orionstars.org"
+    url: "http://start.orionstars.vip:8580/index.html"
   },
   {
     name: "Milky Ways",
     image: "https://casinohipster.com/wp-content/uploads/2022/05/slots-milky-ways-nolimit-city-play-logo.jpg",
     bgColor: "from-blue-500 to-purple-500",
-    url: "https://milkyway.app"
+    url: "https://milkywayapp.xyz/"
   },
   {
     name: "Panda Master",
     image: "https://ballislife.com/betting/wp-content/uploads/sites/20/2023/08/Panda-Master-768x432.png.webp",
     bgColor: "from-red-700 to-red-900",
-    url: "https://pandamaster.vip"
+    url: "http://mobile.pandamaster.vip/web_game/pandamaster/"
   },
   {
     name: "GAME VAULT",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEVZCP_zefwDunNZOHtgVvE3JduxqFt7c7Zw&s",
     bgColor: "from-blue-600 to-blue-800",
-    url: "https://gamevault999.com"
+    url: "https://product.gamevault7777.com/web/"
   }
 ];
 
