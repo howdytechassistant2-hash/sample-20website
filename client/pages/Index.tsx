@@ -98,28 +98,17 @@ export default function Index() {
 
       {/* Hero Section */}
       <section className="px-4 md:px-6 py-8">
-        <Card className="bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 border-casino-green/20 relative overflow-hidden shadow-2xl shadow-casino-green/20 hover:shadow-casino-green/40 transition-all duration-500 animate-pulse">
-          {/* Background Image */}
+        <Card className="bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 border-casino-green/20 relative overflow-hidden shadow-2xl shadow-casino-green/20">
+          {/* Background Image - More Visible */}
           <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-70"
             style={{
               backgroundImage: `url('https://cdn.builder.io/api/v1/image/assets%2Fffae681dbcd7461980d77d5e3a05910d%2Fbadb060c20524a63ac8a53152c708683?format=webp&width=800')`
             }}
           ></div>
 
-          {/* Dark overlay for text readability */}
-          <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-purple-900/80 to-indigo-900/70"></div>
-
-          {/* Animated Background Elements */}
-          <div className="absolute inset-0 opacity-30">
-            <div className="absolute top-4 left-4 w-8 h-8 bg-casino-gold rounded-full animate-bounce"></div>
-            <div className="absolute top-12 right-8 w-6 h-6 bg-casino-green rounded-full animate-bounce delay-300"></div>
-            <div className="absolute bottom-8 left-8 w-10 h-10 bg-purple-400 rounded-full animate-bounce delay-500"></div>
-            <div className="absolute bottom-4 right-4 w-4 h-4 bg-pink-400 rounded-full animate-bounce delay-700"></div>
-          </div>
-
-          {/* Enhanced Glow Effect */}
-          <div className="absolute inset-0 bg-gradient-to-r from-casino-green/20 via-transparent to-casino-gold/20 animate-pulse"></div>
+          {/* Lighter overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-br from-black/40 via-purple-900/50 to-indigo-900/40"></div>
 
           <CardContent className="p-8 md:p-12 text-center relative z-20">
             <div className="mb-4">
