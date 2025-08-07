@@ -90,36 +90,72 @@ export default function Index() {
 
       {/* Hero Section */}
       <section className="px-4 md:px-6 py-8">
-        <Card className="bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 border-casino-green/20 relative overflow-hidden">
+        <Card className="bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 border-casino-green/20 relative overflow-hidden shadow-2xl shadow-casino-green/20 hover:shadow-casino-green/40 transition-all duration-500 animate-pulse">
+          {/* Animated Background Elements */}
+          <div className="absolute inset-0 opacity-30">
+            <div className="absolute top-4 left-4 w-8 h-8 bg-casino-gold rounded-full animate-bounce"></div>
+            <div className="absolute top-12 right-8 w-6 h-6 bg-casino-green rounded-full animate-bounce delay-300"></div>
+            <div className="absolute bottom-8 left-8 w-10 h-10 bg-purple-400 rounded-full animate-bounce delay-500"></div>
+            <div className="absolute bottom-4 right-4 w-4 h-4 bg-pink-400 rounded-full animate-bounce delay-700"></div>
+          </div>
+
+          {/* Glow Effect */}
+          <div className="absolute inset-0 bg-gradient-to-r from-casino-green/10 via-transparent to-casino-gold/10 animate-pulse"></div>
+
           <CardContent className="p-8 md:p-12 text-center relative z-10">
             <div className="mb-4">
-              <span className="bg-casino-green text-casino-dark px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wide">
-                New Player Offer
+              <span className="bg-casino-green text-casino-dark px-6 py-3 rounded-full text-sm font-bold uppercase tracking-wide shadow-lg shadow-casino-green/50 animate-pulse hover:scale-110 transition-transform duration-300">
+                ✨ New Player Offer ✨
               </span>
             </div>
-            <h3 className="text-6xl md:text-8xl font-bold text-white mb-4">100%</h3>
-            <h4 className="text-2xl md:text-3xl font-bold text-white mb-8">SIGNUP BONUS</h4>
-            
-            {/* Slot Machine Graphic */}
+
+            {/* Glowing 100% with animation */}
+            <div className="relative mb-4">
+              <h3 className="text-6xl md:text-8xl font-bold text-white mb-4 relative">
+                <span className="bg-gradient-to-r from-casino-gold via-yellow-300 to-casino-gold bg-clip-text text-transparent animate-pulse drop-shadow-2xl">
+                  100%
+                </span>
+                <div className="absolute inset-0 blur-xl bg-gradient-to-r from-casino-gold/50 to-yellow-300/50 animate-pulse -z-10"></div>
+              </h3>
+            </div>
+
+            <h4 className="text-2xl md:text-3xl font-bold text-white mb-8 drop-shadow-lg">
+              <span className="bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent">
+                SIGNUP BONUS
+              </span>
+            </h4>
+
+            {/* Enhanced Slot Machine Graphic */}
             <div className="flex justify-center items-center mb-8 space-x-4">
-              <div className="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center animate-spin">
-                <Star className="w-8 h-8 text-yellow-900" />
+              <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center animate-spin shadow-lg shadow-yellow-500/50">
+                <Star className="w-8 h-8 text-yellow-900 animate-pulse" />
               </div>
-              <div className="bg-gradient-to-r from-purple-600 to-blue-600 p-4 rounded-xl">
+              <div className="bg-gradient-to-r from-purple-600 to-blue-600 p-4 rounded-xl shadow-xl hover:scale-105 transition-transform duration-300 border border-casino-green/30">
                 <div className="flex space-x-2">
-                  <div className="w-12 h-12 bg-red-500 rounded flex items-center justify-center text-white font-bold">🍒</div>
-                  <div className="w-12 h-12 bg-blue-500 rounded flex items-center justify-center text-white font-bold">BAR</div>
-                  <div className="w-12 h-12 bg-green-500 rounded flex items-center justify-center text-white font-bold">🍒</div>
+                  <div className="w-12 h-12 bg-gradient-to-br from-red-400 to-red-600 rounded flex items-center justify-center text-white font-bold animate-bounce shadow-lg">🍒</div>
+                  <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded flex items-center justify-center text-white font-bold animate-bounce delay-150 shadow-lg">BAR</div>
+                  <div className="w-12 h-12 bg-gradient-to-br from-green-400 to-green-600 rounded flex items-center justify-center text-white font-bold animate-bounce delay-300 shadow-lg">🍒</div>
                 </div>
               </div>
-              <div className="w-16 h-16 bg-casino-gold rounded-full flex items-center justify-center">
-                <DollarSign className="w-8 h-8 text-casino-dark" />
+              <div className="w-16 h-16 bg-gradient-to-br from-casino-gold to-yellow-500 rounded-full flex items-center justify-center animate-pulse shadow-lg shadow-casino-gold/50">
+                <DollarSign className="w-8 h-8 text-casino-dark animate-bounce" />
               </div>
             </div>
 
-            <Button className="bg-casino-green hover:bg-casino-green/90 text-casino-dark font-bold px-12 py-4 text-xl rounded-full uppercase tracking-wide">
-              Signup
-            </Button>
+            {/* Enhanced Signup Button */}
+            <div className="relative">
+              <Button className="bg-gradient-to-r from-casino-green to-green-400 hover:from-green-400 hover:to-casino-green text-casino-dark font-bold px-16 py-6 text-xl rounded-full uppercase tracking-wide shadow-2xl shadow-casino-green/50 hover:shadow-casino-green/80 hover:scale-110 transition-all duration-300 border-2 border-white/20 relative overflow-hidden group">
+                <span className="relative z-10 flex items-center space-x-2">
+                  <Sparkles className="w-5 h-5 animate-spin" />
+                  <span>Signup Now</span>
+                  <Sparkles className="w-5 h-5 animate-spin" />
+                </span>
+                {/* Button glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </Button>
+              {/* Button glow ring */}
+              <div className="absolute inset-0 rounded-full bg-casino-green/20 blur-xl animate-pulse -z-10"></div>
+            </div>
           </CardContent>
         </Card>
       </section>
