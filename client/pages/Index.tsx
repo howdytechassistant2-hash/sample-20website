@@ -84,7 +84,7 @@ export default function Index() {
             <Sparkles className="w-6 h-6 text-casino-dark" />
           </div>
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-white">MYSOLAR</h1>
+            <h1 className="text-2xl md:text-3xl font-bold text-white">MYUNIVERSE</h1>
             <h2 className="text-xl md:text-2xl font-bold text-white">CASINO</h2>
           </div>
         </div>
@@ -220,7 +220,7 @@ export default function Index() {
         <Card className="bg-casino-card/50 border-casino-green/20 max-w-4xl mx-auto relative">
           <CardContent className="p-8 md:p-12">
             <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-              MySolar Casino is your trusted platform for fast, secure, and automated casino slots recharge and redemption services.
+              MyUniverse Casino is your trusted platform for fast, secure, and automated casino slots recharge and redemption services.
             </p>
             <ul className="space-y-4 text-gray-300">
               <li className="flex items-start space-x-3">
@@ -290,7 +290,7 @@ export default function Index() {
                   <Sparkles className="w-6 h-6 text-casino-dark" />
                 </div>
                 <div>
-                  <h1 className="text-2xl font-bold text-white">MYSOLAR</h1>
+                  <h1 className="text-2xl font-bold text-white">MYUNIVERSE</h1>
                   <h2 className="text-xl font-bold text-white">CASINO</h2>
                 </div>
               </div>
@@ -323,7 +323,7 @@ export default function Index() {
           </div>
           
           <div className="text-center text-gray-400 pt-8 border-t border-casino-green/10">
-            <p>© 2024 MySolar Casino. All rights reserved.</p>
+            <p>© 2024 MyUniverse Casino. All rights reserved.</p>
           </div>
         </div>
       </footer>
