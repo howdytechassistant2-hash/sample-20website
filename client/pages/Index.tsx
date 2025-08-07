@@ -121,25 +121,25 @@ export default function Index() {
           {/* Enhanced Glow Effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-casino-green/20 via-transparent to-casino-gold/20 animate-pulse"></div>
 
-          <CardContent className="p-8 md:p-12 text-center relative z-10">
+          <CardContent className="p-8 md:p-12 text-center relative z-20">
             <div className="mb-4">
-              <span className="bg-casino-green text-casino-dark px-6 py-3 rounded-full text-sm font-bold uppercase tracking-wide shadow-lg shadow-casino-green/50 animate-pulse hover:scale-110 transition-transform duration-300">
+              <span className="bg-casino-green text-casino-dark px-6 py-3 rounded-full text-sm font-bold uppercase tracking-wide shadow-xl shadow-casino-green/60 animate-pulse hover:scale-110 transition-transform duration-300 border-2 border-white/30">
                 ✨ New Player Offer ✨
               </span>
             </div>
 
-            {/* Glowing 100% with animation */}
+            {/* Glowing 100% with enhanced visibility */}
             <div className="relative mb-4">
               <h3 className="text-6xl md:text-8xl font-bold text-white mb-4 relative">
-                <span className="bg-gradient-to-r from-casino-gold via-yellow-300 to-casino-gold bg-clip-text text-transparent animate-pulse drop-shadow-2xl">
+                <span className="bg-gradient-to-r from-casino-gold via-yellow-300 to-casino-gold bg-clip-text text-transparent animate-pulse drop-shadow-2xl" style={{textShadow: '0 0 20px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.6)'}}>
                   100%
                 </span>
-                <div className="absolute inset-0 blur-xl bg-gradient-to-r from-casino-gold/50 to-yellow-300/50 animate-pulse -z-10"></div>
+                <div className="absolute inset-0 blur-xl bg-gradient-to-r from-casino-gold/70 to-yellow-300/70 animate-pulse -z-10"></div>
               </h3>
             </div>
 
-            <h4 className="text-2xl md:text-3xl font-bold text-white mb-8 drop-shadow-lg">
-              <span className="bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent">
+            <h4 className="text-2xl md:text-3xl font-bold mb-8 relative">
+              <span className="bg-gradient-to-r from-white via-cyan-100 to-white bg-clip-text text-transparent drop-shadow-2xl" style={{textShadow: '0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.6)'}}>
                 SIGNUP BONUS
               </span>
             </h4>
