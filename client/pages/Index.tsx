@@ -181,11 +181,9 @@ export default function Index() {
                   <img src={provider.image} alt={provider.name} className="w-20 h-20 mx-auto rounded-xl object-cover" />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-4 uppercase tracking-wide">{provider.name}</h3>
-                <a href={provider.url} target="_blank" rel="noopener noreferrer">
-                  <Button className="bg-casino-green hover:bg-casino-green/90 text-casino-dark font-bold px-8 py-2 rounded-full uppercase tracking-wide w-full">
-                    Play
-                  </Button>
-                </a>
+                <Button className="bg-casino-green hover:bg-casino-green/90 text-casino-dark font-bold px-8 py-2 rounded-full uppercase tracking-wide w-full">
+                  Play
+                </Button>
               </CardContent>
             </Card>
           ))}
