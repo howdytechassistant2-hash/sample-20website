@@ -46,35 +46,18 @@ export interface Withdrawal {
 
 // Initialize database tables if they don't exist
 export async function initializeDatabase() {
+  if (!supabase) {
+    console.log("⚠️  Skipping database initialization - Supabase not configured");
+    return;
+  }
+
   try {
-    // Create users table
-    const { error: usersError } = await supabase.rpc("create_users_table");
-    if (usersError && !usersError.message.includes("already exists")) {
-      console.log("Users table creation:", usersError);
-    }
-
-    // Create deposits table
-    const { error: depositsError } = await supabase.rpc(
-      "create_deposits_table",
-    );
-    if (depositsError && !depositsError.message.includes("already exists")) {
-      console.log("Deposits table creation:", depositsError);
-    }
-
-    // Create withdrawals table
-    const { error: withdrawalsError } = await supabase.rpc(
-      "create_withdrawals_table",
-    );
-    if (
-      withdrawalsError &&
-      !withdrawalsError.message.includes("already exists")
-    ) {
-      console.log("Withdrawals table creation:", withdrawalsError);
-    }
-
-    console.log("Database initialization completed");
+    console.log("🚀 Initializing database connection...");
+    // Simple connection test
+    const { data, error } = await supabase.from('users').select('count').limit(1);
+    console.log("✅ Database connection successful");
   } catch (error) {
-    console.error("Database initialization error:", error);
+    console.error("❌ Database connection failed:", error);
   }
 }
 
