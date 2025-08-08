@@ -67,6 +67,11 @@ export async function createUser(
   email: string,
   password: string,
 ): Promise<User | null> {
+  if (!supabase) {
+    console.error("❌ Cannot create user - Supabase not configured");
+    return null;
+  }
+
   try {
     const { data, error } = await supabase
       .from("users")
