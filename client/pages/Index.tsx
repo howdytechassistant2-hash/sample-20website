@@ -96,6 +96,8 @@ const features = [
 ];
 
 export default function Index() {
+  const { isAuthenticated, user, logout } = useAuth();
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-casino-dark via-slate-900 to-casino-dark">
       {/* Header */}
