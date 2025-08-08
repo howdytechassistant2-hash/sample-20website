@@ -99,6 +99,8 @@ export async function createUser(
 }
 
 export async function findUserByEmail(email: string): Promise<User | null> {
+  if (!supabase) return null;
+
   try {
     const { data, error } = await supabase
       .from("users")
