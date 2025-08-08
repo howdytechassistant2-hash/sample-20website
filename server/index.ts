@@ -26,5 +26,16 @@ export function createServer() {
 
   app.get("/api/demo", handleDemo);
 
+  // Authentication routes
+  app.post("/api/auth/signup", handleSignup);
+  app.post("/api/auth/login", handleLogin);
+
+  // Transaction routes
+  app.post("/api/deposit", handleDeposit);
+  app.post("/api/withdraw", handleWithdraw);
+
+  // Admin route to view all data
+  app.get("/api/admin/data", handleGetAllData);
+
   return app;
 }
