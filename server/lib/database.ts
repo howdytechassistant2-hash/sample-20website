@@ -5,13 +5,21 @@ const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_ANON_KEY;
 
 // Check if Supabase is configured
-if (!supabaseUrl || !supabaseKey || supabaseUrl.includes('REPLACE-WITH') || supabaseKey.includes('REPLACE-WITH')) {
-  console.warn('⚠️  Supabase not configured properly. Please set SUPABASE_URL and SUPABASE_ANON_KEY environment variables.');
+if (
+  !supabaseUrl ||
+  !supabaseKey ||
+  supabaseUrl.includes("REPLACE-WITH") ||
+  supabaseKey.includes("REPLACE-WITH")
+) {
+  console.warn(
+    "⚠️  Supabase not configured properly. Please set SUPABASE_URL and SUPABASE_ANON_KEY environment variables.",
+  );
 }
 
-export const supabase = supabaseUrl && supabaseKey && !supabaseUrl.includes('REPLACE-WITH')
-  ? createClient(supabaseUrl, supabaseKey)
-  : null;
+export const supabase =
+  supabaseUrl && supabaseKey && !supabaseUrl.includes("REPLACE-WITH")
+    ? createClient(supabaseUrl, supabaseKey)
+    : null;
 
 // Database types
 export interface User {
@@ -47,14 +55,19 @@ export interface Withdrawal {
 // Initialize database tables if they don't exist
 export async function initializeDatabase() {
   if (!supabase) {
-    console.log("⚠️  Skipping database initialization - Supabase not configured");
+    console.log(
+      "⚠️  Skipping database initialization - Supabase not configured",
+    );
     return;
   }
 
   try {
     console.log("🚀 Initializing database connection...");
     // Simple connection test
-    const { data, error } = await supabase.from('users').select('count').limit(1);
+    const { data, error } = await supabase
+      .from("users")
+      .select("count")
+      .limit(1);
     console.log("✅ Database connection successful");
   } catch (error) {
     console.error("❌ Database connection failed:", error);
