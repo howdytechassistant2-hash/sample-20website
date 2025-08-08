@@ -218,15 +218,17 @@ export default function Index() {
 
             {/* Enhanced Signup Button */}
             <div className="relative">
-              <Button className="bg-gradient-to-r from-casino-green to-green-400 hover:from-green-400 hover:to-casino-green text-casino-dark font-bold px-16 py-6 text-xl rounded-full uppercase tracking-wide shadow-2xl shadow-casino-green/70 hover:shadow-casino-green/90 hover:scale-110 transition-all duration-300 border-4 border-white/40 relative overflow-hidden group">
-                <span className="relative z-10 flex items-center space-x-2">
-                  <Sparkles className="w-5 h-5 animate-spin" />
-                  <span>Signup Now</span>
-                  <Sparkles className="w-5 h-5 animate-spin" />
-                </span>
-                {/* Button glow effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </Button>
+              <Link to="/auth">
+                <Button className="bg-gradient-to-r from-casino-green to-green-400 hover:from-green-400 hover:to-casino-green text-casino-dark font-bold px-16 py-6 text-xl rounded-full uppercase tracking-wide shadow-2xl shadow-casino-green/70 hover:shadow-casino-green/90 hover:scale-110 transition-all duration-300 border-4 border-white/40 relative overflow-hidden group">
+                  <span className="relative z-10 flex items-center space-x-2">
+                    <Sparkles className="w-5 h-5 animate-spin" />
+                    <span>Signup Now</span>
+                    <Sparkles className="w-5 h-5 animate-spin" />
+                  </span>
+                  {/* Button glow effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </Button>
+              </Link>
               {/* Enhanced button glow ring */}
               <div className="absolute inset-0 rounded-full bg-casino-green/40 blur-2xl animate-pulse -z-10"></div>
             </div>
