@@ -8,12 +8,9 @@ import {
   Shield,
   Gift,
   Star,
-  LogOut,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Link } from "react-router-dom";
-import { useAuth } from "@/contexts/AuthContext";
 
 const gameProviders = [
   {
@@ -96,8 +93,6 @@ const features = [
 ];
 
 export default function Index() {
-  const { isAuthenticated, user, logout } = useAuth();
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-casino-dark via-slate-900 to-casino-dark">
       {/* Header */}
@@ -113,34 +108,11 @@ export default function Index() {
             <h2 className="text-xl md:text-2xl font-bold text-white">CASINO</h2>
           </div>
         </div>
-        <div className="flex items-center space-x-4">
-          {isAuthenticated ? (
-            <div className="flex items-center space-x-4">
-              <span className="text-white">
-                Welcome, <span className="text-casino-green font-bold">{user?.username}</span>
-              </span>
-              <Button
-                onClick={logout}
-                variant="outline"
-                className="border-casino-green/20 text-casino-green hover:bg-casino-green/20"
-              >
-                <LogOut className="w-4 h-4 mr-2" />
-                Logout
-              </Button>
-            </div>
-          ) : (
-            <Link to="/auth">
-              <Button className="bg-casino-green hover:bg-casino-green/90 text-casino-dark font-bold px-6 py-2 rounded-full">
-                Sign In
-              </Button>
-            </Link>
-          )}
-          <div className="flex items-center space-x-2">
-            <Send className="w-5 h-5 text-casino-green" />
-            <Button className="bg-casino-green hover:bg-casino-green/90 text-casino-dark font-bold px-6 py-2 rounded-full">
-              LIVE CHAT
-            </Button>
-          </div>
+        <div className="flex items-center space-x-2">
+          <Send className="w-5 h-5 text-casino-green" />
+          <Button className="bg-casino-green hover:bg-casino-green/90 text-casino-dark font-bold px-6 py-2 rounded-full">
+            LIVE CHAT
+          </Button>
         </div>
       </header>
 
@@ -218,17 +190,15 @@ export default function Index() {
 
             {/* Enhanced Signup Button */}
             <div className="relative">
-              <Link to="/auth">
-                <Button className="bg-gradient-to-r from-casino-green to-green-400 hover:from-green-400 hover:to-casino-green text-casino-dark font-bold px-16 py-6 text-xl rounded-full uppercase tracking-wide shadow-2xl shadow-casino-green/70 hover:shadow-casino-green/90 hover:scale-110 transition-all duration-300 border-4 border-white/40 relative overflow-hidden group">
-                  <span className="relative z-10 flex items-center space-x-2">
-                    <Sparkles className="w-5 h-5 animate-spin" />
-                    <span>Signup Now</span>
-                    <Sparkles className="w-5 h-5 animate-spin" />
-                  </span>
-                  {/* Button glow effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </Button>
-              </Link>
+              <Button className="bg-gradient-to-r from-casino-green to-green-400 hover:from-green-400 hover:to-casino-green text-casino-dark font-bold px-16 py-6 text-xl rounded-full uppercase tracking-wide shadow-2xl shadow-casino-green/70 hover:shadow-casino-green/90 hover:scale-110 transition-all duration-300 border-4 border-white/40 relative overflow-hidden group">
+                <span className="relative z-10 flex items-center space-x-2">
+                  <Sparkles className="w-5 h-5 animate-spin" />
+                  <span>Signup Now</span>
+                  <Sparkles className="w-5 h-5 animate-spin" />
+                </span>
+                {/* Button glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-r from-white/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </Button>
               {/* Enhanced button glow ring */}
               <div className="absolute inset-0 rounded-full bg-casino-green/40 blur-2xl animate-pulse -z-10"></div>
             </div>
@@ -276,49 +246,20 @@ export default function Index() {
       {/* Deposit/Withdraw Buttons */}
       <section className="px-4 md:px-6 py-8">
         <div className="flex flex-col md:flex-row gap-4 max-w-2xl mx-auto">
-          {isAuthenticated ? (
-            <>
-              <Link to="/deposit" className="flex-1">
-                <Button className="bg-casino-green hover:bg-casino-green/90 text-casino-dark font-bold px-12 py-6 text-xl rounded-full uppercase tracking-wide w-full">
-                  <div className="flex items-center justify-center space-x-2">
-                    <div className="w-3 h-3 bg-white rounded-full"></div>
-                    <div className="w-3 h-3 bg-white rounded-full opacity-60"></div>
-                    <span>Deposit</span>
-                  </div>
-                </Button>
-              </Link>
-              <Link to="/withdraw" className="flex-1">
-                <Button className="bg-casino-green hover:bg-casino-green/90 text-casino-dark font-bold px-12 py-6 text-xl rounded-full uppercase tracking-wide w-full">
-                  <div className="flex items-center justify-center space-x-2">
-                    <div className="w-3 h-3 bg-white rounded-full"></div>
-                    <div className="w-3 h-3 bg-white rounded-full opacity-60"></div>
-                    <span>Withdraw</span>
-                  </div>
-                </Button>
-              </Link>
-            </>
-          ) : (
-            <>
-              <Link to="/auth" className="flex-1">
-                <Button className="bg-casino-green hover:bg-casino-green/90 text-casino-dark font-bold px-12 py-6 text-xl rounded-full uppercase tracking-wide w-full">
-                  <div className="flex items-center justify-center space-x-2">
-                    <div className="w-3 h-3 bg-white rounded-full"></div>
-                    <div className="w-3 h-3 bg-white rounded-full opacity-60"></div>
-                    <span>Sign In to Deposit</span>
-                  </div>
-                </Button>
-              </Link>
-              <Link to="/auth" className="flex-1">
-                <Button className="bg-casino-green hover:bg-casino-green/90 text-casino-dark font-bold px-12 py-6 text-xl rounded-full uppercase tracking-wide w-full">
-                  <div className="flex items-center justify-center space-x-2">
-                    <div className="w-3 h-3 bg-white rounded-full"></div>
-                    <div className="w-3 h-3 bg-white rounded-full opacity-60"></div>
-                    <span>Sign In to Withdraw</span>
-                  </div>
-                </Button>
-              </Link>
-            </>
-          )}
+          <Button className="bg-casino-green hover:bg-casino-green/90 text-casino-dark font-bold px-12 py-6 text-xl rounded-full uppercase tracking-wide flex-1">
+            <div className="flex items-center justify-center space-x-2">
+              <div className="w-3 h-3 bg-white rounded-full"></div>
+              <div className="w-3 h-3 bg-white rounded-full opacity-60"></div>
+              <span>Deposit</span>
+            </div>
+          </Button>
+          <Button className="bg-casino-green hover:bg-casino-green/90 text-casino-dark font-bold px-12 py-6 text-xl rounded-full uppercase tracking-wide flex-1">
+            <div className="flex items-center justify-center space-x-2">
+              <div className="w-3 h-3 bg-white rounded-full"></div>
+              <div className="w-3 h-3 bg-white rounded-full opacity-60"></div>
+              <span>Withdraw</span>
+            </div>
+          </Button>
         </div>
       </section>
 
