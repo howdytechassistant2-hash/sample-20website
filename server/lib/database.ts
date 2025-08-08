@@ -1,11 +1,17 @@
 import { createClient } from "@supabase/supabase-js";
 
 // Database configuration
-const supabaseUrl =
-  process.env.SUPABASE_URL || "https://your-project.supabase.co";
-const supabaseKey = process.env.SUPABASE_ANON_KEY || "your-anon-key";
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_ANON_KEY;
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
+// Check if Supabase is configured
+if (!supabaseUrl || !supabaseKey || supabaseUrl.includes('REPLACE-WITH') || supabaseKey.includes('REPLACE-WITH')) {
+  console.warn('⚠️  Supabase not configured properly. Please set SUPABASE_URL and SUPABASE_ANON_KEY environment variables.');
+}
+
+export const supabase = supabaseUrl && supabaseKey && !supabaseUrl.includes('REPLACE-WITH')
+  ? createClient(supabaseUrl, supabaseKey)
+  : null;
 
 // Database types
 export interface User {
