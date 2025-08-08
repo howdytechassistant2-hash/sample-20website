@@ -113,11 +113,34 @@ export default function Index() {
             <h2 className="text-xl md:text-2xl font-bold text-white">CASINO</h2>
           </div>
         </div>
-        <div className="flex items-center space-x-2">
-          <Send className="w-5 h-5 text-casino-green" />
-          <Button className="bg-casino-green hover:bg-casino-green/90 text-casino-dark font-bold px-6 py-2 rounded-full">
-            LIVE CHAT
-          </Button>
+        <div className="flex items-center space-x-4">
+          {isAuthenticated ? (
+            <div className="flex items-center space-x-4">
+              <span className="text-white">
+                Welcome, <span className="text-casino-green font-bold">{user?.username}</span>
+              </span>
+              <Button
+                onClick={logout}
+                variant="outline"
+                className="border-casino-green/20 text-casino-green hover:bg-casino-green/20"
+              >
+                <LogOut className="w-4 h-4 mr-2" />
+                Logout
+              </Button>
+            </div>
+          ) : (
+            <Link to="/auth">
+              <Button className="bg-casino-green hover:bg-casino-green/90 text-casino-dark font-bold px-6 py-2 rounded-full">
+                Sign In
+              </Button>
+            </Link>
+          )}
+          <div className="flex items-center space-x-2">
+            <Send className="w-5 h-5 text-casino-green" />
+            <Button className="bg-casino-green hover:bg-casino-green/90 text-casino-dark font-bold px-6 py-2 rounded-full">
+              LIVE CHAT
+            </Button>
+          </div>
         </div>
       </header>
 
