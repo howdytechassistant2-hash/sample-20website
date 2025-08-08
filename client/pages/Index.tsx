@@ -276,20 +276,49 @@ export default function Index() {
       {/* Deposit/Withdraw Buttons */}
       <section className="px-4 md:px-6 py-8">
         <div className="flex flex-col md:flex-row gap-4 max-w-2xl mx-auto">
-          <Button className="bg-casino-green hover:bg-casino-green/90 text-casino-dark font-bold px-12 py-6 text-xl rounded-full uppercase tracking-wide flex-1">
-            <div className="flex items-center justify-center space-x-2">
-              <div className="w-3 h-3 bg-white rounded-full"></div>
-              <div className="w-3 h-3 bg-white rounded-full opacity-60"></div>
-              <span>Deposit</span>
-            </div>
-          </Button>
-          <Button className="bg-casino-green hover:bg-casino-green/90 text-casino-dark font-bold px-12 py-6 text-xl rounded-full uppercase tracking-wide flex-1">
-            <div className="flex items-center justify-center space-x-2">
-              <div className="w-3 h-3 bg-white rounded-full"></div>
-              <div className="w-3 h-3 bg-white rounded-full opacity-60"></div>
-              <span>Withdraw</span>
-            </div>
-          </Button>
+          {isAuthenticated ? (
+            <>
+              <Link to="/deposit" className="flex-1">
+                <Button className="bg-casino-green hover:bg-casino-green/90 text-casino-dark font-bold px-12 py-6 text-xl rounded-full uppercase tracking-wide w-full">
+                  <div className="flex items-center justify-center space-x-2">
+                    <div className="w-3 h-3 bg-white rounded-full"></div>
+                    <div className="w-3 h-3 bg-white rounded-full opacity-60"></div>
+                    <span>Deposit</span>
+                  </div>
+                </Button>
+              </Link>
+              <Link to="/withdraw" className="flex-1">
+                <Button className="bg-casino-green hover:bg-casino-green/90 text-casino-dark font-bold px-12 py-6 text-xl rounded-full uppercase tracking-wide w-full">
+                  <div className="flex items-center justify-center space-x-2">
+                    <div className="w-3 h-3 bg-white rounded-full"></div>
+                    <div className="w-3 h-3 bg-white rounded-full opacity-60"></div>
+                    <span>Withdraw</span>
+                  </div>
+                </Button>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to="/auth" className="flex-1">
+                <Button className="bg-casino-green hover:bg-casino-green/90 text-casino-dark font-bold px-12 py-6 text-xl rounded-full uppercase tracking-wide w-full">
+                  <div className="flex items-center justify-center space-x-2">
+                    <div className="w-3 h-3 bg-white rounded-full"></div>
+                    <div className="w-3 h-3 bg-white rounded-full opacity-60"></div>
+                    <span>Sign In to Deposit</span>
+                  </div>
+                </Button>
+              </Link>
+              <Link to="/auth" className="flex-1">
+                <Button className="bg-casino-green hover:bg-casino-green/90 text-casino-dark font-bold px-12 py-6 text-xl rounded-full uppercase tracking-wide w-full">
+                  <div className="flex items-center justify-center space-x-2">
+                    <div className="w-3 h-3 bg-white rounded-full"></div>
+                    <div className="w-3 h-3 bg-white rounded-full opacity-60"></div>
+                    <span>Sign In to Withdraw</span>
+                  </div>
+                </Button>
+              </Link>
+            </>
+          )}
         </div>
       </section>
 
