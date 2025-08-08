@@ -7,7 +7,7 @@ import {
   createDeposit,
   createWithdrawal,
   getAllData,
-  initializeDatabase
+  initializeDatabase,
 } from "../lib/database";
 
 // Initialize database on startup
@@ -16,12 +16,12 @@ initializeDatabase();
 const signupSchema = z.object({
   username: z.string().min(3),
   email: z.string().email(),
-  password: z.string().min(6)
+  password: z.string().min(6),
 });
 
 const loginSchema = z.object({
   email: z.string().email(),
-  password: z.string()
+  password: z.string(),
 });
 
 export const handleSignup: RequestHandler = async (req, res) => {
@@ -44,7 +44,7 @@ export const handleSignup: RequestHandler = async (req, res) => {
     const { password: _, ...userWithoutPassword } = newUser;
     res.json({ user: userWithoutPassword });
   } catch (error) {
-    console.error('Signup error:', error);
+    console.error("Signup error:", error);
     res.status(400).json({ error: "Invalid input" });
   }
 };
@@ -62,7 +62,7 @@ export const handleLogin: RequestHandler = async (req, res) => {
     const { password: _, ...userWithoutPassword } = user;
     res.json({ user: userWithoutPassword });
   } catch (error) {
-    console.error('Login error:', error);
+    console.error("Login error:", error);
     res.status(400).json({ error: "Invalid input" });
   }
 };
@@ -78,7 +78,7 @@ export const handleDeposit: RequestHandler = async (req, res) => {
       amount,
       cashapp_tag: cashappTag,
       timestamp: new Date().toISOString(),
-      status: 'pending'
+      status: "pending",
     });
 
     if (!deposit) {
@@ -87,7 +87,7 @@ export const handleDeposit: RequestHandler = async (req, res) => {
 
     res.json({ success: true, deposit });
   } catch (error) {
-    console.error('Deposit error:', error);
+    console.error("Deposit error:", error);
     res.status(400).json({ error: "Failed to process deposit" });
   }
 };
@@ -103,7 +103,7 @@ export const handleWithdraw: RequestHandler = async (req, res) => {
       cashtag,
       notes,
       timestamp: new Date().toISOString(),
-      status: 'pending'
+      status: "pending",
     });
 
     if (!withdrawal) {
@@ -112,7 +112,7 @@ export const handleWithdraw: RequestHandler = async (req, res) => {
 
     res.json({ success: true, withdrawal });
   } catch (error) {
-    console.error('Withdraw error:', error);
+    console.error("Withdraw error:", error);
     res.status(400).json({ error: "Failed to process withdrawal" });
   }
 };
@@ -123,7 +123,7 @@ export const handleGetAllData: RequestHandler = async (req, res) => {
     const data = await getAllData();
     res.json(data);
   } catch (error) {
-    console.error('Get all data error:', error);
+    console.error("Get all data error:", error);
     res.status(500).json({ error: "Failed to retrieve data" });
   }
 };

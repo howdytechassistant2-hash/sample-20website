@@ -117,7 +117,10 @@ export default function Index() {
           {isAuthenticated ? (
             <div className="flex items-center space-x-4">
               <span className="text-white">
-                Welcome, <span className="text-casino-green font-bold">{user?.username}</span>
+                Welcome,{" "}
+                <span className="text-casino-green font-bold">
+                  {user?.username}
+                </span>
               </span>
               <Button
                 onClick={logout}
