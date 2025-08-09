@@ -1,6 +1,7 @@
 # Deployment Trigger - Simplified Function
 
 Fixed Netlify function deployment issue:
+
 - Simplified function with dynamic imports
 - Reduced bundle size to pass storage limits
 - Should resolve "Insufficient storage" error
