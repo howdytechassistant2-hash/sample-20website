@@ -44,7 +44,8 @@ export const handleSignup: RequestHandler = async (req, res) => {
       console.error("Failed to create user in database");
       return res.status(500).json({
         error: "Failed to create user",
-        details: "Database configuration may be missing. Please check Supabase setup."
+        details:
+          "Database configuration may be missing. Please check Supabase setup.",
       });
     }
 
@@ -55,7 +56,9 @@ export const handleSignup: RequestHandler = async (req, res) => {
   } catch (error) {
     console.error("Signup error:", error);
     if (error instanceof z.ZodError) {
-      return res.status(400).json({ error: "Invalid input", details: error.issues });
+      return res
+        .status(400)
+        .json({ error: "Invalid input", details: error.issues });
     }
     res.status(500).json({ error: "Server error during signup" });
   }
