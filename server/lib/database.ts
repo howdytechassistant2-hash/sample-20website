@@ -4,6 +4,14 @@ import { createClient } from "@supabase/supabase-js";
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
+// Debug environment variables
+console.log("🔍 Environment check:", {
+  hasUrl: !!supabaseUrl,
+  hasKey: !!supabaseKey,
+  urlPrefix: supabaseUrl?.substring(0, 20) + "...",
+  keyPrefix: supabaseKey?.substring(0, 20) + "..."
+});
+
 // Check if Supabase is configured
 if (
   !supabaseUrl ||
