@@ -134,6 +134,22 @@ export default function Auth() {
         </CardHeader>
 
         <CardContent>
+          {!isLogin && (
+            <div className="mb-6 p-4 bg-blue-900/30 border border-blue-400/30 rounded-lg">
+              <div className="flex items-start space-x-3">
+                <div className="w-5 h-5 rounded-full bg-blue-400 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <span className="text-blue-900 text-xs font-bold">i</span>
+                </div>
+                <div>
+                  <h4 className="text-blue-200 font-semibold text-sm mb-1">Universal Game Access</h4>
+                  <p className="text-blue-100 text-xs leading-relaxed">
+                    The username and password you create here will be your login credentials for <span className="font-semibold text-white">ALL games</span> on our platform (VBLink, Ultra Panda, Juwa, Fire Kirin, Orion Stars, Milky Ways, Panda Master, and Game Vault).
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="space-y-4">
             {!isLogin && (
               <div className="space-y-2">
