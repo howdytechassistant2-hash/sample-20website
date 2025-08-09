@@ -41,30 +41,13 @@ CREATE INDEX IF NOT EXISTS idx_deposits_timestamp ON deposits(timestamp);
 CREATE INDEX IF NOT EXISTS idx_withdrawals_user_id ON withdrawals(user_id);
 CREATE INDEX IF NOT EXISTS idx_withdrawals_timestamp ON withdrawals(timestamp);
 
--- Row Level Security (RLS) policies
-ALTER TABLE users ENABLE ROW LEVEL SECURITY;
-ALTER TABLE deposits ENABLE ROW LEVEL SECURITY;
-ALTER TABLE withdrawals ENABLE ROW LEVEL SECURITY;
+-- DISABLE Row Level Security temporarily for easier development
+-- You can enable this later once everything is working
+ALTER TABLE users DISABLE ROW LEVEL SECURITY;
+ALTER TABLE deposits DISABLE ROW LEVEL SECURITY;
+ALTER TABLE withdrawals DISABLE ROW LEVEL SECURITY;
 
--- Drop existing policies if they exist, then recreate them
-DO $$ 
-BEGIN
-    -- Drop and recreate user policies
-    DROP POLICY IF EXISTS "Service role can manage users" ON users;
-    CREATE POLICY "Service role can manage users" ON users
-        FOR ALL USING (auth.role() = 'service_role');
-    
-    -- Drop and recreate deposit policies  
-    DROP POLICY IF EXISTS "Service role can manage deposits" ON deposits;
-    CREATE POLICY "Service role can manage deposits" ON deposits
-        FOR ALL USING (auth.role() = 'service_role');
-    
-    -- Drop and recreate withdrawal policies
-    DROP POLICY IF EXISTS "Service role can manage withdrawals" ON withdrawals;
-    CREATE POLICY "Service role can manage withdrawals" ON withdrawals
-        FOR ALL USING (auth.role() = 'service_role');
-        
-EXCEPTION 
-    WHEN others THEN 
-        RAISE NOTICE 'Some policies may already exist - continuing...';
-END $$;
+-- Drop existing policies if they exist
+DROP POLICY IF EXISTS "Service role can manage users" ON users;
+DROP POLICY IF EXISTS "Service role can manage deposits" ON deposits;
+DROP POLICY IF EXISTS "Service role can manage withdrawals" ON withdrawals;
