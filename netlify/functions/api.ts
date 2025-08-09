@@ -336,29 +336,60 @@ app.post("/api/deposit", async (req, res) => {
     console.log("=== DEPOSIT REQUEST ===");
     console.log("Request body:", req.body);
 
+    if (!supabase) {
+      console.error("❌ Supabase not configured for deposit");
+      return res.status(500).json({ error: "Database not configured" });
+    }
+
     const { userId, username, game, amount, cashappTag, timestamp } = req.body;
 
-    // For now, just log the deposit request (you can add database storage later)
-    console.log("✅ Deposit request received:", {
-      userId,
-      username,
-      game,
-      amount,
-      cashappTag,
-      timestamp
-    });
+    // Validate required fields
+    if (!userId || !username || !game || !amount || !cashappTag) {
+      return res.status(400).json({
+        error: "Missing required fields",
+        required: ["userId", "username", "game", "amount", "cashappTag"]
+      });
+    }
 
-    // Respond with success
+    // Insert deposit into database
+    console.log("🔄 Inserting deposit into database...");
+    const { data, error } = await supabase
+      .from("deposits")
+      .insert([
+        {
+          user_id: userId,
+          username,
+          game,
+          amount: parseFloat(amount),
+          cashapp_tag: cashappTag,
+          timestamp: timestamp || new Date().toISOString(),
+          status: 'pending'
+        },
+      ])
+      .select()
+      .single();
+
+    if (error) {
+      console.error("❌ Supabase deposit insert error:", error);
+      return res.status(500).json({
+        error: "Failed to save deposit request",
+        details: error.message
+      });
+    }
+
+    console.log("✅ Deposit saved successfully:", data.id);
     res.json({
       success: true,
       message: `Deposit request submitted for ${game} - $${amount}`,
       data: {
+        id: data.id,
         userId,
         username,
         game,
-        amount,
+        amount: parseFloat(amount),
         cashappTag,
-        timestamp
+        timestamp: data.timestamp,
+        status: data.status
       }
     });
   } catch (error) {
