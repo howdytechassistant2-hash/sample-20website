@@ -24,33 +24,35 @@ export default function Withdraw() {
 
   const handleSubmitWithdraw = async () => {
     if (!amount || !cashtag || !notes.trim()) return;
-    
+
     setSubmitting(true);
     try {
-      const response = await fetch('/api/withdraw', {
-        method: 'POST',
+      const response = await fetch("/api/withdraw", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           userId: user?.id,
           username: user?.username,
           amount: parseFloat(amount),
-          cashtag: cashtag.startsWith('$') ? cashtag : `$${cashtag}`,
+          cashtag: cashtag.startsWith("$") ? cashtag : `$${cashtag}`,
           notes,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         }),
       });
 
       if (response.ok) {
-        alert(`Withdrawal request submitted for $${amount} to ${cashtag}. Your withdrawal will be deposited shortly.`);
+        alert(
+          `Withdrawal request submitted for $${amount} to ${cashtag}. Your withdrawal will be deposited shortly.`,
+        );
         setAmount("");
         setCashtag("");
         setNotes("");
       }
     } catch (error) {
-      console.error('Withdraw error:', error);
-      alert('Failed to submit withdrawal request');
+      console.error("Withdraw error:", error);
+      alert("Failed to submit withdrawal request");
     } finally {
       setSubmitting(false);
     }
@@ -69,12 +71,15 @@ export default function Withdraw() {
             <Sparkles className="w-6 h-6 text-casino-dark" />
           </div>
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-white">MYUNIVERSE</h1>
+            <h1 className="text-2xl md:text-3xl font-bold text-white">
+              MYUNIVERSE
+            </h1>
             <h2 className="text-xl md:text-2xl font-bold text-white">CASINO</h2>
           </div>
         </Link>
         <div className="text-white">
-          Welcome, <span className="text-casino-green font-bold">{user?.username}</span>
+          Welcome,{" "}
+          <span className="text-casino-green font-bold">{user?.username}</span>
         </div>
       </header>
 
@@ -93,7 +98,9 @@ export default function Withdraw() {
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="amount" className="text-white">Withdrawal Amount ($)</Label>
+                <Label htmlFor="amount" className="text-white">
+                  Withdrawal Amount ($)
+                </Label>
                 <Input
                   id="amount"
                   type="number"
@@ -108,7 +115,9 @@ export default function Withdraw() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="cashtag" className="text-white">Your CashApp Tag</Label>
+                <Label htmlFor="cashtag" className="text-white">
+                  Your CashApp Tag
+                </Label>
                 <Input
                   id="cashtag"
                   type="text"
@@ -117,11 +126,15 @@ export default function Withdraw() {
                   className="bg-casino-dark/50 border-casino-green/20 text-white placeholder:text-gray-400"
                   placeholder="$yourcashtag"
                 />
-                <p className="text-sm text-gray-400">Enter your CashApp cashtag (e.g., $johndoe)</p>
+                <p className="text-sm text-gray-400">
+                  Enter your CashApp cashtag (e.g., $johndoe)
+                </p>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="notes" className="text-white">Notes *</Label>
+                <Label htmlFor="notes" className="text-white">
+                  Notes *
+                </Label>
                 <Textarea
                   id="notes"
                   value={notes}
@@ -131,7 +144,10 @@ export default function Withdraw() {
                   rows={3}
                   required
                 />
-                <p className="text-sm text-gray-400">Required: Enter the game name from where you want to redeem your winnings</p>
+                <p className="text-sm text-gray-400">
+                  Required: Enter the game name from where you want to redeem
+                  your winnings
+                </p>
               </div>
 
               {/* Important Information */}
@@ -145,7 +161,10 @@ export default function Withdraw() {
                   <li>• Minimum withdrawal: $20</li>
                   <li>• Maximum daily withdrawal: $5000</li>
                   <li>• Verify your CashApp tag is correct</li>
-                  <li>• Contact support if you don't receive payment within 48 hours</li>
+                  <li>
+                    • Contact support if you don't receive payment within 48
+                    hours
+                  </li>
                 </ul>
               </div>
 
@@ -153,7 +172,9 @@ export default function Withdraw() {
               <div className="bg-casino-green/10 border border-casino-green/20 rounded-lg p-4">
                 <div className="flex items-center justify-between">
                   <span className="text-white">Available Balance:</span>
-                  <span className="text-casino-green text-xl font-bold">$0.00</span>
+                  <span className="text-casino-green text-xl font-bold">
+                    $0.00
+                  </span>
                 </div>
                 <p className="text-gray-400 text-sm mt-1">
                   Contact admin to check your actual balance
@@ -162,14 +183,20 @@ export default function Withdraw() {
 
               <Button
                 onClick={handleSubmitWithdraw}
-                disabled={!amount || !cashtag || !notes.trim() || parseFloat(amount) < 20 || submitting}
+                disabled={
+                  !amount ||
+                  !cashtag ||
+                  !notes.trim() ||
+                  parseFloat(amount) < 20 ||
+                  submitting
+                }
                 className="w-full bg-gradient-to-r from-casino-green to-green-400 hover:from-green-400 hover:to-casino-green text-casino-dark font-bold py-3 text-lg rounded-full shadow-lg shadow-casino-green/50 hover:shadow-casino-green/80 transition-all duration-300"
               >
                 {submitting ? "Submitting..." : "Submit Withdrawal Request"}
               </Button>
 
               <div className="text-center">
-                <Link 
+                <Link
                   to="/"
                   className="text-casino-green hover:text-green-400 transition-colors"
                 >
