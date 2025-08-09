@@ -337,7 +337,7 @@ app.use("*", (req, res) => {
       "/auth/login",
       "/api/auth/login",
     ],
-    message: "Try visiting the root / or /ping endpoints first"
+    message: "Try visiting the root / or /ping endpoints first",
   });
 });
 
