@@ -52,6 +52,18 @@ export interface Withdrawal {
   status: string;
 }
 
+export interface Message {
+  id: string;
+  user_id: string;
+  username: string;
+  title: string;
+  content: string;
+  message_type: string;
+  is_read: boolean;
+  sent_at: string;
+  read_at?: string;
+}
+
 // Initialize database tables if they don't exist
 export async function initializeDatabase() {
   if (!supabase) {
