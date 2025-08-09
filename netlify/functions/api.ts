@@ -280,6 +280,39 @@ app.post("/auth/login", async (req, res) => {
   }
 });
 
+// Also handle /api/auth/login for frontend compatibility
+app.post("/api/auth/login", async (req, res) => {
+  try {
+    console.log("=== API LOGIN ATTEMPT ===");
+    console.log("Request body:", req.body);
+
+    const { email, password } = req.body;
+
+    if (!supabase) {
+      return res.status(500).json({ error: "Database not configured" });
+    }
+
+    const { data, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("email", email)
+      .eq("password", password)
+      .single();
+
+    if (error || !data) {
+      console.log("❌ Login failed for:", email);
+      return res.status(401).json({ error: "Invalid credentials" });
+    }
+
+    console.log("✅ Login successful for:", email);
+    const { password: _, ...userWithoutPassword } = data;
+    res.json({ user: userWithoutPassword });
+  } catch (error) {
+    console.error("❌ Login error:", error);
+    res.status(500).json({ error: "Server error during login" });
+  }
+});
+
 // Debug route to see what paths are being called
 app.use("*", (req, res) => {
   console.log("❌ Unmatched route:", req.method, req.originalUrl, req.path);
