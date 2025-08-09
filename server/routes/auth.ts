@@ -26,26 +26,38 @@ const loginSchema = z.object({
 
 export const handleSignup: RequestHandler = async (req, res) => {
   try {
+    console.log("Signup attempt:", { body: req.body });
     const { username, email, password } = signupSchema.parse(req.body);
 
     // Check if user already exists
+    console.log("Checking if user exists:", email);
     const existingUser = await findUserByEmail(email);
     if (existingUser) {
+      console.log("User already exists:", email);
       return res.status(400).json({ error: "User already exists" });
     }
 
     // Create new user
+    console.log("Creating new user:", { username, email });
     const newUser = await createUser(username, email, password);
     if (!newUser) {
-      return res.status(500).json({ error: "Failed to create user" });
+      console.error("Failed to create user in database");
+      return res.status(500).json({
+        error: "Failed to create user",
+        details: "Database configuration may be missing. Please check Supabase setup."
+      });
     }
 
+    console.log("User created successfully:", newUser.id);
     // Return user without password
     const { password: _, ...userWithoutPassword } = newUser;
     res.json({ user: userWithoutPassword });
   } catch (error) {
     console.error("Signup error:", error);
-    res.status(400).json({ error: "Invalid input" });
+    if (error instanceof z.ZodError) {
+      return res.status(400).json({ error: "Invalid input", details: error.issues });
+    }
+    res.status(500).json({ error: "Server error during signup" });
   }
 };
 
