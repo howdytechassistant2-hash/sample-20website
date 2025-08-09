@@ -25,6 +25,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signup = async (username: string, email: string, password: string): Promise<boolean> => {
     try {
+      console.log('🔄 Attempting signup:', { username, email });
       const response = await fetch('/api/auth/signup', {
         method: 'POST',
         headers: {
@@ -33,15 +34,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         body: JSON.stringify({ username, email, password }),
       });
 
+      console.log('📡 Signup response status:', response.status);
+
       if (response.ok) {
         const userData = await response.json();
+        console.log('✅ Signup successful:', userData);
         setUser(userData.user);
         localStorage.setItem('casino_user', JSON.stringify(userData.user));
         return true;
+      } else {
+        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+        console.error('❌ Signup failed:', response.status, errorData);
+        return false;
       }
-      return false;
     } catch (error) {
-      console.error('Signup error:', error);
+      console.error('❌ Signup network error:', error);
       return false;
     }
   };
