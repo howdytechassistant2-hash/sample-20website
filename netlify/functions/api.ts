@@ -98,22 +98,32 @@ app.post("/api/auth/signup", async (req, res) => {
   try {
     console.log("=== SIGNUP ATTEMPT ===");
     console.log("Request body:", req.body);
+    console.log("Environment check:");
+    console.log("- SUPABASE_URL:", process.env.SUPABASE_URL ? "SET" : "NOT SET");
+    console.log("- SUPABASE_SERVICE_ROLE_KEY:", process.env.SUPABASE_SERVICE_ROLE_KEY ? "SET" : "NOT SET");
+    console.log("- Supabase client:", supabase ? "INITIALIZED" : "NOT INITIALIZED");
 
     const { username, email, password } = signupSchema.parse(req.body);
 
     // Check if user already exists
+    console.log("Checking if user exists:", email);
     const existingUser = await findUserByEmail(email);
     if (existingUser) {
-      return res.status(400).json({ error: "User already exists" });
+      console.log("❌ User already exists:", email);
+      return res.status(400).json({
+        error: "User already exists",
+        email: email
+      });
     }
 
     // Create new user
+    console.log("Creating new user:", { username, email });
     const newUser = await createUser(username, email, password);
     if (!newUser) {
-      console.error("❌ Failed to create user");
+      console.error("❌ Failed to create user in database");
       return res.status(500).json({
         error: "Failed to create user",
-        details: "Database error - check environment variables",
+        details: "Database error - check environment variables and database schema",
       });
     }
 
@@ -122,7 +132,18 @@ app.post("/api/auth/signup", async (req, res) => {
     res.json({ user: userWithoutPassword });
   } catch (error) {
     console.error("❌ Signup error:", error);
-    res.status(500).json({ error: "Server error during signup" });
+    if (error instanceof z.ZodError) {
+      console.error("❌ Validation error:", error.issues);
+      return res.status(400).json({
+        error: "Invalid input",
+        details: error.issues,
+        message: "Please check your input fields"
+      });
+    }
+    res.status(500).json({
+      error: "Server error during signup",
+      details: error.message || "Unknown server error"
+    });
   }
 });
 
