@@ -41,10 +41,29 @@ CREATE INDEX IF NOT EXISTS idx_deposits_timestamp ON deposits(timestamp);
 CREATE INDEX IF NOT EXISTS idx_withdrawals_user_id ON withdrawals(user_id);
 CREATE INDEX IF NOT EXISTS idx_withdrawals_timestamp ON withdrawals(timestamp);
 
+-- Messages table for inbox feature
+CREATE TABLE IF NOT EXISTS messages (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    username VARCHAR(50) NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
+    message_type VARCHAR(50) DEFAULT 'info',
+    is_read BOOLEAN DEFAULT FALSE,
+    sent_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    read_at TIMESTAMP WITH TIME ZONE NULL
+);
+
+-- Indexes for messages
+CREATE INDEX IF NOT EXISTS idx_messages_user_id ON messages(user_id);
+CREATE INDEX IF NOT EXISTS idx_messages_is_read ON messages(is_read);
+CREATE INDEX IF NOT EXISTS idx_messages_sent_at ON messages(sent_at);
+
 -- Row Level Security (RLS) policies
 ALTER TABLE users ENABLE ROW LEVEL SECURITY;
 ALTER TABLE deposits ENABLE ROW LEVEL SECURITY;
 ALTER TABLE withdrawals ENABLE ROW LEVEL SECURITY;
+ALTER TABLE messages ENABLE ROW LEVEL SECURITY;
 
 -- Allow service role to access all data
 CREATE POLICY "Service role can manage users" ON users
@@ -54,4 +73,7 @@ CREATE POLICY "Service role can manage deposits" ON deposits
     FOR ALL USING (auth.role() = 'service_role');
 
 CREATE POLICY "Service role can manage withdrawals" ON withdrawals
+    FOR ALL USING (auth.role() = 'service_role');
+
+CREATE POLICY "Service role can manage messages" ON messages
     FOR ALL USING (auth.role() = 'service_role');
