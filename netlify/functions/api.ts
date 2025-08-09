@@ -300,7 +300,14 @@ app.use("*", (req, res) => {
     error: "Route not found",
     path: req.originalUrl,
     method: req.method,
-    availableRoutes: ["/ping", "/api/ping", "/auth/signup", "/api/auth/signup", "/auth/login", "/api/auth/login"]
+    availableRoutes: [
+      "/ping",
+      "/api/ping",
+      "/auth/signup",
+      "/api/auth/signup",
+      "/auth/login",
+      "/api/auth/login",
+    ],
   });
 });
 
