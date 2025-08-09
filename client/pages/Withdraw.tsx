@@ -121,15 +121,17 @@ export default function Withdraw() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="notes" className="text-white">Additional Notes (Optional)</Label>
+                <Label htmlFor="notes" className="text-white">Notes *</Label>
                 <Textarea
                   id="notes"
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
                   className="bg-casino-dark/50 border-casino-green/20 text-white placeholder:text-gray-400"
-                  placeholder="Any additional information..."
+                  placeholder="Enter the game name from where you want to redeem (e.g. VBLink, Ultra Panda, Fire Kirin, etc.)"
                   rows={3}
+                  required
                 />
+                <p className="text-sm text-gray-400">Required: Enter the game name from where you want to redeem your winnings</p>
               </div>
 
               {/* Important Information */}
