@@ -7,7 +7,7 @@ import {
   handleLogin,
   handleDeposit,
   handleWithdraw,
-  handleGetAllData
+  handleGetAllData,
 } from "./routes/auth";
 
 export function createServer() {

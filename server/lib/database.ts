@@ -52,7 +52,6 @@ export interface Withdrawal {
   status: string;
 }
 
-
 // Initialize database tables if they don't exist
 export async function initializeDatabase() {
   if (!supabase) {
