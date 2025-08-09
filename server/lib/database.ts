@@ -4,6 +4,15 @@ import { createClient } from "@supabase/supabase-js";
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
 
+// Log which key is being used
+if (process.env.SUPABASE_SERVICE_ROLE_KEY) {
+  console.log("🔑 Using SUPABASE_SERVICE_ROLE_KEY for database operations");
+} else if (process.env.SUPABASE_ANON_KEY) {
+  console.log("🔑 Using SUPABASE_ANON_KEY for database operations (fallback)");
+} else {
+  console.log("❌ No Supabase key found");
+}
+
 // Check if Supabase is configured
 if (
   !supabaseUrl ||
