@@ -10,7 +10,11 @@ interface User {
 interface AuthContextType {
   user: User | null;
   login: (email: string, password: string) => Promise<boolean>;
-  signup: (username: string, email: string, password: string) => Promise<boolean>;
+  signup: (
+    username: string,
+    email: string,
+    password: string,
+  ) => Promise<boolean>;
   logout: () => void;
   isAuthenticated: boolean;
 }
@@ -19,46 +23,52 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(() => {
-    const savedUser = localStorage.getItem('casino_user');
+    const savedUser = localStorage.getItem("casino_user");
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
-  const signup = async (username: string, email: string, password: string): Promise<boolean> => {
+  const signup = async (
+    username: string,
+    email: string,
+    password: string,
+  ): Promise<boolean> => {
     try {
-      console.log('🔄 Attempting signup:', { username, email });
-      const response = await fetch('/api/auth/signup', {
-        method: 'POST',
+      console.log("🔄 Attempting signup:", { username, email });
+      const response = await fetch("/api/auth/signup", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ username, email, password }),
       });
 
-      console.log('📡 Signup response status:', response.status);
+      console.log("📡 Signup response status:", response.status);
 
       if (response.ok) {
         const userData = await response.json();
-        console.log('✅ Signup successful:', userData);
+        console.log("✅ Signup successful:", userData);
         setUser(userData.user);
-        localStorage.setItem('casino_user', JSON.stringify(userData.user));
+        localStorage.setItem("casino_user", JSON.stringify(userData.user));
         return true;
       } else {
-        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
-        console.error('❌ Signup failed:', response.status, errorData);
+        const errorData = await response
+          .json()
+          .catch(() => ({ error: "Unknown error" }));
+        console.error("❌ Signup failed:", response.status, errorData);
         return false;
       }
     } catch (error) {
-      console.error('❌ Signup network error:', error);
+      console.error("❌ Signup network error:", error);
       return false;
     }
   };
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
+      const response = await fetch("/api/auth/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
       });
@@ -66,29 +76,31 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (response.ok) {
         const userData = await response.json();
         setUser(userData.user);
-        localStorage.setItem('casino_user', JSON.stringify(userData.user));
+        localStorage.setItem("casino_user", JSON.stringify(userData.user));
         return true;
       }
       return false;
     } catch (error) {
-      console.error('Login error:', error);
+      console.error("Login error:", error);
       return false;
     }
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('casino_user');
+    localStorage.removeItem("casino_user");
   };
 
   return (
-    <AuthContext.Provider value={{
-      user,
-      login,
-      signup,
-      logout,
-      isAuthenticated: !!user
-    }}>
+    <AuthContext.Provider
+      value={{
+        user,
+        login,
+        signup,
+        logout,
+        isAuthenticated: !!user,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
@@ -97,7 +109,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 export function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 }

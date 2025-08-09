@@ -29,9 +29,18 @@ export const handleSignup: RequestHandler = async (req, res) => {
     console.log("=== SIGNUP ATTEMPT ===");
     console.log("Request body:", req.body);
     console.log("Environment check:");
-    console.log("- SUPABASE_URL:", process.env.SUPABASE_URL ? "SET" : "NOT SET");
-    console.log("- SUPABASE_SERVICE_ROLE_KEY:", process.env.SUPABASE_SERVICE_ROLE_KEY ? "SET" : "NOT SET");
-    console.log("- SUPABASE_ANON_KEY:", process.env.SUPABASE_ANON_KEY ? "SET" : "NOT SET");
+    console.log(
+      "- SUPABASE_URL:",
+      process.env.SUPABASE_URL ? "SET" : "NOT SET",
+    );
+    console.log(
+      "- SUPABASE_SERVICE_ROLE_KEY:",
+      process.env.SUPABASE_SERVICE_ROLE_KEY ? "SET" : "NOT SET",
+    );
+    console.log(
+      "- SUPABASE_ANON_KEY:",
+      process.env.SUPABASE_ANON_KEY ? "SET" : "NOT SET",
+    );
 
     const { username, email, password } = signupSchema.parse(req.body);
 
@@ -48,10 +57,12 @@ export const handleSignup: RequestHandler = async (req, res) => {
     const newUser = await createUser(username, email, password);
     if (!newUser) {
       console.error("❌ Failed to create user in database");
-      console.error("❌ This usually means Supabase configuration is missing or RLS is blocking access");
+      console.error(
+        "❌ This usually means Supabase configuration is missing or RLS is blocking access",
+      );
       return res.status(500).json({
         error: "Failed to create user",
-        details: "Database error - check server logs for more information"
+        details: "Database error - check server logs for more information",
       });
     }
 
@@ -63,9 +74,13 @@ export const handleSignup: RequestHandler = async (req, res) => {
     console.error("❌ Signup error:", error);
     if (error instanceof z.ZodError) {
       console.error("❌ Validation error:", error.issues);
-      return res.status(400).json({ error: "Invalid input", details: error.issues });
+      return res
+        .status(400)
+        .json({ error: "Invalid input", details: error.issues });
     }
-    res.status(500).json({ error: "Server error during signup", details: error.message });
+    res
+      .status(500)
+      .json({ error: "Server error during signup", details: error.message });
   }
 };
 
