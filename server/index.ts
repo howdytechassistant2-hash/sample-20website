@@ -7,14 +7,14 @@ import {
   handleLogin,
   handleDeposit,
   handleWithdraw,
-  handleGetAllData
+  handleGetAllData,
 } from "./routes/auth";
 import {
   handleSendMessage,
   handleSendBroadcast,
   handleGetUserMessages,
   handleMarkMessageRead,
-  handleGetUnreadCount
+  handleGetUnreadCount,
 } from "./routes/messages";
 
 export function createServer() {

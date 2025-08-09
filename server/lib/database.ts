@@ -212,7 +212,9 @@ export async function createWithdrawal(
 }
 
 // Message operations
-export async function createMessage(messageData: Omit<Message, "id">): Promise<Message | null> {
+export async function createMessage(
+  messageData: Omit<Message, "id">,
+): Promise<Message | null> {
   if (!supabase) return null;
 
   try {
@@ -264,7 +266,7 @@ export async function markMessageAsRead(messageId: string): Promise<boolean> {
       .from("messages")
       .update({
         is_read: true,
-        read_at: new Date().toISOString()
+        read_at: new Date().toISOString(),
       })
       .eq("id", messageId);
 
@@ -305,12 +307,13 @@ export async function getUnreadMessageCount(userId: string): Promise<number> {
 // Admin operations
 export async function getAllData() {
   try {
-    const [usersResult, depositsResult, withdrawalsResult, messagesResult] = await Promise.all([
-      supabase.from("users").select("id, username, email, created_at"),
-      supabase.from("deposits").select("*"),
-      supabase.from("withdrawals").select("*"),
-      supabase.from("messages").select("*"),
-    ]);
+    const [usersResult, depositsResult, withdrawalsResult, messagesResult] =
+      await Promise.all([
+        supabase.from("users").select("id, username, email, created_at"),
+        supabase.from("deposits").select("*"),
+        supabase.from("withdrawals").select("*"),
+        supabase.from("messages").select("*"),
+      ]);
 
     return {
       users: usersResult.data || [],

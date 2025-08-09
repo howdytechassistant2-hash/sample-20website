@@ -4,7 +4,15 @@ import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Sparkles, Mail, MailOpen, AlertCircle, Info, DollarSign, Gift } from "lucide-react";
+import {
+  Sparkles,
+  Mail,
+  MailOpen,
+  AlertCircle,
+  Info,
+  DollarSign,
+  Gift,
+} from "lucide-react";
 
 interface Message {
   id: string;
@@ -20,11 +28,11 @@ interface Message {
 
 const getMessageIcon = (type: string) => {
   switch (type) {
-    case 'alert':
+    case "alert":
       return <AlertCircle className="w-5 h-5 text-red-500" />;
-    case 'promotion':
+    case "promotion":
       return <Gift className="w-5 h-5 text-purple-500" />;
-    case 'deposit':
+    case "deposit":
       return <DollarSign className="w-5 h-5 text-green-500" />;
     default:
       return <Info className="w-5 h-5 text-blue-500" />;
@@ -33,14 +41,14 @@ const getMessageIcon = (type: string) => {
 
 const getMessageTypeColor = (type: string) => {
   switch (type) {
-    case 'alert':
-      return 'bg-red-500';
-    case 'promotion':
-      return 'bg-purple-500';
-    case 'deposit':
-      return 'bg-green-500';
+    case "alert":
+      return "bg-red-500";
+    case "promotion":
+      return "bg-purple-500";
+    case "deposit":
+      return "bg-green-500";
     default:
-      return 'bg-blue-500';
+      return "bg-blue-500";
   }
 };
 
@@ -66,12 +74,12 @@ export default function Inbox() {
     try {
       const response = await fetch(`/api/messages?userId=${user.id}`);
       const data = await response.json();
-      
+
       if (response.ok) {
         setMessages(data.messages || []);
       }
     } catch (error) {
-      console.error('Error fetching messages:', error);
+      console.error("Error fetching messages:", error);
     } finally {
       setLoading(false);
     }
@@ -79,25 +87,25 @@ export default function Inbox() {
 
   const markAsRead = async (messageId: string) => {
     try {
-      const response = await fetch('/api/messages/read', {
-        method: 'POST',
+      const response = await fetch("/api/messages/read", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ messageId }),
       });
 
       if (response.ok) {
-        setMessages(prevMessages =>
-          prevMessages.map(msg =>
+        setMessages((prevMessages) =>
+          prevMessages.map((msg) =>
             msg.id === messageId
               ? { ...msg, is_read: true, read_at: new Date().toISOString() }
-              : msg
-          )
+              : msg,
+          ),
         );
       }
     } catch (error) {
-      console.error('Error marking message as read:', error);
+      console.error("Error marking message as read:", error);
     }
   };
 
@@ -125,12 +133,15 @@ export default function Inbox() {
             <Sparkles className="w-6 h-6 text-casino-dark" />
           </div>
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-white">MYUNIVERSE</h1>
+            <h1 className="text-2xl md:text-3xl font-bold text-white">
+              MYUNIVERSE
+            </h1>
             <h2 className="text-xl md:text-2xl font-bold text-white">CASINO</h2>
           </div>
         </Link>
         <div className="text-white">
-          Welcome, <span className="text-casino-green font-bold">{user?.username}</span>
+          Welcome,{" "}
+          <span className="text-casino-green font-bold">{user?.username}</span>
         </div>
       </header>
 
@@ -139,8 +150,11 @@ export default function Inbox() {
           <div className="flex items-center space-x-3 mb-8">
             <Mail className="w-8 h-8 text-casino-green" />
             <h1 className="text-3xl md:text-4xl font-bold text-white">Inbox</h1>
-            <Badge variant="secondary" className="bg-casino-green text-casino-dark">
-              {messages.filter(m => !m.is_read).length} unread
+            <Badge
+              variant="secondary"
+              className="bg-casino-green text-casino-dark"
+            >
+              {messages.filter((m) => !m.is_read).length} unread
             </Badge>
           </div>
 
@@ -169,12 +183,12 @@ export default function Inbox() {
                       key={message.id}
                       className={`cursor-pointer transition-all duration-200 hover:scale-105 ${
                         !message.is_read
-                          ? 'bg-casino-card border-casino-green/40 shadow-lg shadow-casino-green/20'
-                          : 'bg-casino-card/50 border-casino-green/20'
+                          ? "bg-casino-card border-casino-green/40 shadow-lg shadow-casino-green/20"
+                          : "bg-casino-card/50 border-casino-green/20"
                       } ${
                         selectedMessage?.id === message.id
-                          ? 'ring-2 ring-casino-green'
-                          : ''
+                          ? "ring-2 ring-casino-green"
+                          : ""
                       }`}
                       onClick={() => handleMessageClick(message)}
                     >
@@ -183,9 +197,13 @@ export default function Inbox() {
                           {getMessageIcon(message.message_type)}
                           <div className="flex-1 min-w-0">
                             <div className="flex items-center space-x-2">
-                              <h3 className={`font-semibold truncate ${
-                                !message.is_read ? 'text-white' : 'text-gray-300'
-                              }`}>
+                              <h3
+                                className={`font-semibold truncate ${
+                                  !message.is_read
+                                    ? "text-white"
+                                    : "text-gray-300"
+                                }`}
+                              >
                                 {message.title}
                               </h3>
                               {!message.is_read && (
@@ -218,7 +236,7 @@ export default function Inbox() {
                             {selectedMessage.title}
                           </CardTitle>
                           <div className="flex items-center space-x-4 mt-2">
-                            <Badge 
+                            <Badge
                               className={`${getMessageTypeColor(selectedMessage.message_type)} text-white`}
                             >
                               {selectedMessage.message_type}
@@ -226,11 +244,12 @@ export default function Inbox() {
                             <span className="text-gray-400 text-sm">
                               {formatDate(selectedMessage.sent_at)}
                             </span>
-                            {selectedMessage.is_read && selectedMessage.read_at && (
-                              <span className="text-gray-500 text-xs">
-                                Read on {formatDate(selectedMessage.read_at)}
-                              </span>
-                            )}
+                            {selectedMessage.is_read &&
+                              selectedMessage.read_at && (
+                                <span className="text-gray-500 text-xs">
+                                  Read on {formatDate(selectedMessage.read_at)}
+                                </span>
+                              )}
                           </div>
                         </div>
                       </div>

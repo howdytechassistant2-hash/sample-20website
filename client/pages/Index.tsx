@@ -115,14 +115,16 @@ export default function Index() {
     if (!user?.id) return;
 
     try {
-      const response = await fetch(`/api/messages/unread-count?userId=${user.id}`);
+      const response = await fetch(
+        `/api/messages/unread-count?userId=${user.id}`,
+      );
       const data = await response.json();
 
       if (response.ok) {
         setUnreadCount(data.count || 0);
       }
     } catch (error) {
-      console.error('Error fetching unread count:', error);
+      console.error("Error fetching unread count:", error);
     }
   };
 
@@ -162,7 +164,7 @@ export default function Index() {
                 </Button>
                 {unreadCount > 0 && (
                   <Badge className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full min-w-[20px] h-5 flex items-center justify-center">
-                    {unreadCount > 99 ? '99+' : unreadCount}
+                    {unreadCount > 99 ? "99+" : unreadCount}
                   </Badge>
                 )}
               </Link>

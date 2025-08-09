@@ -5,7 +5,7 @@ import {
   getUserMessages,
   markMessageAsRead,
   getUnreadMessageCount,
-  findUserByEmail
+  findUserByEmail,
 } from "../lib/database";
 
 const sendMessageSchema = z.object({
@@ -14,17 +14,18 @@ const sendMessageSchema = z.object({
   username: z.string().optional(),
   title: z.string().min(1),
   content: z.string().min(1),
-  messageType: z.string().default('info')
+  messageType: z.string().default("info"),
 });
 
 const markReadSchema = z.object({
-  messageId: z.string()
+  messageId: z.string(),
 });
 
 // Send message to a user (Admin only)
 export const handleSendMessage: RequestHandler = async (req, res) => {
   try {
-    const { userEmail, userId, username, title, content, messageType } = sendMessageSchema.parse(req.body);
+    const { userEmail, userId, username, title, content, messageType } =
+      sendMessageSchema.parse(req.body);
 
     let targetUserId = userId;
     let targetUsername = username;
@@ -40,7 +41,9 @@ export const handleSendMessage: RequestHandler = async (req, res) => {
     }
 
     if (!targetUserId || !targetUsername) {
-      return res.status(400).json({ error: "User ID and username are required" });
+      return res
+        .status(400)
+        .json({ error: "User ID and username are required" });
     }
 
     const message = await createMessage({
@@ -50,7 +53,7 @@ export const handleSendMessage: RequestHandler = async (req, res) => {
       content,
       message_type: messageType,
       is_read: false,
-      sent_at: new Date().toISOString()
+      sent_at: new Date().toISOString(),
     });
 
     if (!message) {
@@ -67,17 +70,20 @@ export const handleSendMessage: RequestHandler = async (req, res) => {
 // Send message to all users (Admin only)
 export const handleSendBroadcast: RequestHandler = async (req, res) => {
   try {
-    const { title, content, messageType } = z.object({
-      title: z.string().min(1),
-      content: z.string().min(1),
-      messageType: z.string().default('info')
-    }).parse(req.body);
+    const { title, content, messageType } = z
+      .object({
+        title: z.string().min(1),
+        content: z.string().min(1),
+        messageType: z.string().default("info"),
+      })
+      .parse(req.body);
 
     // This is a simplified broadcast - in practice you'd want to batch this
     // For now, we'll just return success and let admin send to individual users
-    res.json({ 
-      success: true, 
-      message: "Broadcast feature - use send message to individual users for now" 
+    res.json({
+      success: true,
+      message:
+        "Broadcast feature - use send message to individual users for now",
     });
   } catch (error) {
     console.error("Broadcast message error:", error);
