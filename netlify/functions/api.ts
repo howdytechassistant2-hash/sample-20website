@@ -407,29 +407,60 @@ app.post("/api/withdraw", async (req, res) => {
     console.log("=== WITHDRAW REQUEST ===");
     console.log("Request body:", req.body);
 
+    if (!supabase) {
+      console.error("❌ Supabase not configured for withdrawal");
+      return res.status(500).json({ error: "Database not configured" });
+    }
+
     const { userId, username, amount, cashtag, notes, timestamp } = req.body;
 
-    // For now, just log the withdrawal request (you can add database storage later)
-    console.log("✅ Withdrawal request received:", {
-      userId,
-      username,
-      amount,
-      cashtag,
-      notes,
-      timestamp
-    });
+    // Validate required fields
+    if (!userId || !username || !amount || !cashtag) {
+      return res.status(400).json({
+        error: "Missing required fields",
+        required: ["userId", "username", "amount", "cashtag"]
+      });
+    }
 
-    // Respond with success
+    // Insert withdrawal into database
+    console.log("🔄 Inserting withdrawal into database...");
+    const { data, error } = await supabase
+      .from("withdrawals")
+      .insert([
+        {
+          user_id: userId,
+          username,
+          amount: parseFloat(amount),
+          cashtag,
+          notes: notes || null,
+          timestamp: timestamp || new Date().toISOString(),
+          status: 'pending'
+        },
+      ])
+      .select()
+      .single();
+
+    if (error) {
+      console.error("❌ Supabase withdrawal insert error:", error);
+      return res.status(500).json({
+        error: "Failed to save withdrawal request",
+        details: error.message
+      });
+    }
+
+    console.log("✅ Withdrawal saved successfully:", data.id);
     res.json({
       success: true,
       message: `Withdrawal request submitted for $${amount} to ${cashtag}`,
       data: {
+        id: data.id,
         userId,
         username,
-        amount,
+        amount: parseFloat(amount),
         cashtag,
         notes,
-        timestamp
+        timestamp: data.timestamp,
+        status: data.status
       }
     });
   } catch (error) {
