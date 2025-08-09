@@ -1,0 +1,124 @@
+service: myuniverse-casino-api
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1  # Change to your preferred region
+  stage: ${opt:stage, 'prod'}
+  environment:
+    SUPABASE_URL: ${env:SUPABASE_URL}
+    SUPABASE_SERVICE_ROLE_KEY: ${env:SUPABASE_SERVICE_ROLE_KEY}
+    SUPABASE_ANON_KEY: ${env:SUPABASE_ANON_KEY}
+
+functions:
+  api:
+    handler: aws-lambda/handler.handler
+    events:
+      - http:
+          path: /{proxy+}
+          method: ANY
+          cors: true
+      - http:
+          path: /
+          method: ANY
+          cors: true
+
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    httpPort: 5000
+
+# CloudFormation resources for S3 bucket and CloudFront
+resources:
+  Resources:
+    # S3 Bucket for static files
+    StaticFilesBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: myuniverse-casino-static-${self:provider.stage}
+        PublicAccessBlockConfiguration:
+          BlockPublicAcls: false
+          BlockPublicPolicy: false
+          IgnorePublicAcls: false
+          RestrictPublicBuckets: false
+        WebsiteConfiguration:
+          IndexDocument: index.html
+          ErrorDocument: index.html
+
+    # CloudFront Distribution
+    CloudFrontDistribution:
+      Type: AWS::CloudFront::Distribution
+      Properties:
+        DistributionConfig:
+          Origins:
+            - Id: S3Origin
+              DomainName: !GetAtt StaticFilesBucket.RegionalDomainName
+              S3OriginConfig:
+                OriginAccessIdentity: ''
+            - Id: ApiOrigin
+              DomainName:
+                Fn::Join:
+                  - ''
+                  - - Ref: ApiGatewayRestApi
+                    - '.execute-api.'
+                    - ${self:provider.region}
+                    - '.amazonaws.com'
+              CustomOriginConfig:
+                HTTPPort: 443
+                HTTPSPort: 443
+                OriginProtocolPolicy: https-only
+          Enabled: true
+          DefaultRootObject: index.html
+          DefaultCacheBehavior:
+            TargetOriginId: S3Origin
+            ViewerProtocolPolicy: redirect-to-https
+            AllowedMethods:
+              - GET
+              - HEAD
+              - OPTIONS
+            CachedMethods:
+              - GET
+              - HEAD
+            ForwardedValues:
+              QueryString: false
+              Cookies:
+                Forward: none
+          CacheBehaviors:
+            - PathPattern: /api/*
+              TargetOriginId: ApiOrigin
+              ViewerProtocolPolicy: redirect-to-https
+              AllowedMethods:
+                - DELETE
+                - GET
+                - HEAD
+                - OPTIONS
+                - PATCH
+                - POST
+                - PUT
+              CachedMethods:
+                - GET
+                - HEAD
+              ForwardedValues:
+                QueryString: true
+                Headers:
+                  - Authorization
+                  - Content-Type
+                Cookies:
+                  Forward: none
+              TTL:
+                DefaultTTL: 0
+                MaxTTL: 0
+                MinTTL: 0
+
+  Outputs:
+    CloudFrontDistributionId:
+      Value:
+        Ref: CloudFrontDistribution
+    CloudFrontDomainName:
+      Value:
+        Fn::GetAtt: [CloudFrontDistribution, DomainName]
+    StaticFilesBucketName:
+      Value:
+        Ref: StaticFilesBucket
