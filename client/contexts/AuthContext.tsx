@@ -54,7 +54,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const errorData = await response
           .json()
           .catch(() => ({ error: "Unknown error" }));
-        console.error("❌ Signup failed:", response.status, errorData);
+        console.error("❌ Signup failed:", response.status);
+        console.error("❌ Error details:", JSON.stringify(errorData, null, 2));
+        console.error("❌ Full error object:", errorData);
         return false;
       }
     } catch (error) {
