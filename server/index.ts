@@ -41,6 +41,13 @@ export function createServer() {
   app.post("/api/deposit", handleDeposit);
   app.post("/api/withdraw", handleWithdraw);
 
+  // Message routes
+  app.post("/api/messages/send", handleSendMessage);
+  app.post("/api/messages/broadcast", handleSendBroadcast);
+  app.get("/api/messages", handleGetUserMessages);
+  app.post("/api/messages/read", handleMarkMessageRead);
+  app.get("/api/messages/unread-count", handleGetUnreadCount);
+
   // Admin route to view all data
   app.get("/api/admin/data", handleGetAllData);
 
