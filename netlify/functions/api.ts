@@ -84,7 +84,20 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Health check endpoint
+// Health check endpoint - handle both /ping and /api/ping
+app.get("/ping", (req, res) => {
+  res.json({
+    message: "API is working!",
+    timestamp: new Date().toISOString(),
+    environment: {
+      SUPABASE_URL: process.env.SUPABASE_URL ? "SET" : "NOT SET",
+      SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY
+        ? "SET"
+        : "NOT SET",
+    },
+  });
+});
+
 app.get("/api/ping", (req, res) => {
   res.json({
     message: "API is working!",
@@ -98,7 +111,70 @@ app.get("/api/ping", (req, res) => {
   });
 });
 
-// Signup endpoint
+// Signup endpoint - handle both /auth/signup and /api/auth/signup
+app.post("/auth/signup", async (req, res) => {
+  try {
+    console.log("=== SIGNUP ATTEMPT ===");
+    console.log("Request body:", req.body);
+    console.log("Environment check:");
+    console.log(
+      "- SUPABASE_URL:",
+      process.env.SUPABASE_URL ? "SET" : "NOT SET",
+    );
+    console.log(
+      "- SUPABASE_SERVICE_ROLE_KEY:",
+      process.env.SUPABASE_SERVICE_ROLE_KEY ? "SET" : "NOT SET",
+    );
+    console.log(
+      "- Supabase client:",
+      supabase ? "INITIALIZED" : "NOT INITIALIZED",
+    );
+
+    const { username, email, password } = signupSchema.parse(req.body);
+
+    // Check if user already exists
+    console.log("Checking if user exists:", email);
+    const existingUser = await findUserByEmail(email);
+    if (existingUser) {
+      console.log("❌ User already exists:", email);
+      return res.status(400).json({
+        error: "User already exists",
+        email: email,
+      });
+    }
+
+    // Create new user
+    console.log("Creating new user:", { username, email });
+    const newUser = await createUser(username, email, password);
+    if (!newUser) {
+      console.error("❌ Failed to create user in database");
+      return res.status(500).json({
+        error: "Failed to create user",
+        details:
+          "Database error - check environment variables and database schema",
+      });
+    }
+
+    console.log("✅ User created successfully:", newUser.id);
+    const { password: _, ...userWithoutPassword } = newUser;
+    res.json({ user: userWithoutPassword });
+  } catch (error) {
+    console.error("❌ Signup error:", error);
+    if (error instanceof z.ZodError) {
+      console.error("❌ Validation error:", error.issues);
+      return res.status(400).json({
+        error: "Invalid input",
+        details: error.issues,
+        message: "Please check your input fields",
+      });
+    }
+    res.status(500).json({
+      error: "Server error during signup",
+      details: error.message || "Unknown server error",
+    });
+  }
+});
+
 app.post("/api/auth/signup", async (req, res) => {
   try {
     console.log("=== SIGNUP ATTEMPT ===");
