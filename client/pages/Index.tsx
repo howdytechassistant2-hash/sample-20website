@@ -100,6 +100,31 @@ const features = [
 
 export default function Index() {
   const { isAuthenticated, user, logout } = useAuth();
+  const [unreadCount, setUnreadCount] = useState(0);
+
+  useEffect(() => {
+    if (isAuthenticated && user?.id) {
+      fetchUnreadCount();
+      // Poll for new messages every 30 seconds
+      const interval = setInterval(fetchUnreadCount, 30000);
+      return () => clearInterval(interval);
+    }
+  }, [isAuthenticated, user?.id]);
+
+  const fetchUnreadCount = async () => {
+    if (!user?.id) return;
+
+    try {
+      const response = await fetch(`/api/messages/unread-count?userId=${user.id}`);
+      const data = await response.json();
+
+      if (response.ok) {
+        setUnreadCount(data.count || 0);
+      }
+    } catch (error) {
+      console.error('Error fetching unread count:', error);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-casino-dark via-slate-900 to-casino-dark">
