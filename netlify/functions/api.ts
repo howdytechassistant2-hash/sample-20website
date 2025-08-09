@@ -330,6 +330,86 @@ app.post("/api/auth/login", async (req, res) => {
   }
 });
 
+// Deposit endpoint
+app.post("/api/deposit", async (req, res) => {
+  try {
+    console.log("=== DEPOSIT REQUEST ===");
+    console.log("Request body:", req.body);
+
+    const { userId, username, game, amount, cashappTag, timestamp } = req.body;
+
+    // For now, just log the deposit request (you can add database storage later)
+    console.log("✅ Deposit request received:", {
+      userId,
+      username,
+      game,
+      amount,
+      cashappTag,
+      timestamp
+    });
+
+    // Respond with success
+    res.json({
+      success: true,
+      message: `Deposit request submitted for ${game} - $${amount}`,
+      data: {
+        userId,
+        username,
+        game,
+        amount,
+        cashappTag,
+        timestamp
+      }
+    });
+  } catch (error) {
+    console.error("❌ Deposit error:", error);
+    res.status(500).json({
+      error: "Server error during deposit",
+      details: error.message || "Unknown server error",
+    });
+  }
+});
+
+// Withdraw endpoint
+app.post("/api/withdraw", async (req, res) => {
+  try {
+    console.log("=== WITHDRAW REQUEST ===");
+    console.log("Request body:", req.body);
+
+    const { userId, username, amount, cashtag, notes, timestamp } = req.body;
+
+    // For now, just log the withdrawal request (you can add database storage later)
+    console.log("✅ Withdrawal request received:", {
+      userId,
+      username,
+      amount,
+      cashtag,
+      notes,
+      timestamp
+    });
+
+    // Respond with success
+    res.json({
+      success: true,
+      message: `Withdrawal request submitted for $${amount} to ${cashtag}`,
+      data: {
+        userId,
+        username,
+        amount,
+        cashtag,
+        notes,
+        timestamp
+      }
+    });
+  } catch (error) {
+    console.error("❌ Withdraw error:", error);
+    res.status(500).json({
+      error: "Server error during withdrawal",
+      details: error.message || "Unknown server error",
+    });
+  }
+});
+
 // Debug route to see what paths are being called
 app.use("*", (req, res) => {
   console.log("❌ Unmatched route:", req.method, req.originalUrl, req.path);
