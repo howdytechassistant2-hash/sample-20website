@@ -238,7 +238,34 @@ app.post("/api/auth/signup", async (req, res) => {
   }
 });
 
-// Login endpoint
+// Login endpoint - handle both paths
+app.post("/auth/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!supabase) {
+      return res.status(500).json({ error: "Database not configured" });
+    }
+
+    const { data, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("email", email)
+      .eq("password", password)
+      .single();
+
+    if (error || !data) {
+      return res.status(401).json({ error: "Invalid credentials" });
+    }
+
+    const { password: _, ...userWithoutPassword } = data;
+    res.json({ user: userWithoutPassword });
+  } catch (error) {
+    console.error("❌ Login error:", error);
+    res.status(500).json({ error: "Server error during login" });
+  }
+});
+
 app.post("/api/auth/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -266,9 +293,15 @@ app.post("/api/auth/login", async (req, res) => {
   }
 });
 
-// Catch all other routes
+// Debug route to see what paths are being called
 app.use("*", (req, res) => {
-  res.status(404).json({ error: "Route not found", path: req.originalUrl });
+  console.log("Unmatched route:", req.method, req.originalUrl, req.path);
+  res.status(404).json({
+    error: "Route not found",
+    path: req.originalUrl,
+    method: req.method,
+    availableRoutes: ["/ping", "/api/ping", "/auth/signup", "/api/auth/signup", "/auth/login", "/api/auth/login"]
+  });
 });
 
 // Export the serverless handler
