@@ -150,6 +150,23 @@ export default function Index() {
                   {user?.username}
                 </span>
               </span>
+
+              {/* Inbox Button */}
+              <Link to="/inbox" className="relative">
+                <Button
+                  variant="outline"
+                  className="border-casino-green/20 text-casino-green hover:bg-casino-green/20"
+                >
+                  <Mail className="w-4 h-4 mr-2" />
+                  Inbox
+                </Button>
+                {unreadCount > 0 && (
+                  <Badge className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full min-w-[20px] h-5 flex items-center justify-center">
+                    {unreadCount > 99 ? '99+' : unreadCount}
+                  </Badge>
+                )}
+              </Link>
+
               <Button
                 onClick={logout}
                 variant="outline"
