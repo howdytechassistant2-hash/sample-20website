@@ -1,25 +1,158 @@
 import type { Handler } from "@netlify/functions";
+import express from "express";
+import cors from "cors";
+import serverless from "serverless-http";
+import { z } from "zod";
 
-const handler: Handler = async (event, context) => {
-  // Set CORS headers
-  const headers = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-  };
+// Import database functions directly
+import { createClient } from "@supabase/supabase-js";
 
-  if (event.httpMethod === "OPTIONS") {
-    return { statusCode: 200, headers, body: "" };
+// Database configuration
+const supabaseUrl = process.env.SUPABASE_URL;
+const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
+
+const supabase = supabaseUrl && supabaseKey && !supabaseUrl.includes("REPLACE-WITH")
+  ? createClient(supabaseUrl, supabaseKey)
+  : null;
+
+// Validation schemas
+const signupSchema = z.object({
+  username: z.string().min(3),
+  email: z.string().email(),
+  password: z.string().min(6),
+});
+
+// Helper functions
+async function createUser(username: string, email: string, password: string) {
+  if (!supabase) {
+    console.error("❌ Supabase not configured");
+    return null;
   }
 
-  // Import server only when needed to reduce cold start bundle size
-  const { createServer } = await import("../../server");
-  const serverless = await import("serverless-http");
+  try {
+    const { data, error } = await supabase
+      .from("users")
+      .insert([{
+        username,
+        email,
+        password,
+        created_at: new Date().toISOString(),
+      }])
+      .select()
+      .single();
 
-  const app = createServer();
-  const handler = serverless.default(app);
+    if (error) {
+      console.error("❌ Create user error:", error);
+      return null;
+    }
 
-  return handler(event, context);
-};
+    return data;
+  } catch (error) {
+    console.error("❌ Create user error:", error);
+    return null;
+  }
+}
 
+async function findUserByEmail(email: string) {
+  if (!supabase) return null;
+
+  try {
+    const { data, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("email", email)
+      .single();
+
+    if (error) return null;
+    return data;
+  } catch (error) {
+    return null;
+  }
+}
+
+// Create Express app
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+// Health check endpoint
+app.get("/api/ping", (req, res) => {
+  res.json({ 
+    message: "API is working!",
+    timestamp: new Date().toISOString(),
+    environment: {
+      SUPABASE_URL: process.env.SUPABASE_URL ? "SET" : "NOT SET",
+      SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY ? "SET" : "NOT SET",
+    }
+  });
+});
+
+// Signup endpoint
+app.post("/api/auth/signup", async (req, res) => {
+  try {
+    console.log("=== SIGNUP ATTEMPT ===");
+    console.log("Request body:", req.body);
+    
+    const { username, email, password } = signupSchema.parse(req.body);
+
+    // Check if user already exists
+    const existingUser = await findUserByEmail(email);
+    if (existingUser) {
+      return res.status(400).json({ error: "User already exists" });
+    }
+
+    // Create new user
+    const newUser = await createUser(username, email, password);
+    if (!newUser) {
+      console.error("❌ Failed to create user");
+      return res.status(500).json({ 
+        error: "Failed to create user",
+        details: "Database error - check environment variables"
+      });
+    }
+
+    console.log("✅ User created successfully:", newUser.id);
+    const { password: _, ...userWithoutPassword } = newUser;
+    res.json({ user: userWithoutPassword });
+  } catch (error) {
+    console.error("❌ Signup error:", error);
+    res.status(500).json({ error: "Server error during signup" });
+  }
+});
+
+// Login endpoint
+app.post("/api/auth/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!supabase) {
+      return res.status(500).json({ error: "Database not configured" });
+    }
+
+    const { data, error } = await supabase
+      .from("users")
+      .select("*")
+      .eq("email", email)
+      .eq("password", password)
+      .single();
+
+    if (error || !data) {
+      return res.status(401).json({ error: "Invalid credentials" });
+    }
+
+    const { password: _, ...userWithoutPassword } = data;
+    res.json({ user: userWithoutPassword });
+  } catch (error) {
+    console.error("❌ Login error:", error);
+    res.status(500).json({ error: "Server error during login" });
+  }
+});
+
+// Catch all other routes
+app.use("*", (req, res) => {
+  res.status(404).json({ error: "Route not found", path: req.originalUrl });
+});
+
+// Export the serverless handler
+const handler: Handler = serverless(app);
 export { handler };
