@@ -1,6 +1,7 @@
 # Deployment Trigger - Fix CORS Dependencies
 
 Fixed build failure:
+
 - Added missing cors dependency to package.json
 - Added @types/cors for TypeScript support
 - Should resolve "Cannot find package 'cors'" error
