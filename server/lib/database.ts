@@ -9,7 +9,7 @@ console.log("🔍 Environment check:", {
   hasUrl: !!supabaseUrl,
   hasKey: !!supabaseKey,
   urlPrefix: supabaseUrl?.substring(0, 20) + "...",
-  keyPrefix: supabaseKey?.substring(0, 20) + "..."
+  keyPrefix: supabaseKey?.substring(0, 20) + "...",
 });
 
 // Check if Supabase is configured
