@@ -145,9 +145,19 @@ export default function Auth() {
                   required={!isLogin}
                   value={formData.username}
                   onChange={handleInputChange}
-                  className="bg-casino-dark/50 border-casino-green/20 text-white placeholder:text-gray-400"
-                  placeholder="Enter your username"
+                  className={`bg-casino-dark/50 border-casino-green/20 text-white placeholder:text-gray-400 ${
+                    validationErrors.username ? 'border-red-500/50' : ''
+                  }`}
+                  placeholder="MUC + letters & numbers (7-13 chars)"
                 />
+                {validationErrors.username && (
+                  <p className="text-red-400 text-xs">{validationErrors.username}</p>
+                )}
+                {!isLogin && !validationErrors.username && (
+                  <p className="text-gray-400 text-xs">
+                    Must begin with MUC, 7-13 characters, letters and numbers only, at least one letter and one number
+                  </p>
+                )}
               </div>
             )}
 
