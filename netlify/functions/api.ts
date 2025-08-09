@@ -84,10 +84,30 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Health check endpoint - handle both /ping and /api/ping
+// Add middleware to log all requests for debugging
+app.use((req, res, next) => {
+  console.log("📍 Request:", req.method, req.originalUrl, req.path);
+  console.log("📍 Headers:", req.headers);
+  next();
+});
+
+// Health check endpoint - handle multiple variations
+app.get("/", (req, res) => {
+  res.json({
+    message: "API root is working!",
+    timestamp: new Date().toISOString(),
+    environment: {
+      SUPABASE_URL: process.env.SUPABASE_URL ? "SET" : "NOT SET",
+      SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY
+        ? "SET"
+        : "NOT SET",
+    },
+  });
+});
+
 app.get("/ping", (req, res) => {
   res.json({
-    message: "API is working!",
+    message: "API ping is working!",
     timestamp: new Date().toISOString(),
     environment: {
       SUPABASE_URL: process.env.SUPABASE_URL ? "SET" : "NOT SET",
@@ -100,7 +120,7 @@ app.get("/ping", (req, res) => {
 
 app.get("/api/ping", (req, res) => {
   res.json({
-    message: "API is working!",
+    message: "API /api/ping is working!",
     timestamp: new Date().toISOString(),
     environment: {
       SUPABASE_URL: process.env.SUPABASE_URL ? "SET" : "NOT SET",
