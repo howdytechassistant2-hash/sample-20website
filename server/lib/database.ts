@@ -26,10 +26,23 @@ if (
   );
 }
 
-export const supabase =
-  supabaseUrl && supabaseKey && !supabaseUrl.includes("REPLACE-WITH")
-    ? createClient(supabaseUrl, supabaseKey)
-    : null;
+// Create Supabase client safely (build-safe)
+let supabase: ReturnType<typeof createClient> | null = null;
+
+try {
+  if (supabaseUrl && supabaseKey && !supabaseUrl.includes("REPLACE-WITH")) {
+    supabase = createClient(supabaseUrl, supabaseKey);
+    console.log("✅ Database connection successful");
+  } else {
+    console.log("⚠️ Skipping database connection - missing environment variables");
+  }
+} catch (error) {
+  console.error("❌ Database connection failed:", error);
+  console.log("⚠️ Continuing without database connection");
+  supabase = null;
+}
+
+export { supabase };
 
 // Database types
 export interface User {
