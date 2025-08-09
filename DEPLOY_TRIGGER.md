@@ -1,11 +1,10 @@
-# Deployment Trigger - Push Fix
+# Deployment Trigger - Simplified Function
 
 Fixed Netlify function deployment issue:
-
-- Optimized external_node_modules for smaller bundle
-- Added included_files configuration
+- Simplified function with dynamic imports
+- Reduced bundle size to pass storage limits
 - Should resolve "Insufficient storage" error
-- Force push to deploy fixes
+- Added proper CORS headers
 
-Deploy timestamp: 2025-01-18T02:50:00Z
-Function fix version: 1.4
+Deploy timestamp: 2025-01-18T02:55:00Z
+Simplified function version: 2.0
