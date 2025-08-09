@@ -91,42 +91,27 @@ app.use((req, res, next) => {
   next();
 });
 
-// Health check endpoint - handle multiple variations
+// Health check endpoints - Netlify sends paths without the function name
 app.get("/", (req, res) => {
   res.json({
-    message: "API root is working!",
+    message: "✅ API root is working!",
     timestamp: new Date().toISOString(),
     environment: {
       SUPABASE_URL: process.env.SUPABASE_URL ? "SET" : "NOT SET",
-      SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY
-        ? "SET"
-        : "NOT SET",
+      SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY ? "SET" : "NOT SET",
+      supabaseInitialized: supabase ? "YES" : "NO",
     },
   });
 });
 
 app.get("/ping", (req, res) => {
   res.json({
-    message: "API ping is working!",
+    message: "✅ Ping endpoint working!",
     timestamp: new Date().toISOString(),
     environment: {
       SUPABASE_URL: process.env.SUPABASE_URL ? "SET" : "NOT SET",
-      SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY
-        ? "SET"
-        : "NOT SET",
-    },
-  });
-});
-
-app.get("/api/ping", (req, res) => {
-  res.json({
-    message: "API /api/ping is working!",
-    timestamp: new Date().toISOString(),
-    environment: {
-      SUPABASE_URL: process.env.SUPABASE_URL ? "SET" : "NOT SET",
-      SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY
-        ? "SET"
-        : "NOT SET",
+      SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY ? "SET" : "NOT SET",
+      supabaseInitialized: supabase ? "YES" : "NO",
     },
   });
 });
