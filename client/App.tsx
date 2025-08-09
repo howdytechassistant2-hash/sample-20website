@@ -12,6 +12,7 @@ import Auth from "./pages/Auth";
 import Deposit from "./pages/Deposit";
 import Withdraw from "./pages/Withdraw";
 import Inbox from "./pages/Inbox";
+import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
