@@ -19,9 +19,22 @@ const supabase =
 
 // Validation schemas
 const signupSchema = z.object({
-  username: z.string().min(3),
-  email: z.string().email(),
-  password: z.string().min(6),
+  username: z
+    .string()
+    .min(7, "Username must be at least 7 characters")
+    .max(13, "Username must be at most 13 characters")
+    .regex(/^MUC/, "Username must begin with MUC")
+    .regex(/^[A-Za-z0-9]+$/, "Username can only contain letters and numbers")
+    .regex(/[A-Za-z]/, "Username must contain at least one letter")
+    .regex(/[0-9]/, "Username must contain at least one number"),
+  email: z.string().email("Please enter a valid email address"),
+  password: z
+    .string()
+    .min(6, "Password must be at least 6 characters")
+    .max(16, "Password must be at most 16 characters")
+    .regex(/[A-Za-z]/, "Password must contain at least one letter")
+    .regex(/[0-9]/, "Password must contain at least one number")
+    .regex(/^[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/, "Password contains invalid characters"),
 });
 
 // Helper functions
