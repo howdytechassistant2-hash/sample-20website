@@ -2,7 +2,7 @@
 
 This file forces a commit to enable pushing the database configuration fix.
 
-- Fixed: SUPABASE_SERVICE_ROLE_KEY configuration 
+- Fixed: SUPABASE_SERVICE_ROLE_KEY configuration
 - Environment variables set in Netlify
 - Ready for Netlify deployment
 
