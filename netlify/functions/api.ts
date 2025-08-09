@@ -315,12 +315,21 @@ app.post("/api/auth/login", async (req, res) => {
 
 // Debug route to see what paths are being called
 app.use("*", (req, res) => {
-  console.log("Unmatched route:", req.method, req.originalUrl, req.path);
+  console.log("❌ Unmatched route:", req.method, req.originalUrl, req.path);
+  console.log("❌ Base URL:", req.baseUrl);
+  console.log("❌ Query:", req.query);
+
   res.status(404).json({
     error: "Route not found",
-    path: req.originalUrl,
-    method: req.method,
+    requestInfo: {
+      method: req.method,
+      originalUrl: req.originalUrl,
+      path: req.path,
+      baseUrl: req.baseUrl,
+      query: req.query,
+    },
     availableRoutes: [
+      "/",
       "/ping",
       "/api/ping",
       "/auth/signup",
@@ -328,6 +337,7 @@ app.use("*", (req, res) => {
       "/auth/login",
       "/api/auth/login",
     ],
+    message: "Try visiting the root / or /ping endpoints first"
   });
 });
 
