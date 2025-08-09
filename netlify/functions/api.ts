@@ -34,7 +34,10 @@ const signupSchema = z.object({
     .max(16, "Password must be at most 16 characters")
     .regex(/[A-Za-z]/, "Password must contain at least one letter")
     .regex(/[0-9]/, "Password must contain at least one number")
-    .regex(/^[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/, "Password contains invalid characters"),
+    .regex(
+      /^[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/,
+      "Password contains invalid characters",
+    ),
 });
 
 // Helper functions
