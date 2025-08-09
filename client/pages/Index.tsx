@@ -9,14 +9,12 @@ import {
   Gift,
   Star,
   LogOut,
-  Mail,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
-import { useState, useEffect } from "react";
 
 const gameProviders = [
   {
@@ -100,31 +98,6 @@ const features = [
 
 export default function Index() {
   const { isAuthenticated, user, logout } = useAuth();
-  const [unreadCount, setUnreadCount] = useState(0);
-
-  useEffect(() => {
-    if (isAuthenticated && user?.id) {
-      fetchUnreadCount();
-      // Poll for new messages every 30 seconds
-      const interval = setInterval(fetchUnreadCount, 30000);
-      return () => clearInterval(interval);
-    }
-  }, [isAuthenticated, user?.id]);
-
-  const fetchUnreadCount = async () => {
-    if (!user?.id) return;
-
-    try {
-      const response = await fetch(`/api/messages/unread-count?userId=${user.id}`);
-      const data = await response.json();
-
-      if (response.ok) {
-        setUnreadCount(data.count || 0);
-      }
-    } catch (error) {
-      console.error('Error fetching unread count:', error);
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-casino-dark via-slate-900 to-casino-dark">
@@ -150,22 +123,6 @@ export default function Index() {
                   {user?.username}
                 </span>
               </span>
-
-              {/* Inbox Button */}
-              <Link to="/inbox" className="relative">
-                <Button
-                  variant="outline"
-                  className="border-casino-green/20 text-casino-green hover:bg-casino-green/20"
-                >
-                  <Mail className="w-4 h-4 mr-2" />
-                  Inbox
-                </Button>
-                {unreadCount > 0 && (
-                  <Badge className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full min-w-[20px] h-5 flex items-center justify-center">
-                    {unreadCount > 99 ? '99+' : unreadCount}
-                  </Badge>
-                )}
-              </Link>
 
               <Button
                 onClick={logout}
