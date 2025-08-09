@@ -104,9 +104,18 @@ app.post("/api/auth/signup", async (req, res) => {
     console.log("=== SIGNUP ATTEMPT ===");
     console.log("Request body:", req.body);
     console.log("Environment check:");
-    console.log("- SUPABASE_URL:", process.env.SUPABASE_URL ? "SET" : "NOT SET");
-    console.log("- SUPABASE_SERVICE_ROLE_KEY:", process.env.SUPABASE_SERVICE_ROLE_KEY ? "SET" : "NOT SET");
-    console.log("- Supabase client:", supabase ? "INITIALIZED" : "NOT INITIALIZED");
+    console.log(
+      "- SUPABASE_URL:",
+      process.env.SUPABASE_URL ? "SET" : "NOT SET",
+    );
+    console.log(
+      "- SUPABASE_SERVICE_ROLE_KEY:",
+      process.env.SUPABASE_SERVICE_ROLE_KEY ? "SET" : "NOT SET",
+    );
+    console.log(
+      "- Supabase client:",
+      supabase ? "INITIALIZED" : "NOT INITIALIZED",
+    );
 
     const { username, email, password } = signupSchema.parse(req.body);
 
@@ -117,7 +126,7 @@ app.post("/api/auth/signup", async (req, res) => {
       console.log("❌ User already exists:", email);
       return res.status(400).json({
         error: "User already exists",
-        email: email
+        email: email,
       });
     }
 
@@ -128,7 +137,8 @@ app.post("/api/auth/signup", async (req, res) => {
       console.error("❌ Failed to create user in database");
       return res.status(500).json({
         error: "Failed to create user",
-        details: "Database error - check environment variables and database schema",
+        details:
+          "Database error - check environment variables and database schema",
       });
     }
 
@@ -142,12 +152,12 @@ app.post("/api/auth/signup", async (req, res) => {
       return res.status(400).json({
         error: "Invalid input",
         details: error.issues,
-        message: "Please check your input fields"
+        message: "Please check your input fields",
       });
     }
     res.status(500).json({
       error: "Server error during signup",
-      details: error.message || "Unknown server error"
+      details: error.message || "Unknown server error",
     });
   }
 });
