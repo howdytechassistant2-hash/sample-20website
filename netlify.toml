@@ -5,11 +5,17 @@
 
 
 [functions]
-  external_node_modules = ["express"]
+  external_node_modules = ["express", "@supabase/supabase-js"]
   node_bundler = "esbuild"
+  included_files = ["server/**"]
   
 [[redirects]]
   force = true
   from = "/api/*"
   status = 200
   to = "/.netlify/functions/api/:splat"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

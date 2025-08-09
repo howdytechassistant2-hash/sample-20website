@@ -1,27 +1,11 @@
-# Deployment Trigger
+# Deployment Trigger - Fix CORS Dependencies
 
-This file was created to trigger a new deployment with the latest changes including:
+Fixed build failure:
 
-## Latest Changes (Ready for Production):
+- Added missing cors dependency to package.json
+- Added @types/cors for TypeScript support
+- Should resolve "Cannot find package 'cors'" error
+- Build should now complete successfully
 
-- ✅ Supabase database integration
-- ✅ Persistent user authentication
-- ✅ Database-backed deposits and withdrawals
-- ✅ Admin data viewing endpoint
-- ✅ Complete casino functionality
-
-## Database Files Added:
-
-- `server/lib/database.ts` - Supabase connection and operations
-- `server/schema.sql` - Database table creation
-- `server/routes/auth.ts` - Updated to use database
-- `database-setup.md` - Setup instructions
-
-## Environment Variables Needed:
-
-```
-SUPABASE_URL=your-project-url
-SUPABASE_ANON_KEY=your-anon-key
-```
-
-Timestamp: $(date)
+Deploy timestamp: 2025-01-18T03:15:00Z
+CORS fix version: 2.2
