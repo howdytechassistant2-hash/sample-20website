@@ -38,12 +38,20 @@ const App = () => (
   </div>
 );
 
-// Ensure we only create the root once
+// Create root only once
 const container = document.getElementById("root")!;
-if (!container._reactRootContainer) {
-  const root = createRoot(container);
-  container._reactRootContainer = root;
-  root.render(<App />);
+let root: ReturnType<typeof createRoot>;
+
+// Check if we're in development and root might already exist
+if (import.meta.hot) {
+  // In development, store root on the window object to persist across HMR
+  if (!(window as any).__reactRoot) {
+    (window as any).__reactRoot = createRoot(container);
+  }
+  root = (window as any).__reactRoot;
 } else {
-  container._reactRootContainer.render(<App />);
+  // In production, create root normally
+  root = createRoot(container);
 }
+
+root.render(<App />);
