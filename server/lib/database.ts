@@ -81,11 +81,15 @@ export async function createUser(
   password: string,
 ): Promise<User | null> {
   if (!supabase) {
-    console.error("❌ Cannot create user - Supabase not configured");
+    console.error("❌ Cannot create user - Supabase not configured properly");
+    console.error("❌ Please set SUPABASE_URL and SUPABASE_ANON_KEY environment variables");
+    console.error("❌ Current SUPABASE_URL:", process.env.SUPABASE_URL);
+    console.error("❌ Current SUPABASE_ANON_KEY:", process.env.SUPABASE_ANON_KEY ? "SET" : "NOT SET");
     return null;
   }
 
   try {
+    console.log("🔄 Attempting to create user in Supabase:", { username, email });
     const { data, error } = await supabase
       .from("users")
       .insert([
@@ -100,13 +104,15 @@ export async function createUser(
       .single();
 
     if (error) {
-      console.error("Create user error:", error);
+      console.error("❌ Supabase create user error:", error);
+      console.error("❌ Error details:", error.message, error.details, error.hint);
       return null;
     }
 
+    console.log("✅ User created successfully in Supabase");
     return data;
   } catch (error) {
-    console.error("Create user error:", error);
+    console.error("❌ Unexpected error creating user:", error);
     return null;
   }
 }
