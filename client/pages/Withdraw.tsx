@@ -43,7 +43,7 @@ export default function Withdraw() {
       });
 
       if (response.ok) {
-        alert(`Withdrawal request submitted for $${amount} to ${cashtag}. Processing time: 24-48 hours.`);
+        alert(`Withdrawal request submitted for $${amount} to ${cashtag}. Your withdrawal will be deposited shortly.`);
         setAmount("");
         setCashtag("");
         setNotes("");
