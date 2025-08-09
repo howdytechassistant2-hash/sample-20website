@@ -9,6 +9,13 @@ import {
   handleWithdraw,
   handleGetAllData
 } from "./routes/auth";
+import {
+  handleSendMessage,
+  handleSendBroadcast,
+  handleGetUserMessages,
+  handleMarkMessageRead,
+  handleGetUnreadCount
+} from "./routes/messages";
 
 export function createServer() {
   const app = express();
