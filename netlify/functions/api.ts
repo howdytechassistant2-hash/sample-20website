@@ -223,7 +223,8 @@ app.post("/api/auth/signup", async (req, res) => {
       console.error("❌ Failed to create user in database");
       return res.status(500).json({
         error: "Failed to create user",
-        details: "Database error - check environment variables and database schema",
+        details:
+          "Database error - check environment variables and database schema",
       });
     }
 
