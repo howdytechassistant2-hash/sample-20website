@@ -26,7 +26,13 @@ const loginSchema = z.object({
 
 export const handleSignup: RequestHandler = async (req, res) => {
   try {
-    console.log("Signup attempt:", { body: req.body });
+    console.log("=== SIGNUP ATTEMPT ===");
+    console.log("Request body:", req.body);
+    console.log("Environment check:");
+    console.log("- SUPABASE_URL:", process.env.SUPABASE_URL ? "SET" : "NOT SET");
+    console.log("- SUPABASE_SERVICE_ROLE_KEY:", process.env.SUPABASE_SERVICE_ROLE_KEY ? "SET" : "NOT SET");
+    console.log("- SUPABASE_ANON_KEY:", process.env.SUPABASE_ANON_KEY ? "SET" : "NOT SET");
+
     const { username, email, password } = signupSchema.parse(req.body);
 
     // Check if user already exists
@@ -41,26 +47,25 @@ export const handleSignup: RequestHandler = async (req, res) => {
     console.log("Creating new user:", { username, email });
     const newUser = await createUser(username, email, password);
     if (!newUser) {
-      console.error("Failed to create user in database");
+      console.error("❌ Failed to create user in database");
+      console.error("❌ This usually means Supabase configuration is missing or RLS is blocking access");
       return res.status(500).json({
         error: "Failed to create user",
-        details:
-          "Database configuration may be missing. Please check Supabase setup.",
+        details: "Database error - check server logs for more information"
       });
     }
 
-    console.log("User created successfully:", newUser.id);
+    console.log("✅ User created successfully:", newUser.id);
     // Return user without password
     const { password: _, ...userWithoutPassword } = newUser;
     res.json({ user: userWithoutPassword });
   } catch (error) {
-    console.error("Signup error:", error);
+    console.error("❌ Signup error:", error);
     if (error instanceof z.ZodError) {
-      return res
-        .status(400)
-        .json({ error: "Invalid input", details: error.issues });
+      console.error("❌ Validation error:", error.issues);
+      return res.status(400).json({ error: "Invalid input", details: error.issues });
     }
-    res.status(500).json({ error: "Server error during signup" });
+    res.status(500).json({ error: "Server error during signup", details: error.message });
   }
 };
 
