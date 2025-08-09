@@ -9,11 +9,13 @@ import { createClient } from "@supabase/supabase-js";
 
 // Database configuration
 const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
+const supabaseKey =
+  process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY;
 
-const supabase = supabaseUrl && supabaseKey && !supabaseUrl.includes("REPLACE-WITH")
-  ? createClient(supabaseUrl, supabaseKey)
-  : null;
+const supabase =
+  supabaseUrl && supabaseKey && !supabaseUrl.includes("REPLACE-WITH")
+    ? createClient(supabaseUrl, supabaseKey)
+    : null;
 
 // Validation schemas
 const signupSchema = z.object({
@@ -32,12 +34,14 @@ async function createUser(username: string, email: string, password: string) {
   try {
     const { data, error } = await supabase
       .from("users")
-      .insert([{
-        username,
-        email,
-        password,
-        created_at: new Date().toISOString(),
-      }])
+      .insert([
+        {
+          username,
+          email,
+          password,
+          created_at: new Date().toISOString(),
+        },
+      ])
       .select()
       .single();
 
@@ -77,13 +81,15 @@ app.use(express.json());
 
 // Health check endpoint
 app.get("/api/ping", (req, res) => {
-  res.json({ 
+  res.json({
     message: "API is working!",
     timestamp: new Date().toISOString(),
     environment: {
       SUPABASE_URL: process.env.SUPABASE_URL ? "SET" : "NOT SET",
-      SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY ? "SET" : "NOT SET",
-    }
+      SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY
+        ? "SET"
+        : "NOT SET",
+    },
   });
 });
 
@@ -92,7 +98,7 @@ app.post("/api/auth/signup", async (req, res) => {
   try {
     console.log("=== SIGNUP ATTEMPT ===");
     console.log("Request body:", req.body);
-    
+
     const { username, email, password } = signupSchema.parse(req.body);
 
     // Check if user already exists
@@ -105,9 +111,9 @@ app.post("/api/auth/signup", async (req, res) => {
     const newUser = await createUser(username, email, password);
     if (!newUser) {
       console.error("❌ Failed to create user");
-      return res.status(500).json({ 
+      return res.status(500).json({
         error: "Failed to create user",
-        details: "Database error - check environment variables"
+        details: "Database error - check environment variables",
       });
     }
 

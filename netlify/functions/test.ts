@@ -20,7 +20,9 @@ export const handler: Handler = async (event, context) => {
       path: event.path,
       environment: {
         SUPABASE_URL: process.env.SUPABASE_URL ? "SET" : "NOT SET",
-        SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY ? "SET" : "NOT SET",
+        SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY
+          ? "SET"
+          : "NOT SET",
         nodeVersion: process.version,
       },
       timestamp: new Date().toISOString(),
