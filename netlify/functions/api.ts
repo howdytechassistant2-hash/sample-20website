@@ -347,7 +347,7 @@ app.post("/api/deposit", async (req, res) => {
     if (!userId || !username || !game || !amount || !cashappTag) {
       return res.status(400).json({
         error: "Missing required fields",
-        required: ["userId", "username", "game", "amount", "cashappTag"]
+        required: ["userId", "username", "game", "amount", "cashappTag"],
       });
     }
 
@@ -363,7 +363,7 @@ app.post("/api/deposit", async (req, res) => {
           amount: parseFloat(amount),
           cashapp_tag: cashappTag,
           timestamp: timestamp || new Date().toISOString(),
-          status: 'pending'
+          status: "pending",
         },
       ])
       .select()
@@ -373,7 +373,7 @@ app.post("/api/deposit", async (req, res) => {
       console.error("❌ Supabase deposit insert error:", error);
       return res.status(500).json({
         error: "Failed to save deposit request",
-        details: error.message
+        details: error.message,
       });
     }
 
@@ -389,8 +389,8 @@ app.post("/api/deposit", async (req, res) => {
         amount: parseFloat(amount),
         cashappTag,
         timestamp: data.timestamp,
-        status: data.status
-      }
+        status: data.status,
+      },
     });
   } catch (error) {
     console.error("❌ Deposit error:", error);
@@ -418,7 +418,7 @@ app.post("/api/withdraw", async (req, res) => {
     if (!userId || !username || !amount || !cashtag) {
       return res.status(400).json({
         error: "Missing required fields",
-        required: ["userId", "username", "amount", "cashtag"]
+        required: ["userId", "username", "amount", "cashtag"],
       });
     }
 
@@ -434,7 +434,7 @@ app.post("/api/withdraw", async (req, res) => {
           cashtag,
           notes: notes || null,
           timestamp: timestamp || new Date().toISOString(),
-          status: 'pending'
+          status: "pending",
         },
       ])
       .select()
@@ -444,7 +444,7 @@ app.post("/api/withdraw", async (req, res) => {
       console.error("❌ Supabase withdrawal insert error:", error);
       return res.status(500).json({
         error: "Failed to save withdrawal request",
-        details: error.message
+        details: error.message,
       });
     }
 
@@ -460,8 +460,8 @@ app.post("/api/withdraw", async (req, res) => {
         cashtag,
         notes,
         timestamp: data.timestamp,
-        status: data.status
-      }
+        status: data.status,
+      },
     });
   } catch (error) {
     console.error("❌ Withdraw error:", error);
