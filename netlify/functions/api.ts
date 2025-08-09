@@ -27,11 +27,12 @@ const signupSchema = z.object({
 // Helper functions
 async function createUser(username: string, email: string, password: string) {
   if (!supabase) {
-    console.error("❌ Supabase not configured");
+    console.error("❌ Supabase not configured - missing URL or key");
     return null;
   }
 
   try {
+    console.log("🔄 Attempting to insert user into database...");
     const { data, error } = await supabase
       .from("users")
       .insert([
@@ -46,13 +47,17 @@ async function createUser(username: string, email: string, password: string) {
       .single();
 
     if (error) {
-      console.error("❌ Create user error:", error);
+      console.error("❌ Supabase insert error:", error);
+      console.error("❌ Error code:", error.code);
+      console.error("❌ Error message:", error.message);
+      console.error("❌ Error details:", error.details);
       return null;
     }
 
+    console.log("✅ User successfully inserted into database");
     return data;
   } catch (error) {
-    console.error("❌ Create user error:", error);
+    console.error("❌ Unexpected error during user creation:", error);
     return null;
   }
 }
