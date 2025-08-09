@@ -184,9 +184,19 @@ export default function Auth() {
                 required
                 value={formData.password}
                 onChange={handleInputChange}
-                className="bg-casino-dark/50 border-casino-green/20 text-white placeholder:text-gray-400"
-                placeholder="Enter your password"
+                className={`bg-casino-dark/50 border-casino-green/20 text-white placeholder:text-gray-400 ${
+                  validationErrors.password ? 'border-red-500/50' : ''
+                }`}
+                placeholder="6-16 characters with letter & number"
               />
+              {validationErrors.password && (
+                <p className="text-red-400 text-xs">{validationErrors.password}</p>
+              )}
+              {!isLogin && !validationErrors.password && (
+                <p className="text-gray-400 text-xs">
+                  6-16 characters, at least one letter and one number, optional symbols allowed
+                </p>
+              )}
             </div>
 
             {!isLogin && (
