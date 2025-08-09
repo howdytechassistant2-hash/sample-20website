@@ -162,7 +162,7 @@ export default function Withdraw() {
 
               <Button
                 onClick={handleSubmitWithdraw}
-                disabled={!amount || !cashtag || parseFloat(amount) < 20 || submitting}
+                disabled={!amount || !cashtag || !notes.trim() || parseFloat(amount) < 20 || submitting}
                 className="w-full bg-gradient-to-r from-casino-green to-green-400 hover:from-green-400 hover:to-casino-green text-casino-dark font-bold py-3 text-lg rounded-full shadow-lg shadow-casino-green/50 hover:shadow-casino-green/80 transition-all duration-300"
               >
                 {submitting ? "Submitting..." : "Submit Withdrawal Request"}
