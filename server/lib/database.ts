@@ -52,17 +52,6 @@ export interface Withdrawal {
   status: string;
 }
 
-export interface Message {
-  id: string;
-  user_id: string;
-  username: string;
-  title: string;
-  content: string;
-  message_type: string;
-  is_read: boolean;
-  sent_at: string;
-  read_at?: string;
-}
 
 // Initialize database tables if they don't exist
 export async function initializeDatabase() {
@@ -211,112 +200,19 @@ export async function createWithdrawal(
   }
 }
 
-// Message operations
-export async function createMessage(messageData: Omit<Message, "id">): Promise<Message | null> {
-  if (!supabase) return null;
-
-  try {
-    const { data, error } = await supabase
-      .from("messages")
-      .insert([messageData])
-      .select()
-      .single();
-
-    if (error) {
-      console.error("Create message error:", error);
-      return null;
-    }
-
-    return data;
-  } catch (error) {
-    console.error("Create message error:", error);
-    return null;
-  }
-}
-
-export async function getUserMessages(userId: string): Promise<Message[]> {
-  if (!supabase) return [];
-
-  try {
-    const { data, error } = await supabase
-      .from("messages")
-      .select("*")
-      .eq("user_id", userId)
-      .order("sent_at", { ascending: false });
-
-    if (error) {
-      console.error("Get user messages error:", error);
-      return [];
-    }
-
-    return data || [];
-  } catch (error) {
-    console.error("Get user messages error:", error);
-    return [];
-  }
-}
-
-export async function markMessageAsRead(messageId: string): Promise<boolean> {
-  if (!supabase) return false;
-
-  try {
-    const { error } = await supabase
-      .from("messages")
-      .update({
-        is_read: true,
-        read_at: new Date().toISOString()
-      })
-      .eq("id", messageId);
-
-    if (error) {
-      console.error("Mark message as read error:", error);
-      return false;
-    }
-
-    return true;
-  } catch (error) {
-    console.error("Mark message as read error:", error);
-    return false;
-  }
-}
-
-export async function getUnreadMessageCount(userId: string): Promise<number> {
-  if (!supabase) return 0;
-
-  try {
-    const { count, error } = await supabase
-      .from("messages")
-      .select("*", { count: "exact", head: true })
-      .eq("user_id", userId)
-      .eq("is_read", false);
-
-    if (error) {
-      console.error("Get unread count error:", error);
-      return 0;
-    }
-
-    return count || 0;
-  } catch (error) {
-    console.error("Get unread count error:", error);
-    return 0;
-  }
-}
-
 // Admin operations
 export async function getAllData() {
   try {
-    const [usersResult, depositsResult, withdrawalsResult, messagesResult] = await Promise.all([
+    const [usersResult, depositsResult, withdrawalsResult] = await Promise.all([
       supabase.from("users").select("id, username, email, created_at"),
       supabase.from("deposits").select("*"),
       supabase.from("withdrawals").select("*"),
-      supabase.from("messages").select("*"),
     ]);
 
     return {
       users: usersResult.data || [],
       deposits: depositsResult.data || [],
       withdrawals: withdrawalsResult.data || [],
-      messages: messagesResult.data || [],
     };
   } catch (error) {
     console.error("Get all data error:", error);
@@ -324,7 +220,6 @@ export async function getAllData() {
       users: [],
       deposits: [],
       withdrawals: [],
-      messages: [],
     };
   }
 }
