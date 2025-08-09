@@ -1,6 +1,7 @@
 # Deployment Trigger - Function Fix
 
 Fixed Netlify function deployment issue:
+
 - Optimized external_node_modules for smaller bundle
 - Added included_files configuration
 - Should resolve "Insufficient storage" error
