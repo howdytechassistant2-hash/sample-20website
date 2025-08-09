@@ -18,18 +18,57 @@ export default function Auth() {
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [validationErrors, setValidationErrors] = useState({
+    username: "",
+    password: ""
+  });
   const { login, signup } = useAuth();
   const navigate = useNavigate();
+
+  const validateUsername = (username: string): string => {
+    if (username.length < 7) return "Username must be at least 7 characters";
+    if (username.length > 13) return "Username must be at most 13 characters";
+    if (!username.startsWith("MUC")) return "Username must begin with MUC";
+    if (!/^[A-Za-z0-9]+$/.test(username)) return "Username can only contain letters and numbers";
+    if (!/[A-Za-z]/.test(username)) return "Username must contain at least one letter";
+    if (!/[0-9]/.test(username)) return "Username must contain at least one number";
+    return "";
+  };
+
+  const validatePassword = (password: string): string => {
+    if (password.length < 6) return "Password must be at least 6 characters";
+    if (password.length > 16) return "Password must be at most 16 characters";
+    if (!/[A-Za-z]/.test(password)) return "Password must contain at least one letter";
+    if (!/[0-9]/.test(password)) return "Password must contain at least one number";
+    if (!/^[A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/.test(password)) return "Password contains invalid characters";
+    return "";
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError("");
+    setValidationErrors({ username: "", password: "" });
 
-    if (!isLogin && formData.password !== formData.confirmPassword) {
-      setError("Passwords don't match");
-      setLoading(false);
-      return;
+    // Frontend validation for signup
+    if (!isLogin) {
+      const usernameError = validateUsername(formData.username);
+      const passwordError = validatePassword(formData.password);
+
+      if (usernameError || passwordError) {
+        setValidationErrors({
+          username: usernameError,
+          password: passwordError
+        });
+        setLoading(false);
+        return;
+      }
+
+      if (formData.password !== formData.confirmPassword) {
+        setError("Passwords don't match");
+        setLoading(false);
+        return;
+      }
     }
 
     try {
