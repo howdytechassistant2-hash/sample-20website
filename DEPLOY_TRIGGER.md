@@ -1,11 +1,9 @@
-# Deployment Trigger - Simplified Function
+# Deployment Trigger - Fix Dependencies
 
-Fixed Netlify function deployment issue:
+Fixed build failure:
+- Added missing dotenv dependency to package.json
+- Should resolve "Cannot find package 'dotenv'" error
+- Build should now complete successfully
 
-- Simplified function with dynamic imports
-- Reduced bundle size to pass storage limits
-- Should resolve "Insufficient storage" error
-- Added proper CORS headers
-
-Deploy timestamp: 2025-01-18T02:55:00Z
-Simplified function version: 2.0
+Deploy timestamp: 2025-01-18T03:10:00Z
+Dependency fix version: 2.1
