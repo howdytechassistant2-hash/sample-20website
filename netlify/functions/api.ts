@@ -433,6 +433,8 @@ app.use("*", (req, res) => {
       "/api/auth/signup",
       "/auth/login",
       "/api/auth/login",
+      "/api/deposit",
+      "/api/withdraw",
     ],
     message: "Try visiting the root / or /ping endpoints first",
   });
