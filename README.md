@@ -5,7 +5,7 @@ A modern casino platform with user authentication, payment processing, and messa
 ## Features
 
 - ✅ User authentication and account management
-- ✅ Deposit and withdrawal functionality 
+- ✅ Deposit and withdrawal functionality
 - ✅ Admin messaging system with inbox
 - ✅ Multiple casino platform integrations
 - ✅ Responsive design with modern UI
@@ -29,7 +29,7 @@ SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 ## Dependencies Fixed
 
 - ✅ Added missing `dotenv` dependency
-- ✅ Added missing `cors` dependency  
+- ✅ Added missing `cors` dependency
 - ✅ Added TypeScript types for cors
 - ✅ Optimized Netlify function bundle size
 
