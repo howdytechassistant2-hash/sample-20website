@@ -116,7 +116,7 @@ app.get("/ping", (req, res) => {
   });
 });
 
-// Signup endpoint - handle both /auth/signup and /api/auth/signup
+// Signup endpoint - Netlify will send /auth/signup (without /api prefix)
 app.post("/auth/signup", async (req, res) => {
   try {
     console.log("=== SIGNUP ATTEMPT ===");
