@@ -23,7 +23,7 @@ export default function Withdraw() {
   }, [isAuthenticated, navigate]);
 
   const handleSubmitWithdraw = async () => {
-    if (!amount || !cashtag) return;
+    if (!amount || !cashtag || !notes.trim()) return;
     
     setSubmitting(true);
     try {
