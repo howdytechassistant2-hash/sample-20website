@@ -1,10 +1,9 @@
-# Deployment Trigger - Netlify Fix
+# Deployment Trigger - Function Fix
 
-This file forces a commit to enable pushing the database configuration fix.
+Fixed Netlify function deployment issue:
+- Optimized external_node_modules for smaller bundle
+- Added included_files configuration
+- Should resolve "Insufficient storage" error
 
-- Fixed: SUPABASE_SERVICE_ROLE_KEY configuration
-- Environment variables set in Netlify
-- Ready for Netlify deployment
-
-Deploy timestamp: 2025-01-18T02:40:00Z
-Fix version: 1.2
+Deploy timestamp: 2025-01-18T02:45:00Z
+Function fix version: 1.3
