@@ -92,10 +92,19 @@ export default function Auth() {
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
+
+    // Clear validation errors when user starts typing
+    if (name === "username" && validationErrors.username) {
+      setValidationErrors(prev => ({ ...prev, username: "" }));
+    }
+    if (name === "password" && validationErrors.password) {
+      setValidationErrors(prev => ({ ...prev, password: "" }));
+    }
   };
 
   return (
