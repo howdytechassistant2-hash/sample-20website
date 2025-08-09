@@ -5,11 +5,13 @@
 This repository contains the same MyUniverse Casino code optimized for AWS deployment while keeping your Supabase backend intact.
 
 ### ✅ **Current Netlify Site (KEEP RUNNING)**
+
 - Production URL: `https://myuniverse-casino.netlify.app/`
 - Status: ✅ Working perfectly
 - **DO NOT TOUCH** - This stays as your main production site
 
 ### 🔄 **New AWS Deployment (Testing)**
+
 This repository is for testing AWS deployment options.
 
 ## 📋 **Quick Setup - Choose Your Option:**
@@ -95,14 +97,14 @@ SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 
 ## 📊 **Comparison: Netlify vs AWS Options**
 
-| Feature | Current Netlify | AWS Amplify | AWS EC2 | AWS Lambda |
-|---------|----------------|-------------|---------|------------|
-| **Setup Time** | ✅ Already Done | 🟡 ~30 min | 🔴 ~2 hours | 🟡 ~1 hour |
-| **Auto Scaling** | ✅ Yes | ✅ Yes | 🔴 Manual | ✅ Yes |
-| **Cost** | Free tier | Free tier | ~$10-50/month | Pay per use |
-| **Custom Domain** | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
-| **SSL Certificate** | ✅ Auto | ✅ Auto | 🟡 Manual setup | ✅ Auto |
-| **Maintenance** | ✅ None | ✅ Minimal | 🔴 Server updates | ✅ None |
+| Feature             | Current Netlify | AWS Amplify | AWS EC2           | AWS Lambda  |
+| ------------------- | --------------- | ----------- | ----------------- | ----------- |
+| **Setup Time**      | ✅ Already Done | 🟡 ~30 min  | 🔴 ~2 hours       | 🟡 ~1 hour  |
+| **Auto Scaling**    | ✅ Yes          | ✅ Yes      | 🔴 Manual         | ✅ Yes      |
+| **Cost**            | Free tier       | Free tier   | ~$10-50/month     | Pay per use |
+| **Custom Domain**   | ✅ Yes          | ✅ Yes      | ✅ Yes            | ✅ Yes      |
+| **SSL Certificate** | ✅ Auto         | ✅ Auto     | 🟡 Manual setup   | ✅ Auto     |
+| **Maintenance**     | ✅ None         | ✅ Minimal  | 🔴 Server updates | ✅ None     |
 
 ## 🎯 **Recommendation**
 

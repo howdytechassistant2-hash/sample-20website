@@ -3,7 +3,7 @@ service: myuniverse-casino-api
 provider:
   name: aws
   runtime: nodejs18.x
-  region: us-east-1  # Change to your preferred region
+  region: us-east-1 # Change to your preferred region
   stage: ${opt:stage, 'prod'}
   environment:
     SUPABASE_URL: ${env:SUPABASE_URL}
@@ -56,15 +56,15 @@ resources:
             - Id: S3Origin
               DomainName: !GetAtt StaticFilesBucket.RegionalDomainName
               S3OriginConfig:
-                OriginAccessIdentity: ''
+                OriginAccessIdentity: ""
             - Id: ApiOrigin
               DomainName:
                 Fn::Join:
-                  - ''
+                  - ""
                   - - Ref: ApiGatewayRestApi
-                    - '.execute-api.'
+                    - ".execute-api."
                     - ${self:provider.region}
-                    - '.amazonaws.com'
+                    - ".amazonaws.com"
               CustomOriginConfig:
                 HTTPPort: 443
                 HTTPSPort: 443
