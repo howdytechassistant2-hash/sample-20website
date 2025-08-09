@@ -12,7 +12,7 @@ if (
   supabaseKey.includes("REPLACE-WITH")
 ) {
   console.warn(
-    "⚠️  Supabase not configured properly. Please set SUPABASE_URL and SUPABASE_ANON_KEY environment variables.",
+    "⚠️  Supabase not configured properly. Please set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY (or SUPABASE_ANON_KEY) environment variables.",
   );
 }
 
@@ -83,12 +83,16 @@ export async function createUser(
   if (!supabase) {
     console.error("❌ Cannot create user - Supabase not configured properly");
     console.error(
-      "❌ Please set SUPABASE_URL and SUPABASE_ANON_KEY environment variables",
+      "❌ Please set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY environment variables",
     );
     console.error("❌ Current SUPABASE_URL:", process.env.SUPABASE_URL);
     console.error(
+      "❌ Current SUPABASE_SERVICE_ROLE_KEY:",
+      process.env.SUPABASE_SERVICE_ROLE_KEY ? "SET" : "NOT SET",
+    );
+    console.error(
       "❌ Current SUPABASE_ANON_KEY:",
-      process.env.SUPABASE_ANON_KEY ? "SET" : "NOT SET",
+      process.env.SUPABASE_ANON_KEY ? "SET (fallback)" : "NOT SET",
     );
     return null;
   }
