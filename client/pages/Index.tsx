@@ -228,7 +228,7 @@ export default function Index() {
                       size="sm"
                       className="bg-brand-primary hover:bg-brand-primary/90 text-white w-full"
                     >
-                      Launch
+                      Play
                     </Button>
                   </a>
                 </CardContent>
