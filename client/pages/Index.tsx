@@ -131,7 +131,7 @@ export default function Index() {
               <Button
                 size="sm"
                 variant="outline"
-                className="border-neutral-300 text-neutral-700 hover:bg-neutral-50"
+                className="border-neutral-300 text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900 bg-white"
               >
                 <Phone className="w-4 h-4 mr-2" />
                 Support
