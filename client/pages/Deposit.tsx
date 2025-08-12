@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Sparkles, DollarSign, Smartphone, Copy, CheckCircle } from "lucide-react";
+import { Play, DollarSign, Smartphone, Copy, CheckCircle, ArrowLeft, Info } from "lucide-react";
 
 const gameOptions = [
   "VBLink", "Ultra Panda", "Juwa", "Fire Kirin", 
@@ -39,10 +39,10 @@ export default function Deposit() {
     
     setSubmitting(true);
     try {
-      const response = await fetch('/api/deposit', {
-        method: 'POST',
+      const response = await fetch("/api/deposit", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           userId: user?.id,
@@ -50,18 +50,20 @@ export default function Deposit() {
           game: selectedGame,
           amount: parseFloat(amount),
           cashappTag,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
         }),
       });
 
       if (response.ok) {
-        alert(`Deposit request submitted for ${selectedGame} - $${amount}. Please send payment to ${cashappTag}`);
+        alert(
+          `Deposit request submitted for ${selectedGame} - $${amount}. Please send payment to ${cashappTag}`,
+        );
         setSelectedGame("");
         setAmount("");
       }
     } catch (error) {
-      console.error('Deposit error:', error);
-      alert('Failed to submit deposit request');
+      console.error("Deposit error:", error);
+      alert("Failed to submit deposit request");
     } finally {
       setSubmitting(false);
     }
@@ -72,127 +74,164 @@ export default function Deposit() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-casino-dark via-slate-900 to-casino-dark">
+    <div className="min-h-screen bg-surface-primary">
       {/* Header */}
-      <header className="flex items-center justify-between p-4 md:p-6">
-        <Link to="/" className="flex items-center space-x-3">
-          <div className="w-12 h-12 bg-gradient-to-br from-casino-gold to-yellow-500 rounded-xl flex items-center justify-center">
-            <Sparkles className="w-6 h-6 text-casino-dark" />
+      <header className="border-b border-neutral-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <Link to="/" className="flex items-center space-x-3 text-neutral-600 hover:text-neutral-900 transition-colors">
+              <ArrowLeft className="w-5 h-5" />
+              <span className="text-sm font-medium">Back to Home</span>
+            </Link>
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-brand-primary rounded-lg flex items-center justify-center">
+                <Play className="w-4 h-4 text-white fill-current" />
+              </div>
+              <div>
+                <h1 className="text-lg font-semibold text-neutral-900">MyUniverse</h1>
+                <p className="text-xs text-neutral-500 -mt-1">Casino</p>
+              </div>
+            </div>
+            <div className="text-neutral-700">
+              Welcome, <span className="font-semibold text-neutral-900">{user?.username}</span>
+            </div>
           </div>
-          <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-white">MYUNIVERSE</h1>
-            <h2 className="text-xl md:text-2xl font-bold text-white">CASINO</h2>
-          </div>
-        </Link>
-        <div className="text-white">
-          Welcome, <span className="text-casino-green font-bold">{user?.username}</span>
         </div>
       </header>
 
-      <div className="px-4 md:px-6 py-8">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-bold text-white text-center mb-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="text-center mb-12">
+          <h1 className="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4">
             Make a Deposit
           </h1>
+          <p className="text-lg text-neutral-600">
+            Quick and secure deposits to your gaming account
+          </p>
+        </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {/* Deposit Form */}
-            <Card className="bg-casino-card/95 border-casino-green/20">
-              <CardHeader>
-                <CardTitle className="text-white flex items-center space-x-2">
-                  <DollarSign className="w-6 h-6 text-casino-green" />
-                  <span>Deposit Details</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="space-y-2">
-                  <Label htmlFor="game" className="text-white">Select Game</Label>
-                  <Select value={selectedGame} onValueChange={setSelectedGame}>
-                    <SelectTrigger className="bg-casino-dark/50 border-casino-green/20 text-white">
-                      <SelectValue placeholder="Choose a game" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-casino-dark border-casino-green/20">
-                      {gameOptions.map((game) => (
-                        <SelectItem key={game} value={game} className="text-white hover:bg-casino-green/20">
-                          {game}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="amount" className="text-white">Amount ($)</Label>
-                  <Input
-                    id="amount"
-                    type="number"
-                    min="10"
-                    step="0.01"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                    className="bg-casino-dark/50 border-casino-green/20 text-white placeholder:text-gray-400"
-                    placeholder="Enter deposit amount"
-                  />
-                  <p className="text-sm text-gray-400">Minimum deposit: $10</p>
-                </div>
-
-                <Button
-                  onClick={handleSubmitDeposit}
-                  disabled={!selectedGame || !amount || parseFloat(amount) < 10 || submitting}
-                  className="w-full bg-gradient-to-r from-casino-green to-green-400 hover:from-green-400 hover:to-casino-green text-casino-dark font-bold py-3 text-lg rounded-full shadow-lg shadow-casino-green/50 hover:shadow-casino-green/80 transition-all duration-300"
-                >
-                  {submitting ? "Submitting..." : "Submit Deposit Request"}
-                </Button>
-              </CardContent>
-            </Card>
-
-            {/* Payment Instructions */}
-            <Card className="bg-casino-card/95 border-casino-green/20">
-              <CardHeader>
-                <CardTitle className="text-white flex items-center space-x-2">
-                  <Smartphone className="w-6 h-6 text-casino-green" />
-                  <span>CashApp Payment</span>
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="text-center">
-                  <p className="text-gray-300 mb-4">Send payment to our CashApp:</p>
-                  
-                  <div className="bg-casino-dark/50 border border-casino-green/20 rounded-lg p-4 mb-4">
-                    <div className="flex items-center justify-between">
-                      <span className="text-casino-green text-xl font-bold">{cashappTag}</span>
-                      <Button
-                        onClick={handleCopyTag}
-                        variant="outline"
-                        size="sm"
-                        className="border-casino-green/20 text-casino-green hover:bg-casino-green/20"
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Deposit Form */}
+          <Card className="bg-surface-primary border border-neutral-200 shadow-sm">
+            <CardHeader>
+              <CardTitle className="text-neutral-900 flex items-center space-x-2">
+                <DollarSign className="w-6 h-6 text-brand-primary" />
+                <span>Deposit Details</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="space-y-2">
+                <Label htmlFor="game" className="text-neutral-900 font-medium">Select Game</Label>
+                <Select value={selectedGame} onValueChange={setSelectedGame}>
+                  <SelectTrigger className="border-neutral-300 focus:border-brand-primary focus:ring-brand-primary">
+                    <SelectValue placeholder="Choose a game" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-surface-primary border-neutral-200">
+                    {gameOptions.map((game) => (
+                      <SelectItem
+                        key={game}
+                        value={game}
+                        className="text-neutral-900 hover:bg-neutral-50"
                       >
-                        {copied ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                      </Button>
-                    </div>
-                  </div>
+                        {game}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
 
-                  {/* QR Code Placeholder */}
-                  <div className="bg-white p-6 rounded-lg mx-auto w-48 h-48 flex items-center justify-center mb-4">
-                    <div className="text-center">
-                      <Smartphone className="w-16 h-16 text-casino-dark mx-auto mb-2" />
-                      <p className="text-casino-dark text-sm">CashApp QR Code</p>
-                      <p className="text-casino-dark text-xs">{cashappTag}</p>
-                    </div>
-                  </div>
+              <div className="space-y-2">
+                <Label htmlFor="amount" className="text-neutral-900 font-medium">Amount ($)</Label>
+                <Input
+                  id="amount"
+                  type="number"
+                  min="10"
+                  step="0.01"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  className="border-neutral-300 focus:border-brand-primary focus:ring-brand-primary"
+                  placeholder="Enter deposit amount"
+                />
+                <p className="text-sm text-neutral-500">Minimum deposit: $10</p>
+              </div>
 
-                  <div className="bg-yellow-900/20 border border-yellow-500/20 rounded-lg p-4">
-                    <h3 className="text-yellow-400 font-bold mb-2">Important Instructions:</h3>
-                    <ul className="text-gray-300 text-sm space-y-1 text-left">
-                      <li>• Include your username: <span className="text-casino-green font-bold">{user?.username}</span></li>
-                      <li>• Include the game name in the payment note</li>
-                      <li>• Processing takes 5-15 minutes</li>
-                      <li>• Screenshots are not required but helpful</li>
-                    </ul>
+              <Button
+                onClick={handleSubmitDeposit}
+                disabled={!selectedGame || !amount || parseFloat(amount) < 10 || submitting}
+                className="w-full bg-brand-primary hover:bg-brand-primary/90 text-white font-semibold py-3 text-lg"
+              >
+                {submitting ? "Submitting..." : "Submit Deposit Request"}
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Payment Instructions */}
+          <Card className="bg-surface-primary border border-neutral-200 shadow-sm">
+            <CardHeader>
+              <CardTitle className="text-neutral-900 flex items-center space-x-2">
+                <Smartphone className="w-6 h-6 text-brand-primary" />
+                <span>Payment Instructions</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="text-center">
+                <p className="text-neutral-700 mb-6">Send payment to our CashApp:</p>
+                
+                <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
+                  <div className="flex items-center justify-between">
+                    <span className="text-brand-primary text-xl font-semibold">{cashappTag}</span>
+                    <Button
+                      onClick={handleCopyTag}
+                      variant="outline"
+                      size="sm"
+                      className="border-neutral-300 text-neutral-700 hover:bg-neutral-50"
+                    >
+                      {copied ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                    </Button>
                   </div>
                 </div>
-              </CardContent>
-            </Card>
+
+                {/* QR Code Placeholder */}
+                <div className="bg-neutral-100 border border-neutral-200 rounded-lg p-8 mx-auto w-48 h-48 flex items-center justify-center mb-6">
+                  <div className="text-center">
+                    <Smartphone className="w-16 h-16 text-neutral-400 mx-auto mb-2" />
+                    <p className="text-neutral-600 text-sm">CashApp QR Code</p>
+                    <p className="text-neutral-500 text-xs">{cashappTag}</p>
+                  </div>
+                </div>
+
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <div className="flex items-start space-x-3">
+                    <Info className="w-5 h-5 text-brand-primary flex-shrink-0 mt-0.5" />
+                    <div className="text-left">
+                      <h3 className="text-brand-primary font-semibold mb-2">Payment Instructions:</h3>
+                      <ul className="text-neutral-700 text-sm space-y-1">
+                        <li>• Include your username: <span className="font-semibold">{user?.username}</span></li>
+                        <li>• Include the game name in the payment note</li>
+                        <li>• Processing takes 5-15 minutes</li>
+                        <li>• Screenshots are helpful but not required</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Security Notice */}
+        <div className="mt-12 max-w-4xl mx-auto">
+          <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-6">
+            <div className="flex items-start space-x-3">
+              <div className="w-8 h-8 bg-brand-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <DollarSign className="w-4 h-4 text-brand-primary" />
+              </div>
+              <div>
+                <h3 className="text-neutral-900 font-semibold mb-2">Secure Payment Processing</h3>
+                <p className="text-neutral-600 text-sm leading-relaxed">
+                  All deposits are processed securely through our automated system. Your funds will be credited to your gaming account within 5-15 minutes of payment confirmation. For any issues, please contact our 24/7 support team.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
