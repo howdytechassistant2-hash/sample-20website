@@ -64,6 +64,33 @@ export default {
           purple: "hsl(var(--casino-purple))",
           gold: "hsl(var(--casino-gold))",
         },
+        // Apple-inspired minimalistic colors
+        brand: {
+          primary: "#007AFF", // Apple blue
+          secondary: "#5856D6", // Apple purple
+          accent: "#FF9500", // Apple orange
+          success: "#34C759", // Apple green
+          gray: "#8E8E93", // Apple gray
+        },
+        neutral: {
+          50: "#FAFAFA",
+          100: "#F5F5F5",
+          200: "#E5E5E5",
+          300: "#D4D4D4",
+          400: "#A3A3A3",
+          500: "#737373",
+          600: "#525252",
+          700: "#404040",
+          800: "#262626",
+          900: "#171717",
+          950: "#0A0A0A",
+        },
+        surface: {
+          primary: "#FFFFFF",
+          secondary: "#F9F9F9",
+          tertiary: "#F0F0F0",
+          elevated: "#FFFFFF",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
