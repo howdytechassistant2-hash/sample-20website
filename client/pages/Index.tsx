@@ -112,7 +112,7 @@ export default function Index() {
                     onClick={logout}
                     variant="outline"
                     size="sm"
-                    className="border-neutral-300 text-neutral-700 hover:bg-neutral-50"
+                    className="border-neutral-300 text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900 bg-white"
                   >
                     <LogOut className="w-4 h-4 mr-2" />
                     Sign Out
