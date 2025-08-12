@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Sparkles, LogIn, UserPlus } from "lucide-react";
+import { Play, LogIn, UserPlus, ArrowLeft, Info } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function Auth() {
@@ -120,188 +120,195 @@ export default function Auth() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-casino-dark via-slate-900 to-casino-dark flex items-center justify-center px-4">
+    <div className="min-h-screen bg-surface-primary">
       {/* Header */}
-      <div className="absolute top-0 left-0 right-0 p-6">
-        <Link to="/" className="flex items-center space-x-3">
-          <div className="w-12 h-12 bg-gradient-to-br from-casino-gold to-yellow-500 rounded-xl flex items-center justify-center">
-            <Sparkles className="w-6 h-6 text-casino-dark" />
+      <header className="border-b border-neutral-200">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <Link to="/" className="flex items-center space-x-3 text-neutral-600 hover:text-neutral-900 transition-colors">
+              <ArrowLeft className="w-5 h-5" />
+              <span className="text-sm font-medium">Back to Home</span>
+            </Link>
+            <div className="flex items-center space-x-3">
+              <div className="w-8 h-8 bg-brand-primary rounded-lg flex items-center justify-center">
+                <Play className="w-4 h-4 text-white fill-current" />
+              </div>
+              <div>
+                <h1 className="text-lg font-semibold text-neutral-900">MyUniverse</h1>
+                <p className="text-xs text-neutral-500 -mt-1">Casino</p>
+              </div>
+            </div>
           </div>
-          <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-white">
-              MYUNIVERSE
-            </h1>
-            <h2 className="text-xl md:text-2xl font-bold text-white">CASINO</h2>
-          </div>
-        </Link>
-      </div>
+        </div>
+      </header>
 
-      <Card className="w-full max-w-md bg-casino-card/95 border-casino-green/20 backdrop-blur-sm">
-        <CardHeader className="text-center pb-8">
-          <CardTitle className="text-2xl font-bold text-white flex items-center justify-center space-x-2">
-            {isLogin ? (
-              <LogIn className="w-6 h-6 text-casino-green" />
-            ) : (
-              <UserPlus className="w-6 h-6 text-casino-green" />
-            )}
-            <span>{isLogin ? "Sign In" : "Sign Up"}</span>
-          </CardTitle>
-          <p className="text-gray-300">
-            {isLogin
-              ? "Welcome back to MyUniverse Casino"
-              : "Join MyUniverse Casino today"}
-          </p>
-        </CardHeader>
-
-        <CardContent>
-          {!isLogin && (
-            <div className="mb-6 p-4 bg-blue-900/30 border border-blue-400/30 rounded-lg">
-              <div className="flex items-start space-x-3">
-                <div className="w-5 h-5 rounded-full bg-blue-400 flex items-center justify-center flex-shrink-0 mt-0.5">
-                  <span className="text-blue-900 text-xs font-bold">i</span>
-                </div>
-                <div>
-                  <h4 className="text-blue-200 font-semibold text-sm mb-1">
-                    Universal Game Access
-                  </h4>
-                  <p className="text-blue-100 text-xs leading-relaxed">
-                    The username and password you create here will be your login
-                    credentials for{" "}
-                    <span className="font-semibold text-white">ALL games</span>{" "}
-                    on our platform (VBLink, Ultra Panda, Juwa, Fire Kirin,
-                    Orion Stars, Milky Ways, Panda Master, and Game Vault).
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {!isLogin && (
-              <div className="space-y-2">
-                <Label htmlFor="username" className="text-white">
-                  Username
-                </Label>
-                <Input
-                  id="username"
-                  name="username"
-                  type="text"
-                  required={!isLogin}
-                  value={formData.username}
-                  onChange={handleInputChange}
-                  className={`bg-casino-dark/50 border-casino-green/20 text-white placeholder:text-gray-400 ${
-                    validationErrors.username ? "border-red-500/50" : ""
-                  }`}
-                  placeholder="MUC + letters & numbers (7-13 chars)"
-                />
-                {validationErrors.username && (
-                  <p className="text-red-400 text-xs">
-                    {validationErrors.username}
-                  </p>
-                )}
-                {!isLogin && !validationErrors.username && (
-                  <p className="text-gray-400 text-xs">
-                    Must begin with MUC, 7-13 characters, letters and numbers
-                    only, at least one letter and one number
-                  </p>
-                )}
-              </div>
-            )}
-
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-white">
-                Email
-              </Label>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                required
-                value={formData.email}
-                onChange={handleInputChange}
-                className="bg-casino-dark/50 border-casino-green/20 text-white placeholder:text-gray-400"
-                placeholder="Enter your email"
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="password" className="text-white">
-                Password
-              </Label>
-              <Input
-                id="password"
-                name="password"
-                type="password"
-                required
-                value={formData.password}
-                onChange={handleInputChange}
-                className={`bg-casino-dark/50 border-casino-green/20 text-white placeholder:text-gray-400 ${
-                  validationErrors.password ? "border-red-500/50" : ""
-                }`}
-                placeholder="6-16 characters with letter & number"
-              />
-              {validationErrors.password && (
-                <p className="text-red-400 text-xs">
-                  {validationErrors.password}
-                </p>
+      <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <Card className="w-full max-w-md bg-surface-primary border border-neutral-200 shadow-sm">
+          <CardHeader className="text-center pb-6">
+            <CardTitle className="text-2xl font-bold text-neutral-900 flex items-center justify-center space-x-2">
+              {isLogin ? (
+                <LogIn className="w-6 h-6 text-brand-primary" />
+              ) : (
+                <UserPlus className="w-6 h-6 text-brand-primary" />
               )}
-              {!isLogin && !validationErrors.password && (
-                <p className="text-gray-400 text-xs">
-                  6-16 characters, at least one letter and one number, optional
-                  symbols allowed
-                </p>
-              )}
-            </div>
-
-            {!isLogin && (
-              <div className="space-y-2">
-                <Label htmlFor="confirmPassword" className="text-white">
-                  Confirm Password
-                </Label>
-                <Input
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  type="password"
-                  required={!isLogin}
-                  value={formData.confirmPassword}
-                  onChange={handleInputChange}
-                  className="bg-casino-dark/50 border-casino-green/20 text-white placeholder:text-gray-400"
-                  placeholder="Confirm your password"
-                />
-              </div>
-            )}
-
-            {error && (
-              <div className="text-red-400 text-sm text-center bg-red-900/20 border border-red-500/20 rounded p-2">
-                {error}
-              </div>
-            )}
-
-            <Button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-gradient-to-r from-casino-green to-green-400 hover:from-green-400 hover:to-casino-green text-casino-dark font-bold py-3 text-lg rounded-full shadow-lg shadow-casino-green/50 hover:shadow-casino-green/80 transition-all duration-300"
-            >
-              {loading
-                ? "Please wait..."
-                : isLogin
-                  ? "Sign In"
-                  : "Create Account"}
-            </Button>
-          </form>
-
-          <div className="mt-6 text-center">
-            <button
-              onClick={() => setIsLogin(!isLogin)}
-              className="text-casino-green hover:text-green-400 transition-colors"
-            >
+              <span>{isLogin ? "Sign In" : "Create Account"}</span>
+            </CardTitle>
+            <p className="text-neutral-600 mt-2">
               {isLogin
-                ? "Don't have an account? Sign up"
-                : "Already have an account? Sign in"}
-            </button>
-          </div>
-        </CardContent>
-      </Card>
+                ? "Welcome back to MyUniverse Casino"
+                : "Join MyUniverse Casino today"}
+            </p>
+          </CardHeader>
+
+          <CardContent className="space-y-6">
+            {!isLogin && (
+              <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <div className="flex items-start space-x-3">
+                  <div className="w-5 h-5 rounded-full bg-brand-primary flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Info className="w-3 h-3 text-white" />
+                  </div>
+                  <div>
+                    <h4 className="text-brand-primary font-semibold text-sm mb-1">
+                      Universal Game Access
+                    </h4>
+                    <p className="text-neutral-700 text-xs leading-relaxed">
+                      Your login credentials work for{" "}
+                      <span className="font-semibold">all games</span> on our
+                      platform including VBLink, Ultra Panda, Juwa, Fire Kirin,
+                      Orion Stars, Milky Ways, Panda Master, and Game Vault.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit} className="space-y-6">
+              {!isLogin && (
+                <div className="space-y-2">
+                  <Label htmlFor="username" className="text-neutral-900 font-medium">
+                    Username
+                  </Label>
+                  <Input
+                    id="username"
+                    name="username"
+                    type="text"
+                    required={!isLogin}
+                    value={formData.username}
+                    onChange={handleInputChange}
+                    className={`border-neutral-300 focus:border-brand-primary focus:ring-brand-primary ${
+                      validationErrors.username ? "border-red-500" : ""
+                    }`}
+                    placeholder="MUC + letters & numbers (7-13 chars)"
+                  />
+                  {validationErrors.username && (
+                    <p className="text-red-500 text-xs">
+                      {validationErrors.username}
+                    </p>
+                  )}
+                  {!isLogin && !validationErrors.username && (
+                    <p className="text-neutral-500 text-xs">
+                      Must begin with MUC, 7-13 characters, letters and numbers
+                      only, at least one letter and one number
+                    </p>
+                  )}
+                </div>
+              )}
+
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-neutral-900 font-medium">
+                  Email
+                </Label>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  required
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  className="border-neutral-300 focus:border-brand-primary focus:ring-brand-primary"
+                  placeholder="Enter your email"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="password" className="text-neutral-900 font-medium">
+                  Password
+                </Label>
+                <Input
+                  id="password"
+                  name="password"
+                  type="password"
+                  required
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  className={`border-neutral-300 focus:border-brand-primary focus:ring-brand-primary ${
+                    validationErrors.password ? "border-red-500" : ""
+                  }`}
+                  placeholder="6-16 characters with letter & number"
+                />
+                {validationErrors.password && (
+                  <p className="text-red-500 text-xs">
+                    {validationErrors.password}
+                  </p>
+                )}
+                {!isLogin && !validationErrors.password && (
+                  <p className="text-neutral-500 text-xs">
+                    6-16 characters, at least one letter and one number, optional
+                    symbols allowed
+                  </p>
+                )}
+              </div>
+
+              {!isLogin && (
+                <div className="space-y-2">
+                  <Label htmlFor="confirmPassword" className="text-neutral-900 font-medium">
+                    Confirm Password
+                  </Label>
+                  <Input
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type="password"
+                    required={!isLogin}
+                    value={formData.confirmPassword}
+                    onChange={handleInputChange}
+                    className="border-neutral-300 focus:border-brand-primary focus:ring-brand-primary"
+                    placeholder="Confirm your password"
+                  />
+                </div>
+              )}
+
+              {error && (
+                <div className="text-red-600 text-sm text-center bg-red-50 border border-red-200 rounded-lg p-3">
+                  {error}
+                </div>
+              )}
+
+              <Button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-brand-primary hover:bg-brand-primary/90 text-white font-semibold py-3 text-lg"
+              >
+                {loading
+                  ? "Please wait..."
+                  : isLogin
+                    ? "Sign In"
+                    : "Create Account"}
+              </Button>
+            </form>
+
+            <div className="text-center pt-4 border-t border-neutral-200">
+              <button
+                onClick={() => setIsLogin(!isLogin)}
+                className="text-brand-primary hover:text-brand-primary/80 transition-colors font-medium"
+              >
+                {isLogin
+                  ? "Don't have an account? Create one"
+                  : "Already have an account? Sign in"}
+              </button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
