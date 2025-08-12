@@ -174,7 +174,7 @@ export default function Index() {
                     <Button
                       size="lg"
                       variant="outline"
-                      className="border-neutral-300 text-neutral-700 hover:bg-neutral-50 px-8 py-6 text-lg"
+                      className="border-neutral-300 text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900 bg-white px-8 py-6 text-lg"
                     >
                       Withdraw Funds
                     </Button>
