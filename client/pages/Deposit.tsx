@@ -183,7 +183,7 @@ export default function Deposit() {
                       onClick={handleCopyTag}
                       variant="outline"
                       size="sm"
-                      className="border-neutral-300 text-neutral-700 hover:bg-neutral-50"
+                      className="border-neutral-300 text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900 bg-white"
                     >
                       {copied ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
                     </Button>
