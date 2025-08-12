@@ -107,6 +107,59 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-surface-primary text-neutral-900 font-medium;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Apple-inspired smooth transitions */
+  * {
+    transition: all 0.2s ease-in-out;
+  }
+
+  /* Better focus states */
+  button:focus,
+  input:focus,
+  textarea:focus,
+  select:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Better button styling */
+  button {
+    @apply font-medium;
+  }
+
+  /* Card hover effects */
+  .card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+
+  /* Typography improvements */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold;
+    letter-spacing: -0.02em;
+  }
+
+  /* Better input styling */
+  input, textarea, select {
+    @apply transition-all duration-200;
+  }
+
+  /* Professional backdrop blur */
+  .backdrop-blur-glass {
+    backdrop-filter: blur(20px) saturate(180%);
   }
 }
