@@ -3,14 +3,34 @@ import { useAuth } from "@/contexts/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Play, DollarSign, Smartphone, Copy, CheckCircle, ArrowLeft, Info } from "lucide-react";
+import {
+  Play,
+  DollarSign,
+  Smartphone,
+  Copy,
+  CheckCircle,
+  ArrowLeft,
+  Info,
+} from "lucide-react";
 
 const gameOptions = [
-  "VBLink", "Ultra Panda", "Juwa", "Fire Kirin", 
-  "Orion Stars", "Milky Ways", "Panda Master", "GAME VAULT"
+  "VBLink",
+  "Ultra Panda",
+  "Juwa",
+  "Fire Kirin",
+  "Orion Stars",
+  "Milky Ways",
+  "Panda Master",
+  "GAME VAULT",
 ];
 
 export default function Deposit() {
@@ -36,7 +56,7 @@ export default function Deposit() {
 
   const handleSubmitDeposit = async () => {
     if (!selectedGame || !amount) return;
-    
+
     setSubmitting(true);
     try {
       const response = await fetch("/api/deposit", {
@@ -79,7 +99,10 @@ export default function Deposit() {
       <header className="border-b border-neutral-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <Link to="/" className="flex items-center space-x-3 text-neutral-600 hover:text-neutral-900 transition-colors">
+            <Link
+              to="/"
+              className="flex items-center space-x-3 text-neutral-600 hover:text-neutral-900 transition-colors"
+            >
               <ArrowLeft className="w-5 h-5" />
               <span className="text-sm font-medium">Back to Home</span>
             </Link>
@@ -88,12 +111,17 @@ export default function Deposit() {
                 <Play className="w-4 h-4 text-white fill-current" />
               </div>
               <div>
-                <h1 className="text-lg font-semibold text-neutral-900">MyUniverse</h1>
+                <h1 className="text-lg font-semibold text-neutral-900">
+                  MyUniverse
+                </h1>
                 <p className="text-xs text-neutral-500 -mt-1">Casino</p>
               </div>
             </div>
             <div className="text-neutral-700">
-              Welcome, <span className="font-semibold text-neutral-900">{user?.username}</span>
+              Welcome,{" "}
+              <span className="font-semibold text-neutral-900">
+                {user?.username}
+              </span>
             </div>
           </div>
         </div>
@@ -120,7 +148,9 @@ export default function Deposit() {
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="game" className="text-neutral-900 font-medium">Select Game</Label>
+                <Label htmlFor="game" className="text-neutral-900 font-medium">
+                  Select Game
+                </Label>
                 <Select value={selectedGame} onValueChange={setSelectedGame}>
                   <SelectTrigger className="border-neutral-300 focus:border-brand-primary focus:ring-brand-primary">
                     <SelectValue placeholder="Choose a game" />
@@ -140,7 +170,12 @@ export default function Deposit() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="amount" className="text-neutral-900 font-medium">Amount ($)</Label>
+                <Label
+                  htmlFor="amount"
+                  className="text-neutral-900 font-medium"
+                >
+                  Amount ($)
+                </Label>
                 <Input
                   id="amount"
                   type="number"
@@ -156,7 +191,12 @@ export default function Deposit() {
 
               <Button
                 onClick={handleSubmitDeposit}
-                disabled={!selectedGame || !amount || parseFloat(amount) < 10 || submitting}
+                disabled={
+                  !selectedGame ||
+                  !amount ||
+                  parseFloat(amount) < 10 ||
+                  submitting
+                }
                 className="w-full bg-brand-primary hover:bg-brand-primary/90 text-white font-semibold py-3 text-lg"
               >
                 {submitting ? "Submitting..." : "Submit Deposit Request"}
@@ -174,18 +214,26 @@ export default function Deposit() {
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="text-center">
-                <p className="text-neutral-700 mb-6">Send payment to our CashApp:</p>
-                
+                <p className="text-neutral-700 mb-6">
+                  Send payment to our CashApp:
+                </p>
+
                 <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
                   <div className="flex items-center justify-between">
-                    <span className="text-brand-primary text-xl font-semibold">{cashappTag}</span>
+                    <span className="text-brand-primary text-xl font-semibold">
+                      {cashappTag}
+                    </span>
                     <Button
                       onClick={handleCopyTag}
                       variant="outline"
                       size="sm"
                       className="border-neutral-300 text-neutral-700 hover:bg-neutral-50 hover:text-neutral-900 bg-white"
                     >
-                      {copied ? <CheckCircle className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+                      {copied ? (
+                        <CheckCircle className="w-4 h-4" />
+                      ) : (
+                        <Copy className="w-4 h-4" />
+                      )}
                     </Button>
                   </div>
                 </div>
@@ -203,9 +251,16 @@ export default function Deposit() {
                   <div className="flex items-start space-x-3">
                     <Info className="w-5 h-5 text-brand-primary flex-shrink-0 mt-0.5" />
                     <div className="text-left">
-                      <h3 className="text-brand-primary font-semibold mb-2">Payment Instructions:</h3>
+                      <h3 className="text-brand-primary font-semibold mb-2">
+                        Payment Instructions:
+                      </h3>
                       <ul className="text-neutral-700 text-sm space-y-1">
-                        <li>• Include your username: <span className="font-semibold">{user?.username}</span></li>
+                        <li>
+                          • Include your username:{" "}
+                          <span className="font-semibold">
+                            {user?.username}
+                          </span>
+                        </li>
                         <li>• Include the game name in the payment note</li>
                         <li>• Processing takes 5-15 minutes</li>
                         <li>• Screenshots are helpful but not required</li>
@@ -226,9 +281,14 @@ export default function Deposit() {
                 <DollarSign className="w-4 h-4 text-brand-primary" />
               </div>
               <div>
-                <h3 className="text-neutral-900 font-semibold mb-2">Secure Payment Processing</h3>
+                <h3 className="text-neutral-900 font-semibold mb-2">
+                  Secure Payment Processing
+                </h3>
                 <p className="text-neutral-600 text-sm leading-relaxed">
-                  All deposits are processed securely through our automated system. Your funds will be credited to your gaming account within 5-15 minutes of payment confirmation. For any issues, please contact our 24/7 support team.
+                  All deposits are processed securely through our automated
+                  system. Your funds will be credited to your gaming account
+                  within 5-15 minutes of payment confirmation. For any issues,
+                  please contact our 24/7 support team.
                 </p>
               </div>
             </div>

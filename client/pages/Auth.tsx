@@ -125,7 +125,10 @@ export default function Auth() {
       <header className="border-b border-neutral-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <Link to="/" className="flex items-center space-x-3 text-neutral-600 hover:text-neutral-900 transition-colors">
+            <Link
+              to="/"
+              className="flex items-center space-x-3 text-neutral-600 hover:text-neutral-900 transition-colors"
+            >
               <ArrowLeft className="w-5 h-5" />
               <span className="text-sm font-medium">Back to Home</span>
             </Link>
@@ -134,7 +137,9 @@ export default function Auth() {
                 <Play className="w-4 h-4 text-white fill-current" />
               </div>
               <div>
-                <h1 className="text-lg font-semibold text-neutral-900">MyUniverse</h1>
+                <h1 className="text-lg font-semibold text-neutral-900">
+                  MyUniverse
+                </h1>
                 <p className="text-xs text-neutral-500 -mt-1">Casino</p>
               </div>
             </div>
@@ -185,7 +190,10 @@ export default function Auth() {
             <form onSubmit={handleSubmit} className="space-y-6">
               {!isLogin && (
                 <div className="space-y-2">
-                  <Label htmlFor="username" className="text-neutral-900 font-medium">
+                  <Label
+                    htmlFor="username"
+                    className="text-neutral-900 font-medium"
+                  >
                     Username
                   </Label>
                   <Input
@@ -231,7 +239,10 @@ export default function Auth() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="password" className="text-neutral-900 font-medium">
+                <Label
+                  htmlFor="password"
+                  className="text-neutral-900 font-medium"
+                >
                   Password
                 </Label>
                 <Input
@@ -253,15 +264,18 @@ export default function Auth() {
                 )}
                 {!isLogin && !validationErrors.password && (
                   <p className="text-neutral-500 text-xs">
-                    6-16 characters, at least one letter and one number, optional
-                    symbols allowed
+                    6-16 characters, at least one letter and one number,
+                    optional symbols allowed
                   </p>
                 )}
               </div>
 
               {!isLogin && (
                 <div className="space-y-2">
-                  <Label htmlFor="confirmPassword" className="text-neutral-900 font-medium">
+                  <Label
+                    htmlFor="confirmPassword"
+                    className="text-neutral-900 font-medium"
+                  >
                     Confirm Password
                   </Label>
                   <Input

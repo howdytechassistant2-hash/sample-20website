@@ -6,7 +6,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Play, DollarSign, Banknote, Info, ArrowLeft, Clock } from "lucide-react";
+import {
+  Play,
+  DollarSign,
+  Banknote,
+  Info,
+  ArrowLeft,
+  Clock,
+} from "lucide-react";
 
 export default function Withdraw() {
   const { isAuthenticated, user } = useAuth();
@@ -68,7 +75,10 @@ export default function Withdraw() {
       <header className="border-b border-neutral-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <Link to="/" className="flex items-center space-x-3 text-neutral-600 hover:text-neutral-900 transition-colors">
+            <Link
+              to="/"
+              className="flex items-center space-x-3 text-neutral-600 hover:text-neutral-900 transition-colors"
+            >
               <ArrowLeft className="w-5 h-5" />
               <span className="text-sm font-medium">Back to Home</span>
             </Link>
@@ -77,12 +87,17 @@ export default function Withdraw() {
                 <Play className="w-4 h-4 text-white fill-current" />
               </div>
               <div>
-                <h1 className="text-lg font-semibold text-neutral-900">MyUniverse</h1>
+                <h1 className="text-lg font-semibold text-neutral-900">
+                  MyUniverse
+                </h1>
                 <p className="text-xs text-neutral-500 -mt-1">Casino</p>
               </div>
             </div>
             <div className="text-neutral-700">
-              Welcome, <span className="font-semibold text-neutral-900">{user?.username}</span>
+              Welcome,{" "}
+              <span className="font-semibold text-neutral-900">
+                {user?.username}
+              </span>
             </div>
           </div>
         </div>
@@ -120,7 +135,9 @@ export default function Withdraw() {
                 className="border-neutral-300 focus:border-brand-primary focus:ring-brand-primary"
                 placeholder="Enter withdrawal amount"
               />
-              <p className="text-sm text-neutral-500">Minimum withdrawal: $20</p>
+              <p className="text-sm text-neutral-500">
+                Minimum withdrawal: $20
+              </p>
             </div>
 
             <div className="space-y-2">
@@ -154,7 +171,8 @@ export default function Withdraw() {
                 required
               />
               <p className="text-sm text-neutral-500">
-                Required: Enter the game name from where you want to redeem your winnings
+                Required: Enter the game name from where you want to redeem your
+                winnings
               </p>
             </div>
 
@@ -165,7 +183,9 @@ export default function Withdraw() {
                 <span>Withdrawal Information</span>
               </h3>
               <ul className="text-neutral-700 text-sm space-y-1">
-                <li>• Processing time: Deposits are made shortly after request</li>
+                <li>
+                  • Processing time: Deposits are made shortly after request
+                </li>
                 <li>• Minimum withdrawal: $20</li>
                 <li>• Maximum daily withdrawal: $5000</li>
                 <li>• Verify your CashApp tag is correct</li>
@@ -176,8 +196,12 @@ export default function Withdraw() {
             {/* Balance Display */}
             <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
               <div className="flex items-center justify-between">
-                <span className="text-neutral-900 font-medium">Available Balance:</span>
-                <span className="text-brand-primary text-xl font-bold">$0.00</span>
+                <span className="text-neutral-900 font-medium">
+                  Available Balance:
+                </span>
+                <span className="text-brand-primary text-xl font-bold">
+                  $0.00
+                </span>
               </div>
               <p className="text-neutral-500 text-sm mt-1">
                 Contact admin to check your actual balance
@@ -208,9 +232,13 @@ export default function Withdraw() {
                 <Clock className="w-4 h-4 text-brand-primary" />
               </div>
               <div>
-                <h3 className="text-neutral-900 font-semibold mb-2">Fast & Secure Processing</h3>
+                <h3 className="text-neutral-900 font-semibold mb-2">
+                  Fast & Secure Processing
+                </h3>
                 <p className="text-neutral-600 text-sm leading-relaxed">
-                  Your withdrawal request will be processed promptly. We use secure payment methods to ensure your funds reach you safely. All transactions are monitored for security and compliance.
+                  Your withdrawal request will be processed promptly. We use
+                  secure payment methods to ensure your funds reach you safely.
+                  All transactions are monitored for security and compliance.
                 </p>
               </div>
             </div>

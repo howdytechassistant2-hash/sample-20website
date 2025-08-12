@@ -98,7 +98,9 @@ export default function Index() {
                 <Play className="w-4 h-4 text-white fill-current" />
               </div>
               <div>
-                <h1 className="text-lg font-semibold text-neutral-900">MyUniverse</h1>
+                <h1 className="text-lg font-semibold text-neutral-900">
+                  MyUniverse
+                </h1>
                 <p className="text-xs text-neutral-500 -mt-1">Casino</p>
               </div>
             </div>
@@ -106,7 +108,10 @@ export default function Index() {
               {isAuthenticated ? (
                 <div className="flex items-center space-x-4">
                   <span className="text-sm text-neutral-600">
-                    Welcome, <span className="font-medium text-neutral-900">{user?.username}</span>
+                    Welcome,{" "}
+                    <span className="font-medium text-neutral-900">
+                      {user?.username}
+                    </span>
                   </span>
                   <Button
                     onClick={logout}
@@ -151,13 +156,17 @@ export default function Index() {
               <span className="text-brand-primary">Experience</span>
             </h2>
             <p className="text-xl text-neutral-600 mb-12 max-w-2xl mx-auto leading-relaxed">
-              Discover a world-class gaming platform with instant deposits, secure withdrawals,
-              and exclusive rewards designed for the modern player.
+              Discover a world-class gaming platform with instant deposits,
+              secure withdrawals, and exclusive rewards designed for the modern
+              player.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               {!isAuthenticated ? (
                 <Link to="/auth">
-                  <Button size="lg" className="bg-brand-primary hover:bg-brand-primary/90 text-white px-8 py-6 text-lg">
+                  <Button
+                    size="lg"
+                    className="bg-brand-primary hover:bg-brand-primary/90 text-white px-8 py-6 text-lg"
+                  >
                     Get Started
                     <ArrowRight className="w-5 h-5 ml-2" />
                   </Button>
@@ -165,7 +174,10 @@ export default function Index() {
               ) : (
                 <>
                   <Link to="/deposit">
-                    <Button size="lg" className="bg-brand-primary hover:bg-brand-primary/90 text-white px-8 py-6 text-lg">
+                    <Button
+                      size="lg"
+                      className="bg-brand-primary hover:bg-brand-primary/90 text-white px-8 py-6 text-lg"
+                    >
                       Make Deposit
                       <DollarSign className="w-5 h-5 ml-2" />
                     </Button>
@@ -199,7 +211,8 @@ export default function Index() {
               Gaming Platforms
             </h2>
             <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              Access premium gaming platforms with seamless integration and instant connectivity.
+              Access premium gaming platforms with seamless integration and
+              instant connectivity.
             </p>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -246,7 +259,8 @@ export default function Index() {
               Why Choose MyUniverse
             </h2>
             <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-              Experience gaming with enterprise-grade security, instant transactions, and dedicated support.
+              Experience gaming with enterprise-grade security, instant
+              transactions, and dedicated support.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -275,28 +289,37 @@ export default function Index() {
               Trusted Gaming Platform
             </h2>
             <p className="text-lg text-neutral-600 mb-8 leading-relaxed">
-              MyUniverse Casino provides a secure, fast, and user-friendly platform for casino gaming.
-              Built with advanced security protocols and backed by 24/7 customer support.
+              MyUniverse Casino provides a secure, fast, and user-friendly
+              platform for casino gaming. Built with advanced security protocols
+              and backed by 24/7 customer support.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">
                   <Shield className="w-5 h-5 text-brand-primary mt-1 flex-shrink-0" />
-                  <span className="text-neutral-700">Advanced security protocols</span>
+                  <span className="text-neutral-700">
+                    Advanced security protocols
+                  </span>
                 </div>
                 <div className="flex items-start space-x-3">
                   <DollarSign className="w-5 h-5 text-brand-primary mt-1 flex-shrink-0" />
-                  <span className="text-neutral-700">Instant automated deposits</span>
+                  <span className="text-neutral-700">
+                    Instant automated deposits
+                  </span>
                 </div>
               </div>
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">
                   <ArrowRight className="w-5 h-5 text-brand-primary mt-1 flex-shrink-0" />
-                  <span className="text-neutral-700">Quick withdrawal processing</span>
+                  <span className="text-neutral-700">
+                    Quick withdrawal processing
+                  </span>
                 </div>
                 <div className="flex items-start space-x-3">
                   <HeadphonesIcon className="w-5 h-5 text-brand-primary mt-1 flex-shrink-0" />
-                  <span className="text-neutral-700">24/7 dedicated support team</span>
+                  <span className="text-neutral-700">
+                    24/7 dedicated support team
+                  </span>
                 </div>
               </div>
             </div>
@@ -312,8 +335,9 @@ export default function Index() {
               <h2 className="text-4xl lg:text-5xl font-bold mb-4">75%</h2>
               <h3 className="text-2xl font-semibold mb-6">Referral Bonus</h3>
               <p className="text-lg mb-8 opacity-90 max-w-2xl mx-auto leading-relaxed">
-                Refer friends to our platform and earn 75% of their deposit amount as your referral bonus.
-                Share the premium gaming experience and get rewarded.
+                Refer friends to our platform and earn 75% of their deposit
+                amount as your referral bonus. Share the premium gaming
+                experience and get rewarded.
               </p>
               <div className="w-16 h-16 mx-auto bg-white/20 rounded-lg flex items-center justify-center">
                 <Gift className="w-8 h-8 text-white" />
@@ -333,16 +357,16 @@ export default function Index() {
                   <Play className="w-4 h-4 text-white fill-current" />
                 </div>
                 <div>
-                  <h1 className="text-lg font-semibold text-neutral-900">MyUniverse</h1>
+                  <h1 className="text-lg font-semibold text-neutral-900">
+                    MyUniverse
+                  </h1>
                   <p className="text-xs text-neutral-500 -mt-1">Casino</p>
                 </div>
               </div>
               <h3 className="text-2xl font-bold text-neutral-900 mb-4">
                 Premium Gaming Experience
               </h3>
-              <p className="text-brand-primary font-medium text-lg">
-                Game On!
-              </p>
+              <p className="text-brand-primary font-medium text-lg">Game On!</p>
             </div>
 
             <div className="space-y-6">
