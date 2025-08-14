@@ -202,19 +202,11 @@ export default function Index() {
             <div className="relative">
               <div className="w-96 h-96 mx-auto relative">
                 <div className="absolute inset-0 bg-nike-orange rounded-full opacity-20 animate-pulse"></div>
-                <div className="absolute inset-4 bg-white rounded-full overflow-hidden border-4 border-nike-orange">
-                  <img
-                    src="https://images.pexels.com/photos/2531356/pexels-photo-2531356.jpeg"
-                    alt="Confident casino champion"
-                    className="w-full h-full object-cover object-center"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
-                  <div className="absolute bottom-6 left-0 right-0 text-center">
-                    <div className="flex items-center justify-center space-x-3 mb-2">
-                      <Play className="w-8 h-8 text-white fill-current" />
-                    </div>
-                    <p className="text-white font-black text-xl uppercase tracking-wide">
-                      CHAMPION
+                <div className="absolute inset-8 bg-white rounded-full flex items-center justify-center">
+                  <div className="text-center">
+                    <Play className="w-24 h-24 text-black mx-auto mb-4 fill-current" />
+                    <p className="text-black font-black text-2xl uppercase">
+                      PLAY NOW
                     </p>
                   </div>
                 </div>
