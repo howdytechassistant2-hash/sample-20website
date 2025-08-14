@@ -70,32 +70,34 @@ export default function Withdraw() {
   }
 
   return (
-    <div className="min-h-screen bg-surface-primary">
+    <div className="min-h-screen bg-black text-white">
       {/* Header */}
-      <header className="border-b border-neutral-200">
+      <header className="relative z-50 bg-black border-b-2 border-nike-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-20">
             <Link
               to="/"
-              className="flex items-center space-x-3 text-neutral-600 hover:text-neutral-900 transition-colors"
+              className="flex items-center space-x-3 text-nike-gray-400 hover:text-white transition-colors group"
             >
-              <ArrowLeft className="w-5 h-5" />
-              <span className="text-sm font-medium">Back to Home</span>
+              <ArrowLeft className="w-6 h-6 group-hover:-translate-x-1 transition-transform" />
+              <span className="font-black uppercase tracking-wide">BACK TO HOME</span>
             </Link>
-            <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-brand-primary rounded-lg flex items-center justify-center">
-                <Play className="w-4 h-4 text-white fill-current" />
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-nike-orange flex items-center justify-center">
+                <Play className="w-6 h-6 text-black fill-current" />
               </div>
               <div>
-                <h1 className="text-lg font-semibold text-neutral-900">
+                <h1 className="text-2xl font-black uppercase tracking-tighter">
                   MyUniverse
                 </h1>
-                <p className="text-xs text-neutral-500 -mt-1">Casino</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-nike-gray-400">
+                  CASINO
+                </p>
               </div>
             </div>
-            <div className="text-neutral-700">
-              Welcome,{" "}
-              <span className="font-semibold text-neutral-900">
+            <div className="text-nike-gray-300">
+              <span className="font-bold uppercase">CHAMPION:</span>{" "}
+              <span className="font-black text-nike-orange">
                 {user?.username}
               </span>
             </div>
@@ -104,26 +106,35 @@ export default function Withdraw() {
       </header>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="text-center mb-12">
-          <h1 className="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4">
-            Request Withdrawal
-          </h1>
-          <p className="text-lg text-neutral-600">
-            Submit your withdrawal request and get paid quickly
-          </p>
-        </div>
+        {/* Hero Section */}
+        <section className="relative py-16 bg-gradient-to-r from-black via-nike-gray-900 to-black">
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute top-0 left-20 w-64 h-64 bg-nike-orange rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 right-20 w-64 h-64 bg-nike-red rounded-full blur-3xl"></div>
+          </div>
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 className="text-7xl lg:text-8xl font-black uppercase tracking-tighter mb-6 text-white">
+              CLAIM YOUR
+              <br />
+              <span className="text-nike-orange">VICTORY</span>
+            </h1>
+            <p className="text-xl lg:text-2xl font-bold uppercase tracking-wide text-nike-gray-300">
+              INSTANT WITHDRAWALS FOR CHAMPIONS
+            </p>
+          </div>
+        </section>
 
-        <Card className="bg-surface-primary border border-neutral-200 shadow-sm">
-          <CardHeader>
-            <CardTitle className="text-neutral-900 flex items-center space-x-2">
-              <Banknote className="w-6 h-6 text-brand-primary" />
-              <span>Withdrawal Details</span>
+        <Card className="bg-white text-black border-4 border-nike-orange nike-card">
+          <CardHeader className="bg-gradient-to-r from-nike-orange to-nike-red text-black">
+            <CardTitle className="text-black flex items-center space-x-3">
+              <Banknote className="w-8 h-8" />
+              <span className="text-2xl font-black uppercase tracking-tight">VICTORY CLAIM</span>
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="space-y-2">
-              <Label htmlFor="amount" className="text-neutral-900 font-medium">
-                Withdrawal Amount ($)
+          <CardContent className="p-8 space-y-8">
+            <div className="space-y-3">
+              <Label htmlFor="amount" className="text-black font-black uppercase tracking-wide text-lg">
+                VICTORY AMOUNT ($)
               </Label>
               <Input
                 id="amount"
@@ -132,79 +143,76 @@ export default function Withdraw() {
                 step="0.01"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                className="border-neutral-300 focus:border-brand-primary focus:ring-brand-primary"
-                placeholder="Enter withdrawal amount"
+                className="border-2 border-black focus:border-nike-orange text-black font-bold text-xl py-4"
+                placeholder="ENTER AMOUNT"
               />
-              <p className="text-sm text-neutral-500">
-                Minimum withdrawal: $20
+              <p className="text-nike-gray-600 font-bold uppercase text-sm">
+                MINIMUM WITHDRAWAL: $20
               </p>
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="cashtag" className="text-neutral-900 font-medium">
-                Your CashApp Tag
+            <div className="space-y-3">
+              <Label htmlFor="cashtag" className="text-black font-black uppercase tracking-wide text-lg">
+                YOUR CASHAPP TAG
               </Label>
               <Input
                 id="cashtag"
                 type="text"
                 value={cashtag}
                 onChange={(e) => setCashtag(e.target.value)}
-                className="border-neutral-300 focus:border-brand-primary focus:ring-brand-primary"
-                placeholder="$yourcashtag"
+                className="border-2 border-black focus:border-nike-orange text-black font-bold text-xl py-4"
+                placeholder="$YOURCASHTAG"
               />
-              <p className="text-sm text-neutral-500">
-                Enter your CashApp cashtag (e.g., $johndoe)
+              <p className="text-nike-gray-600 font-bold uppercase text-sm">
+                ENTER YOUR CASHAPP CASHTAG (E.G., $JOHNDOE)
               </p>
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="notes" className="text-neutral-900 font-medium">
-                Game Name *
+            <div className="space-y-3">
+              <Label htmlFor="notes" className="text-black font-black uppercase tracking-wide text-lg">
+                GAME PLATFORM *
               </Label>
               <Textarea
                 id="notes"
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
-                className="border-neutral-300 focus:border-brand-primary focus:ring-brand-primary"
-                placeholder="Enter the game name from where you want to redeem (e.g. VBLink, Ultra Panda, Fire Kirin, etc.)"
+                className="border-2 border-black focus:border-nike-orange text-black font-bold text-lg py-4"
+                placeholder="ENTER THE GAME NAME FROM WHERE YOU WANT TO REDEEM (E.G. VBLINK, ULTRA PANDA, FIRE KIRIN, ETC.)"
                 rows={3}
                 required
               />
-              <p className="text-sm text-neutral-500">
-                Required: Enter the game name from where you want to redeem your
-                winnings
+              <p className="text-nike-gray-600 font-bold uppercase text-sm">
+                REQUIRED: ENTER THE GAME NAME FROM WHERE YOU WANT TO REDEEM YOUR WINNINGS
               </p>
             </div>
 
             {/* Withdrawal Information */}
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-              <h3 className="text-brand-primary font-semibold mb-2 flex items-center space-x-2">
-                <Info className="w-5 h-5" />
-                <span>Withdrawal Information</span>
+            <div className="bg-nike-orange text-black border-4 border-white p-6">
+              <h3 className="font-black text-xl mb-4 uppercase flex items-center space-x-3">
+                <Info className="w-8 h-8" />
+                <span>VICTORY INFORMATION</span>
               </h3>
-              <ul className="text-neutral-700 text-sm space-y-1">
-                <li>
-                  • Processing time: Deposits are made shortly after request
-                </li>
-                <li>• Minimum withdrawal: $20</li>
-                <li>• Maximum daily withdrawal: $5000</li>
-                <li>• Verify your CashApp tag is correct</li>
-                <li>• Contact support if you have any questions</li>
+              <ul className="font-bold space-y-2 uppercase text-sm">
+                <li>• PROCESSING TIME: DEPOSITS ARE MADE SHORTLY AFTER REQUEST</li>
+                <li>• MINIMUM WITHDRAWAL: $20</li>
+                <li>• MAXIMUM DAILY WITHDRAWAL: $5000</li>
+                <li>• VERIFY YOUR CASHAPP TAG IS CORRECT</li>
+                <li>• CONTACT SUPPORT IF YOU HAVE ANY QUESTIONS</li>
               </ul>
             </div>
 
             {/* Balance Display */}
-            <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4">
+            <div className="bg-black border-2 border-nike-orange p-6">
               <div className="flex items-center justify-between">
-                <span className="text-neutral-900 font-medium">
-                  Available Balance:
+                <span className="text-white font-black uppercase text-lg">
+                  AVAILABLE BALANCE:
                 </span>
-                <span className="text-brand-primary text-xl font-bold">
+                <span className="text-nike-orange text-3xl font-black">
                   $0.00
                 </span>
               </div>
-              <p className="text-neutral-500 text-sm mt-1">
-                Contact admin to check your actual balance
+              <p className="text-nike-gray-300 font-bold uppercase text-sm mt-2">
+                CONTACT ADMIN TO CHECK YOUR ACTUAL BALANCE
               </p>
             </div>
 
@@ -217,28 +225,26 @@ export default function Withdraw() {
                 parseFloat(amount) < 20 ||
                 submitting
               }
-              className="w-full bg-brand-primary hover:bg-brand-primary/90 text-white font-semibold py-3 text-lg"
+              className="w-full bg-black text-white hover:bg-nike-orange hover:text-black font-black text-xl uppercase tracking-wide py-6 nike-button"
             >
-              {submitting ? "Submitting..." : "Submit Withdrawal Request"}
+              {submitting ? "PROCESSING..." : "CLAIM VICTORY NOW"}
             </Button>
           </CardContent>
         </Card>
 
         {/* Security Notice */}
-        <div className="mt-8">
-          <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-6">
-            <div className="flex items-start space-x-3">
-              <div className="w-8 h-8 bg-brand-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                <Clock className="w-4 h-4 text-brand-primary" />
+        <div className="mt-16">
+          <div className="bg-nike-gray-900 border-l-8 border-nike-orange p-8">
+            <div className="flex items-start space-x-6">
+              <div className="w-16 h-16 bg-nike-orange flex items-center justify-center flex-shrink-0">
+                <Clock className="w-8 h-8 text-black" />
               </div>
               <div>
-                <h3 className="text-neutral-900 font-semibold mb-2">
-                  Fast & Secure Processing
+                <h3 className="text-nike-orange font-black text-2xl mb-4 uppercase">
+                  ELITE PAYMENT PROCESSING
                 </h3>
-                <p className="text-neutral-600 text-sm leading-relaxed">
-                  Your withdrawal request will be processed promptly. We use
-                  secure payment methods to ensure your funds reach you safely.
-                  All transactions are monitored for security and compliance.
+                <p className="text-white font-bold text-lg leading-relaxed uppercase">
+                  YOUR WITHDRAWAL REQUEST WILL BE PROCESSED PROMPTLY. WE USE SECURE PAYMENT METHODS TO ENSURE YOUR FUNDS REACH YOU SAFELY. ALL TRANSACTIONS ARE MONITORED FOR SECURITY AND COMPLIANCE.
                 </p>
               </div>
             </div>

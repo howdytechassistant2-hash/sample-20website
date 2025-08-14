@@ -149,7 +149,7 @@ export default function Index() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
               <div className="space-y-4">
-                <h2 className="text-8xl lg:text-9xl font-black uppercase leading-none tracking-tighter nike-hero-text">
+                <h2 className="text-8xl lg:text-9xl font-black uppercase leading-none tracking-tighter text-white">
                   JUST
                   <br />
                   <span className="text-nike-orange">WIN</span>
@@ -243,7 +243,7 @@ export default function Index() {
                       className="w-20 h-20 mx-auto object-cover"
                     />
                   </div>
-                  <h3 className="text-lg font-black uppercase tracking-wide mb-6">
+                  <h3 className="text-lg font-black uppercase tracking-wide mb-6 text-black">
                     {provider.name}
                   </h3>
                   <a
