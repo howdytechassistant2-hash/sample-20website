@@ -64,32 +64,29 @@ export default {
           purple: "hsl(var(--casino-purple))",
           gold: "hsl(var(--casino-gold))",
         },
-        // Apple-inspired minimalistic colors
-        brand: {
-          primary: "#007AFF", // Apple blue
-          secondary: "#5856D6", // Apple purple
-          accent: "#FF9500", // Apple orange
-          success: "#34C759", // Apple green
-          gray: "#8E8E93", // Apple gray
+        // Nike-inspired bold colors
+        nike: {
+          black: "#000000",
+          white: "#FFFFFF",
+          orange: "#FF6900", // Nike orange
+          red: "#E74C3C", // Dynamic red
+          gray: {
+            100: "#F7F7F7",
+            200: "#E1E1E1",
+            300: "#CFCFCF",
+            400: "#B7B7B7",
+            500: "#9E9E9E",
+            600: "#757575",
+            700: "#616161",
+            800: "#424242",
+            900: "#212121",
+          }
         },
-        neutral: {
-          50: "#FAFAFA",
-          100: "#F5F5F5",
-          200: "#E5E5E5",
-          300: "#D4D4D4",
-          400: "#A3A3A3",
-          500: "#737373",
-          600: "#525252",
-          700: "#404040",
-          800: "#262626",
-          900: "#171717",
-          950: "#0A0A0A",
-        },
-        surface: {
-          primary: "#FFFFFF",
-          secondary: "#F9F9F9",
-          tertiary: "#F0F0F0",
-          elevated: "#FFFFFF",
+        electric: {
+          blue: "#0066CC",
+          green: "#00D084",
+          yellow: "#FFC72C",
+          purple: "#7B68EE",
         },
       },
       borderRadius: {
