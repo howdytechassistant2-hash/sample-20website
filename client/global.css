@@ -150,15 +150,31 @@
       0 10px 10px -5px rgba(0, 0, 0, 0.04);
   }
 
-  /* Typography improvements */
+  /* Nike-inspired bold typography */
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    @apply font-semibold;
-    letter-spacing: -0.02em;
+    @apply font-black;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    @apply text-6xl md:text-8xl;
+    line-height: 0.9;
+  }
+
+  h2 {
+    @apply text-4xl md:text-6xl;
+    line-height: 0.95;
+  }
+
+  h3 {
+    @apply text-2xl md:text-4xl;
+    line-height: 1;
   }
 
   /* Better input styling */
