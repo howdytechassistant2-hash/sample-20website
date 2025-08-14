@@ -184,8 +184,49 @@
     @apply transition-all duration-200;
   }
 
-  /* Professional backdrop blur */
-  .backdrop-blur-glass {
-    backdrop-filter: blur(20px) saturate(180%);
+  /* Nike-inspired dynamic effects */
+  .nike-gradient {
+    background: linear-gradient(135deg, #000000 0%, #333333 100%);
+  }
+
+  .nike-accent {
+    background: linear-gradient(45deg, #FF6900, #E74C3C);
+  }
+
+  .nike-hero-text {
+    background: linear-gradient(135deg, #000000, #444444);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .nike-button {
+    position: relative;
+    overflow: hidden;
+    transform: perspective(1px) translateZ(0);
+  }
+
+  .nike-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+  }
+
+  .nike-button:hover::before {
+    left: 100%;
+  }
+
+  .nike-card {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .nike-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   }
 }
