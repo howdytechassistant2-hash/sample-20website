@@ -80,7 +80,9 @@ export default function Withdraw() {
               className="flex items-center space-x-3 text-nike-gray-400 hover:text-white transition-colors group"
             >
               <ArrowLeft className="w-6 h-6 group-hover:-translate-x-1 transition-transform" />
-              <span className="font-black uppercase tracking-wide">BACK TO HOME</span>
+              <span className="font-black uppercase tracking-wide">
+                BACK TO HOME
+              </span>
             </Link>
             <div className="flex items-center space-x-4">
               <div className="w-12 h-12 bg-nike-orange flex items-center justify-center">
@@ -128,12 +130,17 @@ export default function Withdraw() {
           <CardHeader className="bg-gradient-to-r from-nike-orange to-nike-red text-black">
             <CardTitle className="text-black flex items-center space-x-3">
               <Banknote className="w-8 h-8" />
-              <span className="text-2xl font-black uppercase tracking-tight">VICTORY CLAIM</span>
+              <span className="text-2xl font-black uppercase tracking-tight">
+                VICTORY CLAIM
+              </span>
             </CardTitle>
           </CardHeader>
           <CardContent className="p-8 space-y-8">
             <div className="space-y-3">
-              <Label htmlFor="amount" className="text-black font-black uppercase tracking-wide text-lg">
+              <Label
+                htmlFor="amount"
+                className="text-black font-black uppercase tracking-wide text-lg"
+              >
                 VICTORY AMOUNT ($)
               </Label>
               <Input
@@ -152,7 +159,10 @@ export default function Withdraw() {
             </div>
 
             <div className="space-y-3">
-              <Label htmlFor="cashtag" className="text-black font-black uppercase tracking-wide text-lg">
+              <Label
+                htmlFor="cashtag"
+                className="text-black font-black uppercase tracking-wide text-lg"
+              >
                 YOUR CASHAPP TAG
               </Label>
               <Input
@@ -169,7 +179,10 @@ export default function Withdraw() {
             </div>
 
             <div className="space-y-3">
-              <Label htmlFor="notes" className="text-black font-black uppercase tracking-wide text-lg">
+              <Label
+                htmlFor="notes"
+                className="text-black font-black uppercase tracking-wide text-lg"
+              >
                 GAME PLATFORM *
               </Label>
               <Textarea
@@ -182,7 +195,8 @@ export default function Withdraw() {
                 required
               />
               <p className="text-nike-gray-600 font-bold uppercase text-sm">
-                REQUIRED: ENTER THE GAME NAME FROM WHERE YOU WANT TO REDEEM YOUR WINNINGS
+                REQUIRED: ENTER THE GAME NAME FROM WHERE YOU WANT TO REDEEM YOUR
+                WINNINGS
               </p>
             </div>
 
@@ -193,7 +207,9 @@ export default function Withdraw() {
                 <span>VICTORY INFORMATION</span>
               </h3>
               <ul className="font-bold space-y-2 uppercase text-sm">
-                <li>• PROCESSING TIME: DEPOSITS ARE MADE SHORTLY AFTER REQUEST</li>
+                <li>
+                  • PROCESSING TIME: DEPOSITS ARE MADE SHORTLY AFTER REQUEST
+                </li>
                 <li>• MINIMUM WITHDRAWAL: $20</li>
                 <li>• MAXIMUM DAILY WITHDRAWAL: $5000</li>
                 <li>• VERIFY YOUR CASHAPP TAG IS CORRECT</li>
@@ -244,7 +260,9 @@ export default function Withdraw() {
                   ELITE PAYMENT PROCESSING
                 </h3>
                 <p className="text-white font-bold text-lg leading-relaxed uppercase">
-                  YOUR WITHDRAWAL REQUEST WILL BE PROCESSED PROMPTLY. WE USE SECURE PAYMENT METHODS TO ENSURE YOUR FUNDS REACH YOU SAFELY. ALL TRANSACTIONS ARE MONITORED FOR SECURITY AND COMPLIANCE.
+                  YOUR WITHDRAWAL REQUEST WILL BE PROCESSED PROMPTLY. WE USE
+                  SECURE PAYMENT METHODS TO ENSURE YOUR FUNDS REACH YOU SAFELY.
+                  ALL TRANSACTIONS ARE MONITORED FOR SECURITY AND COMPLIANCE.
                 </p>
               </div>
             </div>
